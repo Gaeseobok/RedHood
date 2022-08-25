@@ -26,8 +26,6 @@ namespace RedHood
 
         private void Update()
         {
-            //Debug.Log("Grip current: " + gripCurrent + " , Grip Target: " + gripTarget);
-            Debug.Log("애니메이션 GRIP 파라미터: " + animator.GetFloat(ANIMATOR_PARAM_GRIP));
             AnimateHand();
         }
 
