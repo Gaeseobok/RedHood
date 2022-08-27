@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-// HandController class triggers the actions from the Hand class, when a button is pressed
+// HandController class triggers the actions from the HandAnimation class, when a button is pressed
 [RequireComponent(typeof(ActionBasedController))]
 public class HandController : MonoBehaviour
 {

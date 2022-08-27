@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Hand 모델을 컨트롤러의 움직임에 따라 물리적으로 움직이게 하는 스크립트
 public class PhysicsHandMovement : MonoBehaviour
 {
-    //[SerializeField] private float followSpeed = 30f;
-    //[SerializeField] private float rotateSpeed = 100f;
+    [SerializeField] private float followSpeed = 30f;
+    [SerializeField] private float rotateSpeed = 100f;
 
     [SerializeField] private Transform followTarget;
     [SerializeField] private Vector3 positionOffset;
@@ -18,6 +19,7 @@ public class PhysicsHandMovement : MonoBehaviour
 
         _rigidbody.position = followTarget.position;
         _rigidbody.rotation = followTarget.rotation;
+        _rigidbody.maxAngularVelocity = float.PositiveInfinity;
     }
 
     private void FixedUpdate()
@@ -32,7 +34,8 @@ public class PhysicsHandMovement : MonoBehaviour
 
         // Update position
         Vector3 targetPositionWithOffset = followTarget.position + positionOffset;
-        _rigidbody.velocity = (targetPositionWithOffset - transform.position) / Time.fixedDeltaTime;
+        float dist = Vector3.Distance(targetPositionWithOffset, transform.position);
+        _rigidbody.velocity = dist * followSpeed * (targetPositionWithOffset - transform.position).normalized;
 
         // Update rotation
         // 두 오브젝트 간의 rotation 차이를 Quaternion 형태로 계산
@@ -40,7 +43,13 @@ public class PhysicsHandMovement : MonoBehaviour
         Quaternion rotationDiff = targetRotationWithOffset * Quaternion.Inverse(transform.rotation);
         // 각도와 축으로 변환
         rotationDiff.ToAngleAxis(out float angle, out Vector3 axis);
-        Vector3 rotationDiffInDegree = angle * axis;
-        _rigidbody.angularVelocity = (rotationDiffInDegree * Mathf.Deg2Rad) / Time.fixedDeltaTime;
+        if (Mathf.Abs(axis.magnitude) != Mathf.Infinity)
+        {
+            if (angle > 180.0f)
+                angle -= 360.0f;
+
+            Vector3 rotationDiffInDegree = angle * axis;
+            _rigidbody.angularVelocity = Mathf.Deg2Rad * rotateSpeed * rotationDiffInDegree;
+        }
     }
 }

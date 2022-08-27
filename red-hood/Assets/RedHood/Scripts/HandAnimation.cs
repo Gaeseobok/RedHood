@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// 손 컨트롤러에 애니메이션을 결합
+// Hand 모델에 애니메이션을 결합하는 스크립트
 [RequireComponent(typeof(Animator))]
 public class HandAnimation : MonoBehaviour
 {
@@ -24,7 +24,6 @@ public class HandAnimation : MonoBehaviour
     private void Update()
     {
         AnimateHand();
-        Debug.Log("Grip: " + _animator.GetFloat(ANIMATOR_PARAM_GRIP));
     }
 
     internal void SetGrip(float v)

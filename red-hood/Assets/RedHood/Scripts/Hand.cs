@@ -78,7 +78,7 @@ namespace RedHood
             // 두 오브젝트 간의 거리 계산
             float dist = Vector3.Distance(targetPositionWithOffset, transform.position);
             // 두 오브젝트 간의 거리, 속력, 방향에 따라 rigidbody의 속도 설정
-            _rigidbody.velocity = dist * followSpeed * (targetPositionWithOffset - transform.position).normalized;
+            _rigidbody.velocity = dist * followSpeed * (targetPositionWithOffset - transform.position).normalized * Time.deltaTime;
 
             // Update rotation
             Quaternion targetRotationWithOffset = _followTarget.rotation * Quaternion.Euler(rotationOffset);
@@ -86,7 +86,13 @@ namespace RedHood
             Quaternion q = targetRotationWithOffset * Quaternion.Inverse(transform.rotation);
             // 각도와 축으로 변환
             q.ToAngleAxis(out float angle, out Vector3 axis);
-            _rigidbody.angularVelocity = angle * Mathf.Deg2Rad * rotateSpeed * axis;
+            if (Mathf.Abs(axis.magnitude) != Mathf.Infinity)
+            {
+                if (angle > 180.0f)
+                    angle -= 360.0f;
+
+                _rigidbody.angularVelocity = angle * Mathf.Deg2Rad * rotateSpeed * axis * Time.deltaTime;
+            }
         }
     }
 }
