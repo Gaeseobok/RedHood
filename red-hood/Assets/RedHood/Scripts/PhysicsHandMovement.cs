@@ -5,21 +5,24 @@ using UnityEngine;
 // Hand 모델을 컨트롤러의 움직임에 따라 물리적으로 움직이게 하는 스크립트
 public class PhysicsHandMovement : MonoBehaviour
 {
-    [SerializeField] private float followSpeed = 30f;
-    [SerializeField] private float rotateSpeed = 100f;
+    // Physics hand movement
 
     [SerializeField] private Transform followTarget;
+    [SerializeField] private float followSpeed = 30f;
+    [SerializeField] private float rotateSpeed = 100f;
     [SerializeField] private Vector3 positionOffset;
     [SerializeField] private Vector3 rotationOffset;
     private Rigidbody _rigidbody;
+    private Collider[] _handColliders;
 
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
-
         _rigidbody.position = followTarget.position;
         _rigidbody.rotation = followTarget.rotation;
         _rigidbody.maxAngularVelocity = float.PositiveInfinity;
+
+        _handColliders = GetComponentsInChildren<Collider>();
     }
 
     private void FixedUpdate()
@@ -50,6 +53,27 @@ public class PhysicsHandMovement : MonoBehaviour
 
             Vector3 rotationDiffInDegree = angle * axis;
             _rigidbody.angularVelocity = Mathf.Deg2Rad * rotateSpeed * rotationDiffInDegree;
+        }
+    }
+
+    private void EnableHandColliders()
+    {
+        foreach (Collider c in _handColliders)
+        {
+            c.enabled = true;
+        }
+    }
+
+    public void EnableHandCollidersWithDelay(float delay)
+    {
+        Invoke("EnableHandColliders", delay);
+    }
+
+    public void DisableHandColliders()
+    {
+        foreach (Collider c in _handColliders)
+        {
+            c.enabled = false;
         }
     }
 }
