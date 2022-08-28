@@ -14,6 +14,7 @@ public class PhysicsHandMovement : MonoBehaviour
     [SerializeField] private Vector3 rotationOffset;
     private Rigidbody _rigidbody;
     private Collider[] _handColliders;
+    private SkinnedMeshRenderer _handRenderer;
 
     private void Start()
     {
@@ -23,6 +24,7 @@ public class PhysicsHandMovement : MonoBehaviour
         _rigidbody.maxAngularVelocity = float.PositiveInfinity;
 
         _handColliders = GetComponentsInChildren<Collider>();
+        _handRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
     }
 
     private void FixedUpdate()
@@ -64,13 +66,15 @@ public class PhysicsHandMovement : MonoBehaviour
         }
     }
 
-    public void EnableHandCollidersWithDelay(float delay)
+    public void EnableHandWithDelay(float delay)
     {
+        _handRenderer.enabled = true;
         Invoke("EnableHandColliders", delay);
     }
 
-    public void DisableHandColliders()
+    public void DisableHand()
     {
+        _handRenderer.enabled = false;
         foreach (Collider c in _handColliders)
         {
             c.enabled = false;

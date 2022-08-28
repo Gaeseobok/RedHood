@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Hand 모델에 애니메이션을 결합하는 스크립트
+// Hand 모델에 애니메이션을 결합한다.
 [RequireComponent(typeof(Animator))]
 public class HandAnimation : MonoBehaviour
 {
