@@ -5,7 +5,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 [RequireComponent(typeof(XRController))]
 public class DeviceBasedHandController : MonoBehaviour
 {
-    public HandAnimation hand;
+    [SerializeField] private HandAnimation hand;
     private XRController controller;
 
     private void Start()

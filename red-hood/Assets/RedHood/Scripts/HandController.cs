@@ -7,7 +7,7 @@ public class HandController : MonoBehaviour
 {
     private ActionBasedController controller;
 
-    public HandAnimation hand;
+    [SerializeField] private HandAnimation hand;
 
     private void Start()
     {

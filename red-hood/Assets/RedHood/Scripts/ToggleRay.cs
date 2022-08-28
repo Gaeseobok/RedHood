@@ -6,14 +6,16 @@ using UnityEngine.XR.Interaction.Toolkit;
 // Direct interactor가 다른 오브젝트와 상호작용하고 있지 않을 때만 토글한다.
 public class ToggleRay : MonoBehaviour
 {
-    public XRDirectInteractor directInteractor;
-    public PhysicsHandMovement physicsHand;
+    [SerializeField] private XRDirectInteractor directInteractor;
+    [SerializeField] private PhysicsHandMovement physicsHand;
     private XRRayInteractor rayInteractor;
+    private SpriteRenderer reticleRenderer;
     private bool isSwitched;
 
     private void Awake()
     {
         rayInteractor = GetComponent<XRRayInteractor>();
+        reticleRenderer = GetComponent<XRInteractorLineVisual>().reticle.GetComponentInChildren<SpriteRenderer>();
         SwitchInteractors(false);
     }
 
@@ -46,6 +48,7 @@ public class ToggleRay : MonoBehaviour
     {
         isSwitched = value;
         rayInteractor.enabled = value;
+        reticleRenderer.enabled = value;
         directInteractor.enabled = !value;
     }
 }
