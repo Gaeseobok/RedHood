@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Home/Scenes/RedHoodHomeScene.unity
     guid: 42d5bfacddb810643af1c58edae463fd
   - enabled: 1
-    path: Assets/RedHood/Scenes/PhysicsHandTestScene.unity
+    path: Assets/RedHood/Scenes/TestScene.unity
     guid: 5646421f8fe629849a50142f2e488fc8
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: df8d955840a2f42c381269b330f68644, type: 2}
