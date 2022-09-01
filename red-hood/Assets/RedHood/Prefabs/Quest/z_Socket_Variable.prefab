@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8413237322121241362}
   - component: {fileID: 3037723513394278}
   m_Layer: 8
-  m_Name: VariableBlockSocket
+  m_Name: z_Socket_Variable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
