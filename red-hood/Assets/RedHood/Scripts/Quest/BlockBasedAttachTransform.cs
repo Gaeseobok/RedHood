@@ -10,12 +10,14 @@ public class BlockBasedAttachTransform : MonoBehaviour
     //[SerializeField] private float marginLeft = 0.033f;
 
     private XRSocketInteractor socketInteractor;
+    private Vector3 defaultAttachTransform;
 
     private const float BLOCK_WIDTH = 0.1f;
 
     private void Start()
     {
         socketInteractor = GetComponent<XRSocketInteractor>();
+        defaultAttachTransform = socketInteractor.attachTransform.localPosition;
     }
 
     public void SetAttachTransform()
@@ -24,7 +26,11 @@ public class BlockBasedAttachTransform : MonoBehaviour
         float selectedBlockWidth = selectedBlock.transform.FindChildRecursive("Center").localScale.x;
         float x = (selectedBlockWidth - BLOCK_WIDTH) / 2;
 
-        Vector3 attachPosition = socketInteractor.attachTransform.localPosition;
-        socketInteractor.attachTransform.localPosition = new Vector3(-x, attachPosition.y, attachPosition.z);
+        socketInteractor.attachTransform.localPosition = new Vector3(-x, defaultAttachTransform.y, defaultAttachTransform.z);
+    }
+
+    public void RestoreAttachTransform()
+    {
+        socketInteractor.attachTransform.localPosition = defaultAttachTransform;
     }
 }
