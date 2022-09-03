@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7704149469230049971}
   - component: {fileID: 4786098965768980193}
   - component: {fileID: 8452120660126889949}
-  - component: {fileID: 7730522638904469905}
+  - component: {fileID: 2821053407961151245}
   m_Layer: 8
   m_Name: Pointer
   m_TagString: Untagged
@@ -84,7 +84,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7730522638904469905
+--- !u!114 &2821053407961151245
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -96,7 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66541320741b2ae4889b124bd9a6bdaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anotherMaterial: {fileID: 2100000, guid: 435f5c7f020af534f8057fae1d13cd5e, type: 2}
+  selectedMaterial: {fileID: 2100000, guid: 435f5c7f020af534f8057fae1d13cd5e, type: 2}
+  activatedMaterial: {fileID: 2100000, guid: 63244ac6bf4a03f4c94af9a32ddc109a, type: 2}
 --- !u!1 &1768068503427751483
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,9 +204,9 @@ MonoBehaviour:
   m_HoverEntered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7730522638904469905}
+      - m_Target: {fileID: 2821053407961151245}
         m_TargetAssemblyTypeName: ChangeMaterial, Assembly-CSharp
-        m_MethodName: Change
+        m_MethodName: ChangeToSelectedMaterial
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -218,9 +219,9 @@ MonoBehaviour:
   m_HoverExited:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7730522638904469905}
+      - m_Target: {fileID: 2821053407961151245}
         m_TargetAssemblyTypeName: ChangeMaterial, Assembly-CSharp
-        m_MethodName: Change
+        m_MethodName: ChangeToDefaultMaterial
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -247,7 +248,19 @@ MonoBehaviour:
         m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 510187247491108064}
+        m_TargetAssemblyTypeName: BlockBasedAttachTransform, Assembly-CSharp
+        m_MethodName: RestoreAttachTransform
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnHoverEntered:
     m_PersistentCalls:
       m_Calls: []

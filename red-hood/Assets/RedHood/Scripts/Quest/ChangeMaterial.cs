@@ -6,15 +6,19 @@ using UnityEngine;
 // 소켓에 호버(Hover Entered/Hover Exited)할 때마다 소켓의 색상(머티리얼)을 변경하기 위한 스크립트
 public class ChangeMaterial : MonoBehaviour
 {
-    [SerializeField] private Material anotherMaterial;
-    private Material material;
+    [Tooltip("블록이 소켓에 Hover 또는 Select된 상태일 때, 포인터의 머티리얼")]
+    [SerializeField] private Material selectedMaterial;
+
+    [Tooltip("블록이 Activate될 때, 포인터의 머티리얼")]
+    [SerializeField] private Material activatedMaterial;
+
+    private Material defaultMaterial;
     private MeshRenderer[] renderers;
-    private bool isChanged = false;
 
     private void Start()
     {
         renderers = GetComponentsInChildren<MeshRenderer>();
-        material = renderers[0].material;
+        defaultMaterial = renderers[0].material;
     }
 
     private void SetMaterials(Material newMaterial)
@@ -23,13 +27,18 @@ public class ChangeMaterial : MonoBehaviour
             renderer.material = newMaterial;
     }
 
-    public void Change()
+    public void ChangeToDefaultMaterial()
     {
-        if (isChanged)
-            SetMaterials(material);
-        else
-            SetMaterials(anotherMaterial);
+        SetMaterials(defaultMaterial);
+    }
 
-        isChanged = !isChanged;
+    public void ChangeToSelectedMaterial()
+    {
+        SetMaterials(selectedMaterial);
+    }
+
+    public void ChangeToActivatedMaterial()
+    {
+        SetMaterials(activatedMaterial);
     }
 }

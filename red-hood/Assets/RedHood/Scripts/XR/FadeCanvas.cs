@@ -26,7 +26,13 @@ public class FadeCanvas : MonoBehaviour
     public void StartFadeOut()
     {
         StopAllCoroutines();
-        CurrentRoutine = StartCoroutine(FadeOutWithDelay(fadeDelay));
+        CurrentRoutine = StartCoroutine(FadeOutWithDelay(fadeDuration, fadeDelay));
+    }
+
+    public void SetAlpha(float value)
+    {
+        alpha = value;
+        canvasGroup.alpha = alpha;
     }
 
     private IEnumerator FadeIn(float duration)
@@ -41,8 +47,10 @@ public class FadeCanvas : MonoBehaviour
         }
     }
 
-    private IEnumerator FadeOut(float duration)
+    private IEnumerator FadeOutWithDelay(float duration, float delay)
     {
+        yield return new WaitForSeconds(delay);
+
         float time = 0.0f;
 
         while (alpha >= 0.0f)
@@ -51,17 +59,5 @@ public class FadeCanvas : MonoBehaviour
             time += Time.deltaTime;
             yield return null;
         }
-    }
-
-    private IEnumerator FadeOutWithDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        yield return StartCoroutine(FadeOut(fadeDuration));
-    }
-
-    private void SetAlpha(float value)
-    {
-        alpha = value;
-        canvasGroup.alpha = alpha;
     }
 }
