@@ -6,6 +6,6 @@ public class TestBlock : MonoBehaviour
 {
     public void Test()
     {
-        Debug.Log("블록 Activated");
+        Debug.LogWarning("블록 Activated");
     }
 }

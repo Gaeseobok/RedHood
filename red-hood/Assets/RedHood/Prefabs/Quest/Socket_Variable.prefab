@@ -92,7 +92,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5363401781888191885}
         m_TargetAssemblyTypeName: ChangeMaterial, Assembly-CSharp
-        m_MethodName: ChangeToDefaultMaterial
+        m_MethodName: ChangeToSelectedMaterial
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

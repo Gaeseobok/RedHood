@@ -14,6 +14,7 @@ public class ChangeMaterial : MonoBehaviour
 
     private Material defaultMaterial;
     private MeshRenderer[] renderers;
+    private bool isChanged = false;
 
     private void Start()
     {
@@ -34,7 +35,12 @@ public class ChangeMaterial : MonoBehaviour
 
     public void ChangeToSelectedMaterial()
     {
-        SetMaterials(selectedMaterial);
+        if (isChanged)
+            SetMaterials(defaultMaterial);
+        else
+            SetMaterials(selectedMaterial);
+
+        isChanged = !isChanged;
     }
 
     public void ChangeToActivatedMaterial()
