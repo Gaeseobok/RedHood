@@ -1,11 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:red-hood/Assets/Forest/Library/Christmas-Assets-FREE/FBX/Candy-Cane.fbx.meta
 guid: dc23d0fc17b7bc94a987406b7320ca42
-========
-guid: bc1fd310dcc9a1741a5af827987b033d
-timeCreated: 1490373601
-licenseType: Store
->>>>>>>> main:red-hood/Assets/Home/Library/Prop Packs/Interior Asset/Source/Books/1/Book.fbx.meta
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
@@ -13,12 +7,8 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-<<<<<<<< HEAD:red-hood/Assets/Forest/Library/Christmas-Assets-FREE/FBX/Candy-Cane.fbx.meta
     4300000: Candy-Cane
     9500000: //RootNode
-========
-    4300000: "\u041A\u0443\u0431"
->>>>>>>> main:red-hood/Assets/Home/Library/Prop Packs/Interior Asset/Source/Books/1/Book.fbx.meta
   materials:
     importMaterials: 1
     materialName: 0
@@ -77,7 +67,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

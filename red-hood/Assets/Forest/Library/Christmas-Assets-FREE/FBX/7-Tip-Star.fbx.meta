@@ -1,11 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:red-hood/Assets/Forest/Library/Christmas-Assets-FREE/FBX/7-Tip-Star.fbx.meta
 guid: f5a6c0d0e36d06d43ae038aa06fc0c22
-========
-guid: 1286b4a733811134dbd33e14f6fe8ca1
-timeCreated: 1489835589
-licenseType: Store
->>>>>>>> main:red-hood/Assets/Home/Library/Prop Packs/Interior Asset/Source/Armchair/Armchair.fbx.meta
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
@@ -13,12 +7,8 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-<<<<<<<< HEAD:red-hood/Assets/Forest/Library/Christmas-Assets-FREE/FBX/7-Tip-Star.fbx.meta
     4300000: 7-Tip-Star
     9500000: //RootNode
-========
-    4300000: "\u041A\u0443\u0431.001"
->>>>>>>> main:red-hood/Assets/Home/Library/Prop Packs/Interior Asset/Source/Armchair/Armchair.fbx.meta
   materials:
     importMaterials: 1
     materialName: 0
@@ -77,7 +67,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
