@@ -7,6 +7,8 @@ TagManager:
   - SnowmanAcc
   - SuccessWindow
   - CodeSocket
+  - IterationStart
+  - IterationEnd
   layers:
   - Default
   - TransparentFX
@@ -14,9 +16,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Left Hand
+  - Right Hand
+  - Coding Board
   - 
   - 
   - 

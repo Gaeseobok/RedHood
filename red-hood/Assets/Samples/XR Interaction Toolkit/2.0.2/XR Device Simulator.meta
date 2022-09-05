@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: 67b654b34f1644e00a362ecbc0588c76
+<<<<<<<< HEAD:red-hood/Assets/Forest/ActionMaps.meta
+guid: f0653c219a5c84b47a628d7be1418da8
+========
+guid: 408e7dee407fd5248a88a2d24a3c82a3
+>>>>>>>> main:red-hood/Assets/Samples/XR Interaction Toolkit/2.0.2/XR Device Simulator.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
