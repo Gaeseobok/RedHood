@@ -1,11 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:red-hood/Assets/Forest/Library/Christmas-Assets-FREE/FBX/Santa-Hat.fbx.meta
 guid: 29a61db7c97c33c4092a325c8243afe4
-========
-guid: 7405d013b15855a45827cb6d0d2ede7b
-timeCreated: 1490377463
-licenseType: Store
->>>>>>>> main:red-hood/Assets/Home/Library/Prop Packs/Interior Asset/Source/Books/3/Book.fbx.meta
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
@@ -13,12 +7,8 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-<<<<<<<< HEAD:red-hood/Assets/Forest/Library/Christmas-Assets-FREE/FBX/Santa-Hat.fbx.meta
     4300000: Santa-Hat
     9500000: //RootNode
-========
-    4300000: "\u041A\u0443\u0431"
->>>>>>>> main:red-hood/Assets/Home/Library/Prop Packs/Interior Asset/Source/Books/3/Book.fbx.meta
   materials:
     importMaterials: 1
     materialName: 0
@@ -77,7 +67,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

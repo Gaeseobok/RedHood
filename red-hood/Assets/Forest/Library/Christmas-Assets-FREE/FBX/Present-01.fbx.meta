@@ -1,16 +1,9 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:red-hood/Assets/Forest/Library/Christmas-Assets-FREE/FBX/Present-01.fbx.meta
 guid: bd2206f6f74c8a042b70ba88fc13f4c1
-========
-guid: ba19a4a4826dbb047b79f5fe26061e1b
-timeCreated: 1490377155
-licenseType: Store
->>>>>>>> main:red-hood/Assets/Home/Library/Prop Packs/Interior Asset/Source/Books/2/Book.fbx.meta
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
-<<<<<<<< HEAD:red-hood/Assets/Forest/Library/Christmas-Assets-FREE/FBX/Present-01.fbx.meta
     100002: Present-Box-01
     100004: Present-Ribbon-01
     400000: //RootNode
@@ -23,12 +16,6 @@ ModelImporter:
     4300000: Present-Ribbon-01
     4300002: Present-Box-01
     9500000: //RootNode
-========
-    400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: "\u041A\u0443\u0431"
->>>>>>>> main:red-hood/Assets/Home/Library/Prop Packs/Interior Asset/Source/Books/2/Book.fbx.meta
   materials:
     importMaterials: 1
     materialName: 0
@@ -87,7 +74,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
