@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// ¿ÀºêÁ§Æ®ÀÇ ¸ÓÆ¼¸®¾óÀ» Åä±ÛÇÑ´Ù.
-// ¼ÒÄÏ¿¡ È£¹ö(Hover Entered/Hover Exited)ÇÒ ¶§¸¶´Ù ¼ÒÄÏÀÇ »ö»ó(¸ÓÆ¼¸®¾ó)À» º¯°æÇÏ±â À§ÇÑ ½ºÅ©¸³Æ®
+// ì˜¤ë¸Œì íŠ¸ì˜ ë¨¸í‹°ë¦¬ì–¼ì„ í† ê¸€í•œë‹¤.
+// ì†Œì¼“ì— í˜¸ë²„(Hover Entered/Hover Exited)í•  ë•Œë§ˆë‹¤ ì†Œì¼“ì˜ ìƒ‰ìƒ(ë¨¸í‹°ë¦¬ì–¼)ì„ ë³€ê²½í•˜ê¸° ìœ„í•œ ìŠ¤í¬ë¦½íŠ¸
 public class ChangeMaterial : MonoBehaviour
 {
-    [Tooltip("ºí·ÏÀÌ ¼ÒÄÏ¿¡ Hover ¶Ç´Â SelectµÈ »óÅÂÀÏ ¶§, Æ÷ÀÎÅÍÀÇ ¸ÓÆ¼¸®¾ó")]
+    [Tooltip("ë¸”ë¡ì´ ì†Œì¼“ì— Hover ë˜ëŠ” Selectëœ ìƒíƒœì¼ ë•Œ, í¬ì¸í„°ì˜ ë¨¸í‹°ë¦¬ì–¼")]
     [SerializeField] private Material selectedMaterial;
 
-    [Tooltip("ºí·ÏÀÌ ActivateµÉ ¶§, Æ÷ÀÎÅÍÀÇ ¸ÓÆ¼¸®¾ó")]
+    [Tooltip("ë¸”ë¡ì´ Activateë  ë•Œ, í¬ì¸í„°ì˜ ë¨¸í‹°ë¦¬ì–¼")]
     [SerializeField] private Material activatedMaterial;
 
     private Material defaultMaterial;

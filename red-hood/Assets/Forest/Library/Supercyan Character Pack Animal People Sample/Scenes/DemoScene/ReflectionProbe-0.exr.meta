@@ -1,17 +1,9 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:red-hood/Assets/Forest/Library/Supercyan Character Pack Animal People Sample/Scenes/DemoScene/ReflectionProbe-0.exr.meta
 guid: 69ed22ce0c3b49942a75b9ef0d72db1a
-========
-guid: 3908bb1c2ff97c94b87da7a13a4f51d6
->>>>>>>> main:red-hood/Assets/Home/Library/Supercyan Character Pack Free Sample/Scenes/DemoScene/ReflectionProbe-0.exr.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-<<<<<<<< HEAD:red-hood/Assets/Forest/Library/Supercyan Character Pack Animal People Sample/Scenes/DemoScene/ReflectionProbe-0.exr.meta
   serializedVersion: 11
-========
-  serializedVersion: 7
->>>>>>>> main:red-hood/Assets/Home/Library/Supercyan Character Pack Free Sample/Scenes/DemoScene/ReflectionProbe-0.exr.meta
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
@@ -67,11 +59,7 @@ TextureImporter:
   textureFormatSet: 0
   applyGammaDecoding: 0
   platformSettings:
-<<<<<<<< HEAD:red-hood/Assets/Forest/Library/Supercyan Character Pack Animal People Sample/Scenes/DemoScene/ReflectionProbe-0.exr.meta
   - serializedVersion: 3
-========
-  - serializedVersion: 2
->>>>>>>> main:red-hood/Assets/Home/Library/Supercyan Character Pack Free Sample/Scenes/DemoScene/ReflectionProbe-0.exr.meta
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -90,18 +78,12 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 
-<<<<<<<< HEAD:red-hood/Assets/Forest/Library/Supercyan Character Pack Animal People Sample/Scenes/DemoScene/ReflectionProbe-0.exr.meta
     internalID: 0
-========
->>>>>>>> main:red-hood/Assets/Home/Library/Supercyan Character Pack Free Sample/Scenes/DemoScene/ReflectionProbe-0.exr.meta
     vertices: []
     indices: 
     edges: []
     weights: []
-<<<<<<<< HEAD:red-hood/Assets/Forest/Library/Supercyan Character Pack Animal People Sample/Scenes/DemoScene/ReflectionProbe-0.exr.meta
     secondaryTextures: []
-========
->>>>>>>> main:red-hood/Assets/Home/Library/Supercyan Character Pack Free Sample/Scenes/DemoScene/ReflectionProbe-0.exr.meta
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

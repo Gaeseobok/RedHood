@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-// Hand Controller¿¡¼­ ¹ß»ıÇÑ input¿¡ µû¶ó HandAnimation Å¬·¡½ºÀÇ actionÀ» Æ®¸®°ÅÇÑ´Ù.
+// Hand Controllerì—ì„œ ë°œìƒí•œ inputì— ë”°ë¼ HandAnimation í´ë˜ìŠ¤ì˜ actionì„ íŠ¸ë¦¬ê±°í•œë‹¤.
 [RequireComponent(typeof(XRController))]
 public class DeviceBasedHandController : MonoBehaviour
 {
@@ -13,7 +13,7 @@ public class DeviceBasedHandController : MonoBehaviour
         controller = GetComponent<XRController>();
     }
 
-    // Trigger¿Í Grip inputÀÇ value¸¦ HandAnimation¿¡ Àü´ŞÇÑ´Ù.
+    // Triggerì™€ Grip inputì˜ valueë¥¼ HandAnimationì— ì „ë‹¬í•œë‹¤.
     private void Update()
     {
         hand.SetGrip(controller.selectInteractionState.value);

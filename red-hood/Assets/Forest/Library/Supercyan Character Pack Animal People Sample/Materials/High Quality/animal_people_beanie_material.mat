@@ -4,18 +4,11 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-<<<<<<<< HEAD:red-hood/Assets/Forest/Library/Supercyan Character Pack Animal People Sample/Materials/High Quality/animal_people_beanie_material.mat
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: animal_people_beanie_material
   m_Shader: {fileID: 4800000, guid: 46879f491c4ffb442a02036de7cab3e0, type: 3}
-========
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: SmallSmoke
-  m_Shader: {fileID: 200, guid: 0000000000000000f000000000000000, type: 0}
->>>>>>>> main:red-hood/Assets/Home/Library/PollyPrivateers/Particles/Materials/SmallSmoke.mat
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -27,19 +20,9 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-<<<<<<<< HEAD:red-hood/Assets/Forest/Library/Supercyan Character Pack Animal People Sample/Materials/High Quality/animal_people_beanie_material.mat
         m_Texture: {fileID: 2800000, guid: 3df98a4985a510c4880b1ca606edf643, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats: []
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-========
-        m_Texture: {fileID: 2800000, guid: 729a8a3ec3069904bb0bfadced757b5b, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _InvFade: 0.05
-    m_Colors:
-    - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
->>>>>>>> main:red-hood/Assets/Home/Library/PollyPrivateers/Particles/Materials/SmallSmoke.mat
