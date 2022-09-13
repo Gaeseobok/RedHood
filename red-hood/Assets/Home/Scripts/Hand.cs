@@ -56,7 +56,7 @@ namespace RedHood
             _triggerTarget = v;
         }
 
-        // ¿©·¯ ÇÁ·¹ÀÓ¿¡ °ÉÃÄ Á¡ÁøÀûÀ¸·Î Animator parameters¸¦ º¯È­½ÃÄÑ AnimationÀ» Æ®¸®°ÅÇÑ´Ù.
+        // ì—¬ëŸ¬ í”„ë ˆì„ì— ê±¸ì³ ì ì§„ì ìœ¼ë¡œ Animator parametersë¥¼ ë³€í™”ì‹œì¼œ Animationì„ íŠ¸ë¦¬ê±°í•œë‹¤.
         private void AnimateHand()
         {
             if (_gripCurrent != _gripTarget)
@@ -75,16 +75,16 @@ namespace RedHood
         {
             // Update position
             Vector3 targetPositionWithOffset = _followTarget.position + positionOffset;
-            // µÎ ¿ÀºêÁ§Æ® °£ÀÇ °Å¸® °è»ê
+            // ë‘ ì˜¤ë¸Œì íŠ¸ ê°„ì˜ ê±°ë¦¬ ê³„ì‚°
             float dist = Vector3.Distance(targetPositionWithOffset, transform.position);
-            // µÎ ¿ÀºêÁ§Æ® °£ÀÇ °Å¸®, ¼Ó·Â, ¹æÇâ¿¡ µû¶ó rigidbodyÀÇ ¼Óµµ ¼³Á¤
+            // ë‘ ì˜¤ë¸Œì íŠ¸ ê°„ì˜ ê±°ë¦¬, ì†ë ¥, ë°©í–¥ì— ë”°ë¼ rigidbodyì˜ ì†ë„ ì„¤ì •
             _rigidbody.velocity = dist * followSpeed * (targetPositionWithOffset - transform.position).normalized * Time.deltaTime;
 
             // Update rotation
             Quaternion targetRotationWithOffset = _followTarget.rotation * Quaternion.Euler(rotationOffset);
-            // µÎ ¿ÀºêÁ§Æ® °£ÀÇ rotation Â÷ÀÌ¸¦ Quaternion ÇüÅÂ·Î °è»ê
+            // ë‘ ì˜¤ë¸Œì íŠ¸ ê°„ì˜ rotation ì°¨ì´ë¥¼ Quaternion í˜•íƒœë¡œ ê³„ì‚°
             Quaternion q = targetRotationWithOffset * Quaternion.Inverse(transform.rotation);
-            // °¢µµ¿Í ÃàÀ¸·Î º¯È¯
+            // ê°ë„ì™€ ì¶•ìœ¼ë¡œ ë³€í™˜
             q.ToAngleAxis(out float angle, out Vector3 axis);
             if (Mathf.Abs(axis.magnitude) != Mathf.Infinity)
             {

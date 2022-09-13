@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Hand ¸ğµ¨À» ÄÁÆ®·Ñ·¯ÀÇ ¿òÁ÷ÀÓ¿¡ µû¶ó ¹°¸®ÀûÀ¸·Î ¿òÁ÷ÀÌ°Ô ÇÏ´Â ½ºÅ©¸³Æ®
+// Hand ëª¨ë¸ì„ ì»¨íŠ¸ë¡¤ëŸ¬ì˜ ì›€ì§ì„ì— ë”°ë¼ ë¬¼ë¦¬ì ìœ¼ë¡œ ì›€ì§ì´ê²Œ í•˜ëŠ” ìŠ¤í¬ë¦½íŠ¸
 public class PhysicsHandMovement : MonoBehaviour
 {
     // Physics hand movement
@@ -34,8 +34,8 @@ public class PhysicsHandMovement : MonoBehaviour
 
     private void PhysicsMove()
     {
-        // RIgidbodyÀÇ isKinematicÀÌ FalseÀÌ¹Ç·Î Rigidbody.MovePosition »ç¿ë ºÒ°¡
-        // µû¶ó¼­ Rigidbody.velocity(angularVelocity)¸¦ Á¶ÀÛÇØ ¿ÀºêÁ§Æ®°¡ followTargetÀ» µû¶ó°¡µµ·Ï ÇÔ
+        // RIgidbodyì˜ isKinematicì´ Falseì´ë¯€ë¡œ Rigidbody.MovePosition ì‚¬ìš© ë¶ˆê°€
+        // ë”°ë¼ì„œ Rigidbody.velocity(angularVelocity)ë¥¼ ì¡°ì‘í•´ ì˜¤ë¸Œì íŠ¸ê°€ followTargetì„ ë”°ë¼ê°€ë„ë¡ í•¨
 
         // Update position
         Vector3 targetPositionWithOffset = followTarget.position + positionOffset;
@@ -43,10 +43,10 @@ public class PhysicsHandMovement : MonoBehaviour
         _rigidbody.velocity = dist * followSpeed * (targetPositionWithOffset - transform.position).normalized;
 
         // Update rotation
-        // µÎ ¿ÀºêÁ§Æ® °£ÀÇ rotation Â÷ÀÌ¸¦ Quaternion ÇüÅÂ·Î °è»ê
+        // ë‘ ì˜¤ë¸Œì íŠ¸ ê°„ì˜ rotation ì°¨ì´ë¥¼ Quaternion í˜•íƒœë¡œ ê³„ì‚°
         Quaternion targetRotationWithOffset = followTarget.rotation * Quaternion.Euler(rotationOffset);
         Quaternion rotationDiff = targetRotationWithOffset * Quaternion.Inverse(transform.rotation);
-        // °¢µµ¿Í ÃàÀ¸·Î º¯È¯
+        // ê°ë„ì™€ ì¶•ìœ¼ë¡œ ë³€í™˜
         rotationDiff.ToAngleAxis(out float angle, out Vector3 axis);
         if (Mathf.Abs(axis.magnitude) != Mathf.Infinity)
         {

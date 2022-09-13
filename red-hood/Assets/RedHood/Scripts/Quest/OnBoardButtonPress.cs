@@ -5,27 +5,27 @@ using UnityEngine.XR.Interaction.Toolkit;
 using TMPro;
 using System;
 
-// ÄÚµù º¸µåÀÇ ¹öÆ°À» ´­·¶À» ¶§ ºí·ÏÀ» ÃÊ±âÈ­ÇÏ°Å³ª ½ÇÇàÇÑ´Ù. (¸®¼Â & ½ºÅ¸Æ®)
+// ì½”ë”© ë³´ë“œì˜ ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ ë¸”ë¡ì„ ì´ˆê¸°í™”í•˜ê±°ë‚˜ ì‹¤í–‰í•œë‹¤. (ë¦¬ì…‹ & ìŠ¤íƒ€íŠ¸)
 public class OnBoardButtonPress : MonoBehaviour
 {
     public Coroutine CurrentRoutine { private set; get; } = null;
 
-    [Tooltip("¼ÒÄÏµéÀÇ »óÀ§ ¿ÀºêÁ§Æ®")]
+    [Tooltip("ì†Œì¼“ë“¤ì˜ ìƒìœ„ ì˜¤ë¸Œì íŠ¸")]
     [SerializeField] private GameObject socketsObject;
 
-    [Tooltip("¾Ë¸² ¸Ş¼¼Áö¸¦ Ãâ·ÂÇÒ Äµ¹ö½º")]
+    [Tooltip("ì•Œë¦¼ ë©”ì„¸ì§€ë¥¼ ì¶œë ¥í•  ìº”ë²„ìŠ¤")]
     [SerializeField] private Canvas alertCanvas;
 
-    [Tooltip("´ÙÀ½ ÄÚµå ºí·ÏÀÌ ½ÇÇàµÉ ¶§±îÁöÀÇ Áö¿¬ ½Ã°£")]
+    [Tooltip("ë‹¤ìŒ ì½”ë“œ ë¸”ë¡ì´ ì‹¤í–‰ë  ë•Œê¹Œì§€ì˜ ì§€ì—° ì‹œê°„")]
     [SerializeField] private float delay = 2.0f;
 
-    // ÄÚµå ºí·ÏÀÌ À§Ä¡ÇÏ´Â ¼ÒÄÏµé
+    // ì½”ë“œ ë¸”ë¡ì´ ìœ„ì¹˜í•˜ëŠ” ì†Œì¼“ë“¤
     private XRSocketInteractor[] sockets;
 
-    // ¼ÒÄÏµéÀÇ »óÅÂ¸¦ Ç¥ÇöÇÏ´Â ¿ÀºêÁ§Æ®
+    // ì†Œì¼“ë“¤ì˜ ìƒíƒœë¥¼ í‘œí˜„í•˜ëŠ” ì˜¤ë¸Œì íŠ¸
     private ChangeMaterial[] pointers;
 
-    // »óÈ² º° ¾Ë¸² ¸Ş¼¼Áö Ãâ·ÂÀ» À§ÇÑ º¯¼ö
+    // ìƒí™© ë³„ ì•Œë¦¼ ë©”ì„¸ì§€ ì¶œë ¥ì„ ìœ„í•œ ë³€ìˆ˜
     private FadeCanvas errorMessage;
 
     //private GameObject failureMessage;
@@ -48,7 +48,7 @@ public class OnBoardButtonPress : MonoBehaviour
         //successMessage = alertCanvas.transform.Find(SUCCESS_MESSAGE).gameObject;
     }
 
-    // ¼ÒÄÏ¿¡ À§Ä¡ÇÑ ¸ğµç ºí·ÏÀ» ¸®½ºÆ® ÇüÅÂ·Î ¸®ÅÏÇÑ´Ù.
+    // ì†Œì¼“ì— ìœ„ì¹˜í•œ ëª¨ë“  ë¸”ë¡ì„ ë¦¬ìŠ¤íŠ¸ í˜•íƒœë¡œ ë¦¬í„´í•œë‹¤.
     private List<XRGrabInteractable> GetAttachedBlockList()
     {
         List<XRGrabInteractable> blockList = new();
@@ -61,7 +61,7 @@ public class OnBoardButtonPress : MonoBehaviour
         return blockList;
     }
 
-    // ºí·Ï ³»ºÎ º¯¼ö ¼ÒÄÏ(Socket_Variable)¿¡ º¯¼ö ºí·ÏÀÌ Á¸ÀçÇÑ´Ù¸é ÇØ´ç º¯¼ö ºí·ÏÀ» ¸®ÅÏÇÑ´Ù.
+    // ë¸”ë¡ ë‚´ë¶€ ë³€ìˆ˜ ì†Œì¼“(Socket_Variable)ì— ë³€ìˆ˜ ë¸”ë¡ì´ ì¡´ì¬í•œë‹¤ë©´ í•´ë‹¹ ë³€ìˆ˜ ë¸”ë¡ì„ ë¦¬í„´í•œë‹¤.
     private GameObject GetAttachedVariableBlock(XRGrabInteractable block)
     {
         XRSocketInteractor variableSocket = block.GetComponentInChildren<XRSocketInteractor>();
@@ -77,15 +77,15 @@ public class OnBoardButtonPress : MonoBehaviour
         return null;
     }
 
-    // ¸®¼Â ¹öÆ°ÀÌ ´­·¯Á³À» ¶§, ¼ÒÄÏ¿¡ À§Ä¡ÇÑ ¸ğµç ºí·ÏÀ» Á¦°ÅÇÑ´Ù.
+    // ë¦¬ì…‹ ë²„íŠ¼ì´ ëˆŒëŸ¬ì¡Œì„ ë•Œ, ì†Œì¼“ì— ìœ„ì¹˜í•œ ëª¨ë“  ë¸”ë¡ì„ ì œê±°í•œë‹¤.
     public void PressResetButton()
     {
-        // ºí·Ï ¸®½ºÆ® °¡Á®¿À±â
+        // ë¸”ë¡ ë¦¬ìŠ¤íŠ¸ ê°€ì ¸ì˜¤ê¸°
         List<XRGrabInteractable> blockList = GetAttachedBlockList();
-        // ¸ğµç ºí·Ï Á¦°ÅÇÏ±â
+        // ëª¨ë“  ë¸”ë¡ ì œê±°í•˜ê¸°
         foreach (XRGrabInteractable block in blockList)
         {
-            // º¯¼ö ºí·ÏÀÌ Á¸ÀçÇÑ´Ù¸é Á¦°ÅÇÏ±â
+            // ë³€ìˆ˜ ë¸”ë¡ì´ ì¡´ì¬í•œë‹¤ë©´ ì œê±°í•˜ê¸°
             GameObject variableBlock = GetAttachedVariableBlock(block);
             if (variableBlock != null)
                 Destroy(variableBlock);
@@ -93,7 +93,7 @@ public class OnBoardButtonPress : MonoBehaviour
         }
     }
 
-    // ºí·Ï ³»ºÎ¿¡ ºñ¾îÀÖ´Â º¯¼ö ¼ÒÄÏ(Socket_Variable)ÀÌ ÀÖ´ÂÁö °è»êÇÑ´Ù.
+    // ë¸”ë¡ ë‚´ë¶€ì— ë¹„ì–´ìˆëŠ” ë³€ìˆ˜ ì†Œì¼“(Socket_Variable)ì´ ìˆëŠ”ì§€ ê³„ì‚°í•œë‹¤.
     private bool IsSocketEmpty(List<XRGrabInteractable> blockList)
     {
         foreach (XRGrabInteractable block in blockList)
@@ -109,7 +109,7 @@ public class OnBoardButtonPress : MonoBehaviour
         return false;
     }
 
-    // ºí·ÏÀÇ Activated ÀÌº¥Æ®¸¦ È°¼ºÈ­ÇÑ´Ù.
+    // ë¸”ë¡ì˜ Activated ì´ë²¤íŠ¸ë¥¼ í™œì„±í™”í•œë‹¤.
     private void ActivateBlock(XRGrabInteractable block)
     {
         ActivateEventArgs args = new();
@@ -117,7 +117,7 @@ public class OnBoardButtonPress : MonoBehaviour
         block.activated.Invoke(args);
     }
 
-    // ÀÏÁ¤ °£°İÀ¸·Î ºí·ÏÀ» ÇÏ³ª¾¿ ½ÇÇàÇÑ´Ù.
+    // ì¼ì • ê°„ê²©ìœ¼ë¡œ ë¸”ë¡ì„ í•˜ë‚˜ì”© ì‹¤í–‰í•œë‹¤.
     private IEnumerator ExecuteBlockCodes(List<XRGrabInteractable> blockList)
     {
         int iterStartIdx = -1, iterNum = 0, curIterNum = 0;
@@ -127,19 +127,19 @@ public class OnBoardButtonPress : MonoBehaviour
 
         for (int i = 0; i < blockList.Count; i++)
         {
-            Debug.LogWarning($"ÇöÀç ºí·Ï ÀÎµ¦½º: {i}");
+            Debug.LogWarning($"í˜„ì¬ ë¸”ë¡ ì¸ë±ìŠ¤: {i}");
 
             if (blockList[i].CompareTag(ITERATION_START_TAG) && iterStartIdx < 0)
             {
                 iterStartIdx = i;
                 GameObject variableBlock = GetAttachedVariableBlock(blockList[iterStartIdx]);
                 iterNum = Convert.ToInt32(variableBlock.GetComponentInChildren<TMP_Text>().text);
-                Debug.LogWarning($"ÃÑ ¹İº¹ È½¼ö: {iterNum}");
+                Debug.LogWarning($"ì´ ë°˜ë³µ íšŸìˆ˜: {iterNum}");
             }
             else if (blockList[i].CompareTag(ITERATION_END_TAG))
             {
                 curIterNum++;
-                Debug.LogWarning($"ÇöÀç ¹İº¹ È½¼ö: {curIterNum}");
+                Debug.LogWarning($"í˜„ì¬ ë°˜ë³µ íšŸìˆ˜: {curIterNum}");
 
                 if (curIterNum >= iterNum)
                     pointers[iterStartIdx].ChangeToDefaultMaterial();
@@ -160,10 +160,10 @@ public class OnBoardButtonPress : MonoBehaviour
 
     public void PressStartButton()
     {
-        // ºí·Ï ¸®½ºÆ® °¡Á®¿À±â
+        // ë¸”ë¡ ë¦¬ìŠ¤íŠ¸ ê°€ì ¸ì˜¤ê¸°
         List<XRGrabInteractable> blockList = GetAttachedBlockList();
 
-        // ¸ğµç ¼ÒÄÏ¿¡ ºí·ÏÀÌ ¸ğµÎ Ã¤¿öÁöÁö ¾ÊÀº °æ¿ì ¾Ë¸² ¸Ş¼¼Áö Ãâ·Â
+        // ëª¨ë“  ì†Œì¼“ì— ë¸”ë¡ì´ ëª¨ë‘ ì±„ì›Œì§€ì§€ ì•Šì€ ê²½ìš° ì•Œë¦¼ ë©”ì„¸ì§€ ì¶œë ¥
         if (blockList.Count < sockets.Length || IsSocketEmpty(blockList))
         {
             errorMessage.SetAlpha(1.0f);
@@ -171,7 +171,7 @@ public class OnBoardButtonPress : MonoBehaviour
             return;
         }
 
-        // ¸ğµç ºí·Ï ½ÇÇàÇÏ±â
+        // ëª¨ë“  ë¸”ë¡ ì‹¤í–‰í•˜ê¸°
         StopAllCoroutines();
         CurrentRoutine = StartCoroutine(ExecuteBlockCodes(blockList));
     }

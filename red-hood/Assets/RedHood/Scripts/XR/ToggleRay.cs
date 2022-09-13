@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-// Direct interactor¿Í Ray interactor¸¦ Åä±ÛÇÑ´Ù.
-// Direct interactor°¡ ´Ù¸¥ ¿ÀºêÁ§Æ®¿Í »óÈ£ÀÛ¿ëÇÏ°í ÀÖÁö ¾ÊÀ» ¶§¸¸ Åä±ÛÇÑ´Ù.
+// Direct interactorì™€ Ray interactorë¥¼ í† ê¸€í•œë‹¤.
+// Direct interactorê°€ ë‹¤ë¥¸ ì˜¤ë¸Œì íŠ¸ì™€ ìƒí˜¸ì‘ìš©í•˜ê³  ìˆì§€ ì•Šì„ ë•Œë§Œ í† ê¸€í•œë‹¤.
 public class ToggleRay : MonoBehaviour
 {
     [SerializeField] private XRDirectInteractor directInteractor;
