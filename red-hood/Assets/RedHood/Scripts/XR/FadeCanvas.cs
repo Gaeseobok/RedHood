@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Canvas groupì˜ ì˜¤ë¸Œì íŠ¸ë“¤ì„ í˜ì´ë“œí•œë‹¤.
+// Canvas groupÀÇ ¿ÀºêÁ§Æ®µéÀ» ÆäÀÌµåÇÑ´Ù.
 public class FadeCanvas : MonoBehaviour
 {
     public Coroutine CurrentRoutine { private set; get; } = null;

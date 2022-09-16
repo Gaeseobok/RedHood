@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-// ìœ ì €ê°€ ì½”ë”© ë³´ë“œì—ì„œ ì½”ë“œ ë¸”ë¡ì„ ê°€ì ¸ê°ˆ ì‹œ í•´ë‹¹ ìë¦¬ì— ê°€ì ¸ê°„ ì½”ë“œ ë¸”ë¡ì„ ë¦¬ìŠ¤í°í•œë‹¤.
+// À¯Àú°¡ ÄÚµù º¸µå¿¡¼­ ÄÚµå ºí·ÏÀ» °¡Á®°¥ ½Ã ÇØ´ç ÀÚ¸®¿¡ °¡Á®°£ ÄÚµå ºí·ÏÀ» ¸®½ºÆùÇÑ´Ù.
 public class RespawnBlock : MonoBehaviour
 {
     [SerializeField] private XRGrabInteractable attachBlock;

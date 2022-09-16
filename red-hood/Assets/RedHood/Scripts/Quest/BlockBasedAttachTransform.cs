@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-// ì†Œì¼“ì— ë†“ì¼ ì½”ë“œ ë¸”ë¡ì˜ í¬ê¸°ì— ë§ê²Œ ì†Œì¼“ì˜ Attach Transformì„ ì¡°ì ˆí•œë‹¤.
+// ¼ÒÄÏ¿¡ ³õÀÏ ÄÚµå ºí·ÏÀÇ Å©±â¿¡ ¸Â°Ô ¼ÒÄÏÀÇ Attach TransformÀ» Á¶ÀıÇÑ´Ù.
 public class BlockBasedAttachTransform : MonoBehaviour
 {
     //[Tooltip("The distance between Pointer and Code Block")]
@@ -23,7 +23,7 @@ public class BlockBasedAttachTransform : MonoBehaviour
     public void SetAttachTransform()
     {
         XRGrabInteractable selectedBlock = (XRGrabInteractable)socketInteractor.interactablesSelected[0];
-        float selectedBlockWidth = selectedBlock.transform.FindChildRecursive("Center").localScale.x;        
+        float selectedBlockWidth = selectedBlock.transform.GetChild(0).Find("Center").localScale.x;
         float x = (selectedBlockWidth - BLOCK_WIDTH) / 2;
 
         socketInteractor.attachTransform.localPosition = new Vector3(-x, defaultAttachTransform.y, defaultAttachTransform.z);
@@ -33,5 +33,4 @@ public class BlockBasedAttachTransform : MonoBehaviour
     {
         socketInteractor.attachTransform.localPosition = defaultAttachTransform;
     }
-
 }

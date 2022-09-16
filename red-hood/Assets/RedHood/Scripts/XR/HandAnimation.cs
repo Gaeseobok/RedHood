@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Hand ëª¨ë¸ì— ì• ë‹ˆë©”ì´ì…˜ì„ ê²°í•©í•œë‹¤.
+// Hand ¸ğµ¨¿¡ ¾Ö´Ï¸ŞÀÌ¼ÇÀ» °áÇÕÇÑ´Ù.
 [RequireComponent(typeof(Animator))]
 public class HandAnimation : MonoBehaviour
 {
@@ -36,7 +36,7 @@ public class HandAnimation : MonoBehaviour
         _triggerTarget = v;
     }
 
-    // ì—¬ëŸ¬ í”„ë ˆì„ì— ê±¸ì³ ì ì§„ì ìœ¼ë¡œ Animator parametersë¥¼ ë³€í™”ì‹œì¼œ Animationì„ íŠ¸ë¦¬ê±°í•œë‹¤.
+    // ¿©·¯ ÇÁ·¹ÀÓ¿¡ °ÉÃÄ Á¡ÁøÀûÀ¸·Î Animator parameters¸¦ º¯È­½ÃÄÑ AnimationÀ» Æ®¸®°ÅÇÑ´Ù.
     private void AnimateHand()
     {
         if (_gripCurrent != _gripTarget)

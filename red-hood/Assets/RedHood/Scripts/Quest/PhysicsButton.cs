@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-// ë²„íŠ¼ì— ì´ë²¤íŠ¸ë¥¼ ê²°í•©í•œë‹¤.
+// ¹öÆ°¿¡ ÀÌº¥Æ®¸¦ °áÇÕÇÑ´Ù.
 public class PhysicsButton : MonoBehaviour
 {
-    // ì´ë²¤íŠ¸ê°€ ë°œìƒí•˜ëŠ” ì—­ì¹˜ (ë²„íŠ¼ì˜ ëˆŒë¦¼ ì •ë„)
+    // ÀÌº¥Æ®°¡ ¹ß»ıÇÏ´Â ¿ªÄ¡ (¹öÆ°ÀÇ ´­¸² Á¤µµ)
     [SerializeField] private float threshold = 0.1f;
 
-    // ë¬¼ë¦¬ì  íš¨ê³¼(bounciness)ìœ¼ë¡œ ì¸í•´ ë²„íŠ¼ì´ ì—¬ëŸ¬ ë²ˆ ëˆŒë¦¬ëŠ” ê²ƒ(pressed/released)ì„ ë°©ì§€í•˜ê¸° ìœ„í•œ êµ¬ê°„
+    // ¹°¸®Àû È¿°ú(bounciness)À¸·Î ÀÎÇØ ¹öÆ°ÀÌ ¿©·¯ ¹ø ´­¸®´Â °Í(pressed/released)À» ¹æÁöÇÏ±â À§ÇÑ ±¸°£
     [SerializeField] private float deadZone = 0.025f;
 
-    // ë§¤ í”„ë ˆì„ë§ˆë‹¤ ì´ë²¤íŠ¸ë¥¼ íŠ¸ë¦¬ê±°í•˜ì§€ ì•Šê¸° ìœ„í•´ ë²„íŠ¼ì˜ ëˆŒë¦¼ ìƒíƒœë¥¼ ì €ì¥í•œë‹¤.
+    // ¸Å ÇÁ·¹ÀÓ¸¶´Ù ÀÌº¥Æ®¸¦ Æ®¸®°ÅÇÏÁö ¾Ê±â À§ÇØ ¹öÆ°ÀÇ ´­¸² »óÅÂ¸¦ ÀúÀåÇÑ´Ù.
     private bool isPressed = false;
 
     private Vector3 startPos;
