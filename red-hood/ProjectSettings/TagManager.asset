@@ -9,6 +9,9 @@ TagManager:
   - CodeSocket
   - IterationStart
   - IterationEnd
+  - Conditional
+  - Q3_Red
+  - Q3_Green
   layers:
   - Default
   - TransparentFX
