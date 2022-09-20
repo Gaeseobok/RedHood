@@ -8,7 +8,7 @@ public class RespawnBlock : MonoBehaviour
 
     private void Start()
     {
-        InstantiateBlock();
+        //InstantiateBlock();
     }
 
     private void InstantiateBlock()

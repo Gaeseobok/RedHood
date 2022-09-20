@@ -13,12 +13,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 575855249629038377, guid: fd32901f996ed5f4393969f92e737956, type: 3}
       propertyPath: m_text
-      value: "      \uBC88 \uB3D9\uC548 \uBC18\uBCF5\uD558\uAE30"
+      value: "\uB9CC\uC57D           \uB77C\uBA74"
       objectReference: {fileID: 0}
     - target: {fileID: 575855249629038377, guid: fd32901f996ed5f4393969f92e737956, type: 3}
       propertyPath: m_margin.y
       value: -0.002
       objectReference: {fileID: 0}
+    - target: {fileID: 575855249629038377, guid: fd32901f996ed5f4393969f92e737956, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 575855249629038377, guid: fd32901f996ed5f4393969f92e737956, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 1166394259490272423, guid: fd32901f996ed5f4393969f92e737956, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.1
@@ -35,6 +43,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0.0011
       objectReference: {fileID: 0}
+    - target: {fileID: 6290613774705902986, guid: fd32901f996ed5f4393969f92e737956, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 6357058290030755541, guid: fd32901f996ed5f4393969f92e737956, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.2
