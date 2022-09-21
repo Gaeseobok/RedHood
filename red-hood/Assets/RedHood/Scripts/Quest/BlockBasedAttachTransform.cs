@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-// ì†Œì¼“ì— ë†“ì¼ ì½”ë“œ ë¸”ë¡ì˜ í¬ê¸°ì— ë§ê²Œ ì†Œì¼“ì˜ Attach Transformì„ ì¡°ì ˆí•œë‹¤.
+// ¼ÒÄÏ¿¡ ³õÀÏ ÄÚµå ºí·ÏÀÇ Å©±â¿¡ ¸Â°Ô ¼ÒÄÏÀÇ Attach TransformÀ» Á¶ÀıÇÑ´Ù.
 public class BlockBasedAttachTransform : MonoBehaviour
 {
     //[Tooltip("The distance between Pointer and Code Block")]
