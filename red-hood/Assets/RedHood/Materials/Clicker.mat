@@ -7,11 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<<< HEAD:red-hood/Assets/Forest/Materials/Random2.mat
-  m_Name: Random2
-========
   m_Name: Clicker
->>>>>>>> main:red-hood/Assets/RedHood/Materials/Clicker.mat
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -79,10 +75,6 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-<<<<<<<< HEAD:red-hood/Assets/Forest/Materials/Random2.mat
-    - _Color: {r: 0, g: 0.18025112, b: 1, a: 1}
-========
     - _Color: {r: 1, g: 0, b: 0, a: 1}
->>>>>>>> main:red-hood/Assets/RedHood/Materials/Clicker.mat
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

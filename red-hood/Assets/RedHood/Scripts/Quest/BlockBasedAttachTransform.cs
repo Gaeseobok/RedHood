@@ -23,7 +23,7 @@ public class BlockBasedAttachTransform : MonoBehaviour
     public void SetAttachTransform()
     {
         XRGrabInteractable selectedBlock = (XRGrabInteractable)socketInteractor.interactablesSelected[0];
-        float selectedBlockWidth = selectedBlock.transform.FindChildRecursive("Center").localScale.x;        
+        float selectedBlockWidth = selectedBlock.transform.GetChild(0).Find("Center").localScale.x;
         float x = (selectedBlockWidth - BLOCK_WIDTH) / 2;
 
         socketInteractor.attachTransform.localPosition = new Vector3(-x, defaultAttachTransform.y, defaultAttachTransform.z);
@@ -33,5 +33,4 @@ public class BlockBasedAttachTransform : MonoBehaviour
     {
         socketInteractor.attachTransform.localPosition = defaultAttachTransform;
     }
-
 }
