@@ -13,9 +13,9 @@ public class ChangeMaterial : MonoBehaviour
     [SerializeField] private Material activatedMaterial;
 
     private Material defaultMaterial;
-    private MeshRenderer[] renderers;
+    private MeshRenderer [] renderers;
     private bool isChanged = false;
-
+       
     private void Start()
     {
         renderers = GetComponentsInChildren<MeshRenderer>();

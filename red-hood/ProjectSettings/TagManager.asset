@@ -12,6 +12,8 @@ TagManager:
   - Conditional
   - Q3_Red
   - Q3_Green
+  - Q3_Pick
+  - Q3_Pass
   layers:
   - Default
   - TransparentFX
