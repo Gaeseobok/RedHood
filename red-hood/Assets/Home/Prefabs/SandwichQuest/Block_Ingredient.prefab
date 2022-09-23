@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 575855249629038377, guid: fd32901f996ed5f4393969f92e737956, type: 3}
+      propertyPath: m_text
+      value: "\uCD94\uAC00\uD558\uAE30"
+      objectReference: {fileID: 0}
     - target: {fileID: 6370985324493259307, guid: fd32901f996ed5f4393969f92e737956, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -25,11 +29,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6370985324493259307, guid: fd32901f996ed5f4393969f92e737956, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9099613
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6370985324493259307, guid: fd32901f996ed5f4393969f92e737956, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.41469327
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6370985324493259307, guid: fd32901f996ed5f4393969f92e737956, type: 3}
       propertyPath: m_LocalRotation.y
@@ -41,7 +45,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6370985324493259307, guid: fd32901f996ed5f4393969f92e737956, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 49
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6370985324493259307, guid: fd32901f996ed5f4393969f92e737956, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -54,6 +58,18 @@ PrefabInstance:
     - target: {fileID: 6452079840344783200, guid: fd32901f996ed5f4393969f92e737956, type: 3}
       propertyPath: m_Name
       value: Block_Ingredient
+      objectReference: {fileID: 0}
+    - target: {fileID: 6502054924154695906, guid: fd32901f996ed5f4393969f92e737956, type: 3}
+      propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8448197097368998126}
+    - target: {fileID: 6502054924154695906, guid: fd32901f996ed5f4393969f92e737956, type: 3}
+      propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Add
+      objectReference: {fileID: 0}
+    - target: {fileID: 6502054924154695906, guid: fd32901f996ed5f4393969f92e737956, type: 3}
+      propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: AddIngredient, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd32901f996ed5f4393969f92e737956, type: 3}
@@ -75,4 +91,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientModel: {fileID: 0}
-  modelPosition: {x: 0, y: 0, z: 0}
+  modelPosition: {x: -1.2, y: 1, z: -1.1}
