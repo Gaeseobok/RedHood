@@ -25,11 +25,14 @@ public class OnBoardButtonPress : MonoBehaviour
     // 소켓들의 상태를 표현하는 오브젝트
     private ChangeMaterial[] pointers;
 
-    // 상황 별 알림 메세지 출력을 위한 변수
-    private FadeCanvas errorMessage;
+    // 각 소켓의 정답 리스트
+    private AnswerConfirmation[] answers;
 
-    //private GameObject failureMessage;
-    //private GameObject successMessage;
+    // 상황 별 알림 메세지 출력을 위한 변수
+
+    private FadeCanvas errorMessage;
+    private FadeCanvas failureMessage;
+    private FadeCanvas successMessage;
 
     private const string ERROR_MESSAGE = "Error Message";
     private const string FAILURE_MESSAGE = "Failure Message";
@@ -37,15 +40,17 @@ public class OnBoardButtonPress : MonoBehaviour
 
     private const string ITERATION_START_TAG = "IterationStart";
     private const string ITERATION_END_TAG = "IterationEnd";
+    private const string QUEST_MODEL_TAG = "QuestModel";
 
     private void Start()
     {
         sockets = socketsObject.GetComponentsInChildren<XRSocketInteractor>();
         pointers = socketsObject.GetComponentsInChildren<ChangeMaterial>();
+        answers = socketsObject.GetComponentsInChildren<AnswerConfirmation>();
 
         errorMessage = alertCanvas.transform.Find(ERROR_MESSAGE).GetComponent<FadeCanvas>();
-        //failureMessage = alertCanvas.transform.Find(FAILURE_MESSAGE).gameObject;
-        //successMessage = alertCanvas.transform.Find(SUCCESS_MESSAGE).gameObject;
+        failureMessage = alertCanvas.transform.Find(FAILURE_MESSAGE).GetComponent<FadeCanvas>();
+        successMessage = alertCanvas.transform.Find(SUCCESS_MESSAGE).GetComponent<FadeCanvas>();
     }
 
     // 소켓에 위치한 모든 블록을 리스트 형태로 리턴한다.
@@ -82,6 +87,8 @@ public class OnBoardButtonPress : MonoBehaviour
     {
         // 블록 리스트 가져오기
         List<XRGrabInteractable> blockList = GetAttachedBlockList();
+        GameObject[] questModels = GameObject.FindGameObjectsWithTag(QUEST_MODEL_TAG);
+
         // 모든 블록 제거하기
         foreach (XRGrabInteractable block in blockList)
         {
@@ -90,6 +97,12 @@ public class OnBoardButtonPress : MonoBehaviour
             if (variableBlock != null)
                 Destroy(variableBlock);
             Destroy(block.gameObject);
+        }
+
+        // 인스턴스화된 퀘스트용 모델들 모두 제거하기
+        foreach (GameObject model in questModels)
+        {
+            Destroy(model);
         }
     }
 
@@ -121,25 +134,22 @@ public class OnBoardButtonPress : MonoBehaviour
     private IEnumerator ExecuteBlockCodes(List<XRGrabInteractable> blockList)
     {
         int iterStartIdx = -1, iterNum = 0, curIterNum = 0;
+        bool isClear = true;
 
         foreach (ChangeMaterial pointer in pointers)
             pointer.ChangeToDefaultMaterial();
 
         for (int i = 0; i < blockList.Count; i++)
         {
-            Debug.LogWarning($"현재 블록 인덱스: {i}");
-
             if (blockList[i].CompareTag(ITERATION_START_TAG) && iterStartIdx < 0)
             {
                 iterStartIdx = i;
                 GameObject variableBlock = GetAttachedVariableBlock(blockList[iterStartIdx]);
                 iterNum = Convert.ToInt32(variableBlock.GetComponentInChildren<TMP_Text>().text);
-                Debug.LogWarning($"총 반복 횟수: {iterNum}");
             }
             else if (blockList[i].CompareTag(ITERATION_END_TAG))
             {
                 curIterNum++;
-                Debug.LogWarning($"현재 반복 횟수: {curIterNum}");
 
                 if (curIterNum >= iterNum)
                     pointers[iterStartIdx].ChangeToDefaultMaterial();
@@ -149,12 +159,29 @@ public class OnBoardButtonPress : MonoBehaviour
                     continue;
                 }
             }
+
             pointers[i].ChangeToActivatedMaterial();
             ActivateBlock(blockList[i]);
+
+            if (answers[i].CompareAnswer(blockList[i]) == false)
+                isClear = false;
+
             yield return new WaitForSeconds(delay);
 
             if (i != iterStartIdx)
                 pointers[i].ChangeToDefaultMaterial();
+        }
+
+        // 정답 여부에 따라 팝업을 띄운다
+        if (isClear)
+        {
+            successMessage.SetAlpha(1.0f);
+            successMessage.StartFadeOut();
+        }
+        else
+        {
+            failureMessage.SetAlpha(1.0f);
+            failureMessage.StartFadeOut();
         }
     }
 
