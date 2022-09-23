@@ -6,9 +6,6 @@ using UnityEngine.XR.Interaction.Toolkit;
 // 소켓에 놓일 코드 블록의 크기에 맞게 소켓의 Attach Transform을 조절한다.
 public class BlockBasedAttachTransform : MonoBehaviour
 {
-    //[Tooltip("The distance between Pointer and Code Block")]
-    //[SerializeField] private float marginLeft = 0.033f;
-
     private XRSocketInteractor socketInteractor;
     private Vector3 defaultAttachTransform;
 
