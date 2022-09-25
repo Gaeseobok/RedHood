@@ -366,9 +366,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7a02b73a5277fd4fa760389e43a4c0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  socketsObject: {fileID: 0}
+  socketList: {fileID: 0}
   alertCanvas: {fileID: 0}
-  delay: 1
+  ExecuteDelay: 1.3
 --- !u!1 &5118334655355538193
 GameObject:
   m_ObjectHideFlags: 0

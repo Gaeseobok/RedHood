@@ -6,18 +6,18 @@ using TMPro;
 using System;
 
 // 코딩 보드의 버튼을 눌렀을 때 블록을 초기화하거나 실행한다. (리셋 & 스타트)
-public class OnBoardButtonPress : MonoBehaviour
+public class BlockExecution : MonoBehaviour
 {
     public Coroutine CurrentRoutine { private set; get; } = null;
 
-    [Tooltip("소켓들의 상위 오브젝트")]
-    [SerializeField] private GameObject socketsObject;
+    [Tooltip("소켓들의 상위 오브젝트(소켓 리스트)")]
+    [SerializeField] private GameObject socketList;
 
     [Tooltip("알림 메세지를 출력할 캔버스")]
     [SerializeField] private Canvas alertCanvas;
 
     [Tooltip("다음 코드 블록이 실행될 때까지의 지연 시간")]
-    [SerializeField] private float delay = 2.0f;
+    [SerializeField] private float ExecuteDelay = 1.0f;
 
     // 코드 블록이 위치하는 소켓들
     private XRSocketInteractor[] sockets;
@@ -44,30 +44,39 @@ public class OnBoardButtonPress : MonoBehaviour
 
     private void Start()
     {
-        sockets = socketsObject.GetComponentsInChildren<XRSocketInteractor>();
-        pointers = socketsObject.GetComponentsInChildren<ChangeMaterial>();
-        answers = socketsObject.GetComponentsInChildren<AnswerConfirmation>();
+        sockets = socketList.GetComponentsInChildren<XRSocketInteractor>();
+        pointers = socketList.GetComponentsInChildren<ChangeMaterial>();
+        answers = socketList.GetComponentsInChildren<AnswerConfirmation>();
 
         errorMessage = alertCanvas.transform.Find(ERROR_MESSAGE).GetComponent<FadeCanvas>();
         failureMessage = alertCanvas.transform.Find(FAILURE_MESSAGE).GetComponent<FadeCanvas>();
         successMessage = alertCanvas.transform.Find(SUCCESS_MESSAGE).GetComponent<FadeCanvas>();
     }
 
-    // 소켓에 위치한 모든 블록을 리스트 형태로 리턴한다.
+    // 소켓에 부착된 블록을 리턴한다.
+    internal XRGrabInteractable GetAttachedBlock(XRSocketInteractor socket)
+    {
+        List<IXRSelectInteractable> attachedBlocks = socket.interactablesSelected;
+        if (attachedBlocks.Count != 0)
+            return (XRGrabInteractable)attachedBlocks[0];
+        return null;
+    }
+
+    // 소켓들에 부착된 모든 블록을 리스트 형태로 리턴한다.
     private List<XRGrabInteractable> GetAttachedBlockList()
     {
         List<XRGrabInteractable> blockList = new();
         foreach (XRSocketInteractor socket in sockets)
         {
-            List<IXRSelectInteractable> attachedBlocks = socket.interactablesSelected;
-            if (attachedBlocks.Count != 0)
-                blockList.Add((XRGrabInteractable)attachedBlocks[0]);
+            XRGrabInteractable attachedBlock = GetAttachedBlock(socket);
+            if (attachedBlock != null)
+                blockList.Add(attachedBlock);
         }
         return blockList;
     }
 
     // 블록 내부 변수 소켓(Socket_Variable)에 변수 블록이 존재한다면 해당 변수 블록을 리턴한다.
-    private GameObject GetAttachedVariableBlock(XRGrabInteractable block)
+    internal XRGrabInteractable GetAttachedVariableBlock(XRGrabInteractable block)
     {
         XRSocketInteractor variableSocket = block.GetComponentInChildren<XRSocketInteractor>();
         if (variableSocket != null)
@@ -76,14 +85,14 @@ public class OnBoardButtonPress : MonoBehaviour
             if (variableBlocks.Count > 0)
             {
                 XRGrabInteractable variableBlock = (XRGrabInteractable)variableSocket.interactablesSelected[0];
-                return variableBlock.gameObject;
+                return variableBlock;
             }
         }
         return null;
     }
 
-    // 리셋 버튼이 눌러졌을 때, 소켓에 위치한 모든 블록을 제거한다.
-    public void PressResetButton()
+    // 리셋 버튼이 눌러졌을 때, 소켓에 부착된 모든 블록을 제거한다.
+    public void OnResetButtonPress()
     {
         // 블록 리스트 가져오기
         List<XRGrabInteractable> blockList = GetAttachedBlockList();
@@ -93,9 +102,9 @@ public class OnBoardButtonPress : MonoBehaviour
         foreach (XRGrabInteractable block in blockList)
         {
             // 변수 블록이 존재한다면 제거하기
-            GameObject variableBlock = GetAttachedVariableBlock(block);
+            XRGrabInteractable variableBlock = GetAttachedVariableBlock(block);
             if (variableBlock != null)
-                Destroy(variableBlock);
+                Destroy(variableBlock.gameObject);
             Destroy(block.gameObject);
         }
 
@@ -144,7 +153,7 @@ public class OnBoardButtonPress : MonoBehaviour
             if (blockList[i].CompareTag(ITERATION_START_TAG) && iterStartIdx < 0)
             {
                 iterStartIdx = i;
-                GameObject variableBlock = GetAttachedVariableBlock(blockList[iterStartIdx]);
+                XRGrabInteractable variableBlock = GetAttachedVariableBlock(blockList[iterStartIdx]);
                 iterNum = Convert.ToInt32(variableBlock.GetComponentInChildren<TMP_Text>().text);
             }
             else if (blockList[i].CompareTag(ITERATION_END_TAG))
@@ -166,7 +175,7 @@ public class OnBoardButtonPress : MonoBehaviour
             if (answers[i].CompareAnswer(blockList[i]) == false)
                 isClear = false;
 
-            yield return new WaitForSeconds(delay);
+            yield return new WaitForSeconds(ExecuteDelay);
 
             if (i != iterStartIdx)
                 pointers[i].ChangeToDefaultMaterial();
@@ -185,7 +194,7 @@ public class OnBoardButtonPress : MonoBehaviour
         }
     }
 
-    public void PressStartButton()
+    public void OnStartButtonPress()
     {
         // 블록 리스트 가져오기
         List<XRGrabInteractable> blockList = GetAttachedBlockList();
