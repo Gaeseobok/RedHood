@@ -19,8 +19,8 @@ public class QuestManager : MonoBehaviour
     [Tooltip("다음 코드 블록이 실행될 때까지의 지연 시간")]
     [SerializeField] private float delay = 2.0f;
 
-    [Tooltip("꽃의 상위 오브젝트")]
-    [SerializeField] private GameObject flowerBed;
+    [Tooltip("Flower Indicators")]
+    [SerializeField] private GameObject particleEffect;
 
     // 코드 블록이 위치하는 소켓들
     private XRSocketInteractor[] sockets;
@@ -28,12 +28,13 @@ public class QuestManager : MonoBehaviour
     // 소켓들의 상태를 표현하는 오브젝트
     private ChangeMaterial[] pointers;
 
-    // 꽃 색깔 별 오브젝트
-    // private GameObject [] flowers;
-    private ChangeMaterial [] flowerIndicators;
+    // ParticleSystem to indicate selected flowerbed
+    ParticleSystem [] particles;
 
     // 상황 별 알림 메세지 출력을 위한 변수
     private FadeCanvas errorMessage;
+    private FadeCanvas failureMessage;
+    private FadeCanvas successMessage;
 
     //private GameObject failureMessage;
     //private GameObject successMessage;
@@ -51,11 +52,18 @@ public class QuestManager : MonoBehaviour
         sockets = socketsObject.GetComponentsInChildren<XRSocketInteractor>();
         pointers = socketsObject.GetComponentsInChildren<ChangeMaterial>();
 
-        // flowers = flowerBed.GetComponentsInChildren<GameObject>();
-        flowerIndicators = flowerBed.GetComponentsInChildren<ChangeMaterial>();
-
+        // particle system off
+        particles = particleEffect.GetComponentsInChildren<ParticleSystem>();
+        foreach(ParticleSystem particle in particles)
+        {
+            // var emission = particle.emission;
+            // emission.enabled = false;
+            particle.Stop();
+        }
+        
         errorMessage = alertCanvas.transform.Find(ERROR_MESSAGE).GetComponent<FadeCanvas>();
-        //failureMessage = alertCanvas.transform.Find(FAILURE_MESSAGE).gameObject;
+        failureMessage = alertCanvas.transform.Find(FAILURE_MESSAGE).GetComponent<FadeCanvas>();
+        successMessage = alertCanvas.transform.Find(SUCCESS_MESSAGE).GetComponent<FadeCanvas>();
         //successMessage = alertCanvas.transform.Find(SUCCESS_MESSAGE).gameObject;
     }
 
@@ -118,6 +126,8 @@ public class QuestManager : MonoBehaviour
                 Destroy(variableBlock);
             Destroy(block.gameObject);
         }
+
+        //remove failure canvas
     }
 
     // 블록 내부에 비어있는 변수 소켓(Socket_Variable)이 있는지 계산한다.
@@ -154,59 +164,78 @@ public class QuestManager : MonoBehaviour
     // 일정 간격으로 블록을 하나씩 실행한다.
     private IEnumerator ExecuteBlockCodes(List<XRGrabInteractable> blockList)
     {
+        Boolean flag = true;
+
         foreach (ChangeMaterial pointer in pointers)
             pointer.ChangeToDefaultMaterial();
+    
 
-
-        // foreach (ChangeMaterial flowerIndicator in flowerIndicators)
-        //     flowerIndicator.ChangeToDefaultMaterial();
-
-        for (int i = 1; i < blockList.Count; i++)
+        for (int i = 0; i < blockList.Count; i++)
         {
             Debug.LogWarning($"현재 블록 인덱스: {i}");
+            pointers[i].ChangeToActivatedMaterial();
 
             int temp = i%2;
-            switch(temp)
+
+            if(temp == 0)
             {
-                case 1:
-                    if (blockList[i].CompareTag(CONDITIONAL_TAG))
+                if (blockList[i].CompareTag(CONDITIONAL_TAG))
+                {
+                    // 조건블록일 때
+                    XRGrabInteractable colorBlock = GetAttachedXRGrabInteractable(blockList[i]);
+                    SelectBlock(colorBlock); //색 변화                        
+                }
+                else
+                {
+                    //에러창 뜨게하기
+                    flag = false;
+                    Debug.LogWarning("조건 블록 아님");
+                }
+            }
+            else
+            {
+                XRGrabInteractable variableBlock = GetAttachedXRGrabInteractable(blockList[i-1]);
+                if (blockList[i].CompareTag(PICK_TAG))
+                {
+                    Debug.LogWarning("담기 블록");
+                    ActivateBlock(variableBlock);
+                    if(variableBlock.CompareTag(PICK_TAG))
                     {
-                        // 조건블록일 때
-                        XRGrabInteractable colorBlock = GetAttachedXRGrabInteractable(blockList[i]);
-                        SelectBlock(colorBlock); //색 변화                        
+                        flag = true;
+                        Debug.LogWarning("주어진 꽃");
+                        
                     }
                     else
                     {
-                        Debug.LogWarning("조건 블록 아님");
+                        flag = false;
+                        Debug.LogWarning("주어진 꽃 아님");
                     }
-                    break;
-                
-                case 0:
-                    XRGrabInteractable variableBlock = GetAttachedXRGrabInteractable(blockList[i-1]);
-                    switch(blockList[i].CompareTag(PICK_TAG)&&variableBlock.CompareTag(PICK_TAG))
-                    {
-                        case true:
-                            ActivateBlock(variableBlock); //인스턴스화
-                            break;
-                        case false:
-                            Debug.LogWarning("태그 다름");
-                            break;
-                    }
-                    break;
-            
+                }
+                else if(blockList[i].CompareTag(CONDITIONAL_TAG))
+                {
+                    flag = false;
+                    Debug.LogWarning("실행 블록 아님");
+                }
             }
-            
-            pointers[i].ChangeToActivatedMaterial();
-            // ActivateBlock(blockList[i]);
             yield return new WaitForSeconds(delay);
+            pointers[i].ChangeToDefaultMaterial();
 
-            // if (i != iterStartIdx)
-            //     pointers[i].ChangeToDefaultMaterial();
+            if(!flag)
+            {
+                failureMessage.SetAlpha(1.0f);
+                break;
+            }
+        }
+
+        if(flag)
+        {
+            successMessage.SetAlpha(1.0f);
         }
     }
 
     public void PressStartButton()
     {
+
         // 블록 리스트 가져오기
         List<XRGrabInteractable> blockList = GetAttachedBlockList();
 
