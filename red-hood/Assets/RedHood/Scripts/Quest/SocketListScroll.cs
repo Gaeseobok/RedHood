@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
 // 스크롤 버튼을 눌렀을 때 코딩 보드의 소켓 리스트들을 스크롤한다.
+[System.Obsolete]
 public class SocketListScroll : AttachedBlock
 {
     public static Coroutine CurrentRoutine { private set; get; } = null;
@@ -11,13 +12,16 @@ public class SocketListScroll : AttachedBlock
     [Tooltip("버튼을 계속 누르고 있을 때, 다음 스크롤까지의 지연 시간")]
     [SerializeField] private float scrollDelay = 1.0f;
 
-    private struct SocketWIthBlock
+    private XRInteractionManager interactionManager;
+
+    // 소켓 오브젝트와 부착된 블록들을 저장하는 구조체
+    private struct SocketInfo
     {
         public GameObject SocketObject;
-        public GameObject AttachedBlock;
-        public GameObject AttachedVarBlock;
+        public XRGrabInteractable AttachedBlock;
+        public XRGrabInteractable AttachedVarBlock;
 
-        public SocketWIthBlock(GameObject socketObject)
+        public SocketInfo(GameObject socketObject)
         {
             this.SocketObject = socketObject;
             AttachedBlock = null;
@@ -28,8 +32,8 @@ public class SocketListScroll : AttachedBlock
     // 소켓의 개수
     private int socketNum;
 
-    // 소켓들을 저장하는 리스트
-    private static SocketWIthBlock[] sockets;
+    // 소켓과 부착된 블록들을 저장하는 리스트
+    private static SocketInfo[] socketInfos;
 
     // 현재 보이는 첫 번째 소켓의 인덱스
     private static int firstVisibleIndex = 0;
@@ -45,11 +49,12 @@ public class SocketListScroll : AttachedBlock
 
     private void Start()
     {
+        interactionManager = gameObject.AddComponent<XRInteractionManager>();
         socketNum = socketList.childCount;
-        sockets = new SocketWIthBlock[socketNum];
+        socketInfos = new SocketInfo[socketNum];
 
         for (int i = 0; i < socketNum; i++)
-            sockets[i] = new SocketWIthBlock(socketList.GetChild(i).gameObject);
+            socketInfos[i] = new SocketInfo(socketList.GetChild(i).gameObject);
     }
 
     // 소켓 리스트를 위로 스크롤하기 시작한다.
@@ -109,42 +114,47 @@ public class SocketListScroll : AttachedBlock
     // 소켓과 소켓에 부착된 블록을 활성화한다.
     private void ActivateSocket(int index)
     {
-        if (sockets[index].AttachedBlock != null)
+        socketInfos[index].SocketObject.SetActive(true);
+
+        if (socketInfos[index].AttachedBlock != null)
         {
-            Debug.Log($"{index}. {sockets[index].AttachedBlock} 활성화");
-            sockets[index].AttachedBlock.SetActive(true);
-            if (sockets[index].AttachedVarBlock != null)
+            XRSocketInteractor socketInteractor = socketInfos[index].SocketObject.GetComponentInChildren<XRSocketInteractor>();
+
+            socketInfos[index].AttachedBlock.gameObject.SetActive(true);
+            interactionManager.SelectEnter(socketInteractor, socketInfos[index].AttachedBlock);
+
+            if (socketInfos[index].AttachedVarBlock != null)
             {
-                Debug.Log($"{index}. {sockets[index].AttachedVarBlock} 활성화");
-                sockets[index].AttachedVarBlock.SetActive(true);
+                socketInteractor = socketInfos[index].AttachedBlock.GetComponentInChildren<XRSocketInteractor>();
+
+                socketInfos[index].AttachedVarBlock.gameObject.SetActive(true);
+                interactionManager.SelectEnter(socketInteractor, socketInfos[index].AttachedVarBlock);
             }
         }
-        Debug.Log($"{index}. {sockets[index].SocketObject} 활성화");
-        sockets[index].SocketObject.SetActive(true);
     }
 
     // 소켓과 소켓에 부착된 블록을 비활성화한다.
     private void InactivateSocket(int index)
     {
         // 부착된 블록들을 저장한 후, 비활성화
-        XRGrabInteractable attachedBlock = GetAttachedBlock(sockets[index].SocketObject.GetComponentInChildren<XRSocketInteractor>());
-        if (attachedBlock != null)
+        IXRSelectInteractable interactableSelected = socketInfos[index].SocketObject
+                                                     .GetComponentInChildren<XRSocketInteractor>().firstInteractableSelected;
+
+        if (interactableSelected != null)
         {
-            sockets[index].AttachedBlock = attachedBlock.gameObject;
+            XRGrabInteractable attachedBlock = (XRGrabInteractable)interactableSelected;
+            socketInfos[index].AttachedBlock = attachedBlock;
+
             XRGrabInteractable attachedVarBlock = GetAttachedVariableBlock(attachedBlock);
             if (attachedVarBlock != null)
             {
-                sockets[index].AttachedVarBlock = attachedVarBlock.gameObject;
-                sockets[index].AttachedVarBlock.SetActive(false);
-
-                Debug.Log($"{index}. {sockets[index].AttachedVarBlock} 비활성화");
+                socketInfos[index].AttachedVarBlock = attachedVarBlock;
+                socketInfos[index].AttachedVarBlock.gameObject.SetActive(false);
             }
 
-            Debug.Log($"{index}. {sockets[index].AttachedBlock} 비활성화");
-            sockets[index].AttachedBlock.SetActive(false);
+            socketInfos[index].AttachedBlock.gameObject.SetActive(false);
         }
 
-        Debug.Log($"{index}. {sockets[index].SocketObject} 비활성화");
-        sockets[index].SocketObject.SetActive(false);
+        socketInfos[index].SocketObject.SetActive(false);
     }
 }
