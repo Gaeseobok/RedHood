@@ -466,7 +466,6 @@ GameObject:
   - component: {fileID: 197141678}
   - component: {fileID: 197141677}
   - component: {fileID: 197141681}
-  - component: {fileID: 197141682}
   m_Layer: 0
   m_Name: Push_Up
   m_TagString: Untagged
@@ -488,7 +487,7 @@ Transform:
   m_Children:
   - {fileID: 673440765}
   m_Father: {fileID: 5650022720316670270}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &197141674
 BoxCollider:
@@ -723,21 +722,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   socketList: {fileID: 891041713}
   scrollDelay: 1
---- !u!114 &197141682
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 197141672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7a02b73a5277fd4fa760389e43a4c0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  socketList: {fileID: 0}
-  alertCanvas: {fileID: 0}
-  ExecuteDelay: 1
 --- !u!1 &211814937
 GameObject:
   m_ObjectHideFlags: 0
@@ -1048,7 +1032,7 @@ PrefabInstance:
     - target: {fileID: 5204609400262632259, guid: 41d0fba3a1f98294aaaa5cb7728bdc19, type: 3}
       propertyPath: socketList
       value: 
-      objectReference: {fileID: 891041712}
+      objectReference: {fileID: 891041713}
     - target: {fileID: 5204609400262632259, guid: 41d0fba3a1f98294aaaa5cb7728bdc19, type: 3}
       propertyPath: alertCanvas
       value: 
@@ -1838,7 +1822,6 @@ GameObject:
   - component: {fileID: 1001075832}
   - component: {fileID: 1001075831}
   - component: {fileID: 1001075834}
-  - component: {fileID: 1001075835}
   m_Layer: 0
   m_Name: Push_Down
   m_TagString: Untagged
@@ -2095,21 +2078,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   socketList: {fileID: 891041713}
   scrollDelay: 1
---- !u!114 &1001075835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1001075826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7a02b73a5277fd4fa760389e43a4c0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  socketList: {fileID: 0}
-  alertCanvas: {fileID: 0}
-  ExecuteDelay: 1
 --- !u!1001 &1004558822
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2345,7 +2313,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5650022720316670270}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1274529203
 Rigidbody:
@@ -3583,8 +3551,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 826585804}
-  - {fileID: 197141673}
   - {fileID: 1274529202}
+  - {fileID: 197141673}
   - {fileID: 1001075827}
   m_Father: {fileID: 465668378}
   m_RootOrder: 6
@@ -3680,7 +3648,7 @@ PrefabInstance:
     - target: {fileID: 5204609400262632259, guid: 41d0fba3a1f98294aaaa5cb7728bdc19, type: 3}
       propertyPath: socketList
       value: 
-      objectReference: {fileID: 891041712}
+      objectReference: {fileID: 891041713}
     - target: {fileID: 5204609400262632259, guid: 41d0fba3a1f98294aaaa5cb7728bdc19, type: 3}
       propertyPath: alertCanvas
       value: 

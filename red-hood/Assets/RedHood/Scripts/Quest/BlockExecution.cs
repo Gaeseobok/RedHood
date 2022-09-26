@@ -6,12 +6,9 @@ using TMPro;
 using System;
 
 // 코딩 보드의 버튼을 눌렀을 때 블록을 초기화하거나 실행한다. (리셋 & 스타트)
-public class BlockExecution : MonoBehaviour
+public class BlockExecution : AttachedBlock
 {
-    public Coroutine CurrentRoutine { private set; get; } = null;
-
-    [Tooltip("소켓들의 상위 오브젝트(소켓 리스트)")]
-    [SerializeField] private GameObject socketList;
+    public static Coroutine CurrentRoutine { private set; get; } = null;
 
     [Tooltip("알림 메세지를 출력할 캔버스")]
     [SerializeField] private Canvas alertCanvas;
@@ -53,49 +50,11 @@ public class BlockExecution : MonoBehaviour
         successMessage = alertCanvas.transform.Find(SUCCESS_MESSAGE).GetComponent<FadeCanvas>();
     }
 
-    // 소켓에 부착된 블록을 리턴한다.
-    internal XRGrabInteractable GetAttachedBlock(XRSocketInteractor socket)
-    {
-        List<IXRSelectInteractable> attachedBlocks = socket.interactablesSelected;
-        if (attachedBlocks.Count != 0)
-            return (XRGrabInteractable)attachedBlocks[0];
-        return null;
-    }
-
-    // 소켓들에 부착된 모든 블록을 리스트 형태로 리턴한다.
-    private List<XRGrabInteractable> GetAttachedBlockList()
-    {
-        List<XRGrabInteractable> blockList = new();
-        foreach (XRSocketInteractor socket in sockets)
-        {
-            XRGrabInteractable attachedBlock = GetAttachedBlock(socket);
-            if (attachedBlock != null)
-                blockList.Add(attachedBlock);
-        }
-        return blockList;
-    }
-
-    // 블록 내부 변수 소켓(Socket_Variable)에 변수 블록이 존재한다면 해당 변수 블록을 리턴한다.
-    internal XRGrabInteractable GetAttachedVariableBlock(XRGrabInteractable block)
-    {
-        XRSocketInteractor variableSocket = block.GetComponentInChildren<XRSocketInteractor>();
-        if (variableSocket != null)
-        {
-            List<IXRSelectInteractable> variableBlocks = variableSocket.interactablesSelected;
-            if (variableBlocks.Count > 0)
-            {
-                XRGrabInteractable variableBlock = (XRGrabInteractable)variableSocket.interactablesSelected[0];
-                return variableBlock;
-            }
-        }
-        return null;
-    }
-
     // 리셋 버튼이 눌러졌을 때, 소켓에 부착된 모든 블록을 제거한다.
     public void OnResetButtonPress()
     {
         // 블록 리스트 가져오기
-        List<XRGrabInteractable> blockList = GetAttachedBlockList();
+        List<XRGrabInteractable> blockList = GetAttachedBlockList(sockets);
         GameObject[] questModels = GameObject.FindGameObjectsWithTag(QUEST_MODEL_TAG);
 
         // 모든 블록 제거하기
@@ -197,7 +156,7 @@ public class BlockExecution : MonoBehaviour
     public void OnStartButtonPress()
     {
         // 블록 리스트 가져오기
-        List<XRGrabInteractable> blockList = GetAttachedBlockList();
+        List<XRGrabInteractable> blockList = GetAttachedBlockList(sockets);
 
         // 모든 소켓에 블록이 모두 채워지지 않은 경우 알림 메세지 출력
         if (blockList.Count < sockets.Length || IsSocketEmpty(blockList))
