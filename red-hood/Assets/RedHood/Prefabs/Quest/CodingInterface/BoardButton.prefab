@@ -368,7 +368,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   socketList: {fileID: 0}
   alertCanvas: {fileID: 0}
-  ExecuteDelay: 1.3
+  ExecuteDelay: 1
 --- !u!1 &5118334655355538193
 GameObject:
   m_ObjectHideFlags: 0

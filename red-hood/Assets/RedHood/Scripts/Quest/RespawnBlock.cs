@@ -6,18 +6,19 @@ public class RespawnBlock : MonoBehaviour
 {
     [SerializeField] private XRGrabInteractable attachBlock;
 
-    private void Start()
+    private void Awake()
     {
         InstantiateBlock();
     }
 
     private void InstantiateBlock()
     {
-        Instantiate(attachBlock, transform.position, transform.rotation);
+        if (gameObject.activeInHierarchy)
+            Instantiate(attachBlock, transform.position, transform.rotation);
     }
 
     public void Respawn()
     {
-        Invoke("InstantiateBlock", 0.2f);
+        Invoke(nameof(InstantiateBlock), 0.2f);
     }
 }
