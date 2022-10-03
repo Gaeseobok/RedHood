@@ -9,6 +9,9 @@ public class SocketListScroll : MonoBehaviour
     [Tooltip("소켓 리스트(소켓들의 상위 오브젝트)")]
     [SerializeField] private SocketList socketList;
 
+    [Tooltip("스크롤바 오브젝트")]
+    [SerializeField] private Transform scrollBar;
+
     [Tooltip("버튼을 계속 누르고 있을 때, 다음 스크롤까지의 지연 시간")]
     [SerializeField] private float scrollDelay = 1.0f;
 
@@ -18,18 +21,44 @@ public class SocketListScroll : MonoBehaviour
     // 한 번에 보이는 소켓의 최대 개수
     private const int MAX_VISIBLE_SOCKETS = 7;
 
-    // 소켓 리스트의 기준이 되는 중간 인덱스
-    private const int MIDDLE_SOCKET_IDX = MAX_VISIBLE_SOCKETS / 2;
-
     // 소켓 간 간격
     private const float SOCKET_INTERVAL = 0.05f;
 
-    private Vector3 direction = new(0.0f, SOCKET_INTERVAL, 0.0f);
-    private Vector3 defaultPosition = new(0.0f, 0.0f, 0.01f);
+    // 스크롤바 이동 범위
+    private const float SCROLLBAR_RANGE = 0.28f;
 
-    public void ResetFisrtVisibleIndex()
+    private Vector3 direction = new(0.0f, SOCKET_INTERVAL, 0.0f);
+    private Vector3 defaultPosition;
+
+    private Vector3 scrollBarDirection;
+    private Vector3 scrollBarDefaultPosition;
+
+    private void Start()
     {
+        InitSocketListScroll();
+    }
+
+    public void InitSocketListScroll()
+    {
+        defaultPosition = socketList.transform.localPosition;
+        scrollBarDefaultPosition = scrollBar.localPosition;
         firstVisibleIndex = 0;
+        CalcScrollBarDirection();
+    }
+
+    private void CalcScrollBarDirection()
+    {
+        // 스크롤해야 하는 소켓의 개수
+        float scrollSocketNum = socketList.socketNum - MAX_VISIBLE_SOCKETS;
+
+        // 스크롤이 필요 없으면, 스크롤바 비활성화
+        if (scrollSocketNum <= 0)
+        {
+            scrollBar.gameObject.SetActive(false);
+            return;
+        }
+
+        scrollBarDirection = new(0.0f, -(SCROLLBAR_RANGE / scrollSocketNum), 0.0f);
     }
 
     // 소켓 리스트를 위로 스크롤하기 시작한다.
@@ -67,6 +96,7 @@ public class SocketListScroll : MonoBehaviour
             socketList.ActivateSocket(--firstVisibleIndex);
             socketList.InactivateSocket(firstVisibleIndex + MAX_VISIBLE_SOCKETS);
             socketList.transform.Translate(-direction);
+            scrollBar.Translate(-scrollBarDirection);
 
             yield return new WaitForSeconds(scrollDelay);
         }
@@ -79,6 +109,7 @@ public class SocketListScroll : MonoBehaviour
             socketList.ActivateSocket(firstVisibleIndex + MAX_VISIBLE_SOCKETS);
             socketList.InactivateSocket(firstVisibleIndex++);
             socketList.transform.Translate(direction);
+            scrollBar.Translate(scrollBarDirection);
 
             yield return new WaitForSeconds(scrollDelay);
         }
@@ -88,6 +119,7 @@ public class SocketListScroll : MonoBehaviour
     internal void ResetScroll()
     {
         socketList.transform.localPosition = defaultPosition;
+        scrollBar.transform.localPosition = scrollBarDefaultPosition;
 
         for (int i = 0; i < socketList.socketNum; i++)
         {
@@ -100,7 +132,7 @@ public class SocketListScroll : MonoBehaviour
                 socketList.InactivateSocket(i);
             }
         }
-        ResetFisrtVisibleIndex();
+        firstVisibleIndex = 0;
     }
 
     // 인덱스에 맞는 위치로 스크롤
@@ -114,6 +146,7 @@ public class SocketListScroll : MonoBehaviour
             socketList.ActivateSocket(firstVisibleIndex + MAX_VISIBLE_SOCKETS);
             socketList.InactivateSocket(firstVisibleIndex++);
             socketList.transform.Translate(direction);
+            scrollBar.Translate(scrollBarDirection);
         }
     }
 }

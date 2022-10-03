@@ -99,6 +99,7 @@ public class BlockExecution : MonoBehaviour
         int iterStartIdx = -1, iterNum = 0, curIterNum = 0;
         bool isClear = true;
 
+        // TODO: pointer 색 자동으로 스크롤에 맞게 활성화하기
         foreach (ChangeMaterial pointer in pointers)
             pointer.ChangeToDefaultMaterial();
 
