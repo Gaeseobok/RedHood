@@ -1213,6 +1213,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 465668378}
     m_Modifications:
+    - target: {fileID: 3242675293598737414, guid: 41d0fba3a1f98294aaaa5cb7728bdc19, type: 3}
+      propertyPath: socketList
+      value: 
+      objectReference: {fileID: 891041714}
     - target: {fileID: 5118334654923195831, guid: 41d0fba3a1f98294aaaa5cb7728bdc19, type: 3}
       propertyPath: OnPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -3029,7 +3033,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7266490584441820865, guid: 1dddf729e1beac8428c0824f40b0ea70, type: 3}
       propertyPath: m_SelectExited.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7266490584441820865, guid: 1dddf729e1beac8428c0824f40b0ea70, type: 3}
       propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.size
@@ -4470,18 +4474,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 891041714}
-        m_TargetAssemblyTypeName: SocketInformation, Assembly-CSharp
-        m_MethodName: SetCurEnteredBlock
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
       m_Calls:
@@ -4489,18 +4481,6 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: RespawnBlock, Assembly-CSharp
         m_MethodName: Respawn
         m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 891041714}
-        m_TargetAssemblyTypeName: SocketInformation, Assembly-CSharp
-        m_MethodName: SetCurExitedBlock
-        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4534,6 +4514,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 465668378}
     m_Modifications:
+    - target: {fileID: 3242675293598737414, guid: 41d0fba3a1f98294aaaa5cb7728bdc19, type: 3}
+      propertyPath: socketList
+      value: 
+      objectReference: {fileID: 891041714}
     - target: {fileID: 5118334654923195831, guid: 41d0fba3a1f98294aaaa5cb7728bdc19, type: 3}
       propertyPath: OnPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

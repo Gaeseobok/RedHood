@@ -173,6 +173,7 @@ GameObject:
   - component: {fileID: 5118334654923195826}
   - component: {fileID: 5118334654923195831}
   - component: {fileID: 5204609400262632259}
+  - component: {fileID: 3242675293598737414}
   m_Layer: 0
   m_Name: Push
   m_TagString: Untagged
@@ -369,6 +370,20 @@ MonoBehaviour:
   socketList: {fileID: 0}
   alertCanvas: {fileID: 0}
   ExecuteDelay: 1
+--- !u!114 &3242675293598737414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5118334654923195824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea310cd20d1e99445b6e7506fdc9d8e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  socketList: {fileID: 0}
+  scrollDelay: 1
 --- !u!1 &5118334655355538193
 GameObject:
   m_ObjectHideFlags: 0

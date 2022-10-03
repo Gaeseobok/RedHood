@@ -1,18 +1,16 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using TMPro;
 using System;
-using static SocketInformation;
 
 // 코딩 보드의 버튼을 눌렀을 때 블록을 초기화하거나 실행한다. (리셋 & 스타트)
 public class BlockExecution : MonoBehaviour
 {
     public static Coroutine CurrentRoutine { private set; get; } = null;
 
-    [Tooltip("소켓 리스트")]
-    [SerializeField] private SocketInformation socketList;
+    [Tooltip("소켓 리스트(소켓들의 상위 오브젝트)")]
+    [SerializeField] private SocketList socketList;
 
     [Tooltip("알림 메세지를 출력할 캔버스")]
     [SerializeField] private Canvas alertCanvas;
@@ -57,23 +55,34 @@ public class BlockExecution : MonoBehaviour
     // 리셋 버튼이 눌러졌을 때, 소켓에 부착된 모든 블록을 제거한다.
     public void OnResetButtonPress()
     {
-        // 모든 블록 제거하기
-        for (int i = 0; i < socketNum; i++)
-        {
-            if (socketInfos[i].AttachedBlock != null)
-                Destroy(socketInfos[i].AttachedBlock.gameObject);
+        scrollComponent.ResetScroll();
 
-            if (socketInfos[i].AttachedVarBlock != null)
-                Destroy(socketInfos[i].AttachedVarBlock.gameObject);
-        }
+        // 모든 블록 제거하기
+        for (int i = 0; i < socketList.socketNum; i++)
+            socketList.DestroyBlocks(i);
 
         // 인스턴스화된 퀘스트용 모델들 모두 제거하기
         GameObject[] questModels = GameObject.FindGameObjectsWithTag(QUEST_MODEL_TAG);
 
         foreach (GameObject model in questModels)
             Destroy(model);
+    }
 
-        //scrollComponent.RevertScroll();
+    // 플레이 버튼이 눌러졌을 때, 모든 블록을 실행한다.
+    public void OnStartButtonPress()
+    {
+        // 모든 소켓에 블록이 모두 채워지지 않은 경우 알림 메세지 출력
+        if (socketList.IsSocketEmpty())
+        {
+            errorMessage.SetAlpha(1.0f);
+            errorMessage.StartFadeOut();
+            return;
+        }
+
+        // 모든 블록 실행하기
+        scrollComponent.ResetScroll();
+        StopAllCoroutines();
+        CurrentRoutine = StartCoroutine(ExecuteBlockCodes());
     }
 
     // 블록의 Activated 이벤트를 활성화한다.
@@ -93,14 +102,15 @@ public class BlockExecution : MonoBehaviour
         foreach (ChangeMaterial pointer in pointers)
             pointer.ChangeToDefaultMaterial();
 
-        for (int i = 0; i < socketNum; i++)
+        for (int i = 0; i < socketList.socketNum; i++)
         {
-            XRGrabInteractable block = socketInfos[i].AttachedBlock;
+            scrollComponent.SetScroll(i);
+            XRGrabInteractable block = socketList.SetCurrentBlock(i);
 
             if (block.CompareTag(ITERATION_START_TAG) && iterStartIdx < 0)
             {
                 iterStartIdx = i;
-                XRGrabInteractable variableBlock = socketInfos[i].AttachedVarBlock;
+                XRGrabInteractable variableBlock = socketList.GetCurrentVariableBlock(block);
                 iterNum = Convert.ToInt32(variableBlock.GetComponentInChildren<TMP_Text>().text);
             }
             else if (block.CompareTag(ITERATION_END_TAG))
@@ -139,21 +149,5 @@ public class BlockExecution : MonoBehaviour
             failureMessage.SetAlpha(1.0f);
             failureMessage.StartFadeOut();
         }
-    }
-
-    public void OnStartButtonPress()
-    {
-        // 모든 소켓에 블록이 모두 채워지지 않은 경우 알림 메세지 출력
-        if (IsSocketEmpty())
-        {
-            errorMessage.SetAlpha(1.0f);
-            errorMessage.StartFadeOut();
-            return;
-        }
-
-        // 모든 블록 실행하기
-        //scrollComponent.RevertScroll();
-        StopAllCoroutines();
-        CurrentRoutine = StartCoroutine(ExecuteBlockCodes());
     }
 }
