@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5124207761927028834}
   - component: {fileID: 4199555458563504724}
   - component: {fileID: 7600765670026970797}
-  - component: {fileID: -3551102161085473661}
+  - component: {fileID: 8046126567287807792}
   - component: {fileID: -9188327457077071204}
   m_Layer: 0
   m_Name: Tomato
@@ -85,8 +85,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &-3551102161085473661
-MeshCollider:
+--- !u!65 &8046126567287807792
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -95,10 +95,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 5892359386350019813, guid: 3f79bf2a302b0467194aaad4f4b3fa4a, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 3.9294689, y: 0.7909375, z: 3.9538796}
+  m_Center: {x: 0.026362922, y: -0.0007855147, z: -0.00965584}
 --- !u!54 &-9188327457077071204
 Rigidbody:
   m_ObjectHideFlags: 0

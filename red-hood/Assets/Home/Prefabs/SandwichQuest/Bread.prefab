@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6214665124915838309}
   - component: {fileID: 3127164718466385747}
   - component: {fileID: 8672071226503019434}
-  - component: {fileID: 2122498143822691093}
+  - component: {fileID: 799225170484074555}
   - component: {fileID: -1886287596359860012}
   m_Layer: 0
   m_Name: Bread
@@ -85,8 +85,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &2122498143822691093
-MeshCollider:
+--- !u!65 &799225170484074555
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -95,10 +95,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -4548727101508622366, guid: 2ffd338905db7446b99ed921843749f0, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 3.8817244, y: 0.84113514, z: 4.8562813}
+  m_Center: {x: -0.08040411, y: -0.25952888, z: 0.18378358}
 --- !u!54 &-1886287596359860012
 Rigidbody:
   m_ObjectHideFlags: 0
