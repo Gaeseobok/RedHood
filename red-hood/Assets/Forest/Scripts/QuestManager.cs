@@ -32,16 +32,20 @@ public class QuestManager : MonoBehaviour
     ParticleSystem [] particles;
 
     // 상황 별 알림 메세지 출력을 위한 변수
-    private FadeCanvas errorMessage;
+    private FadeCanvas blankMessage;
     private FadeCanvas failureMessage;
     private FadeCanvas successMessage;
+    private FadeCanvas syntaxMessage;
 
     //private GameObject failureMessage;
     //private GameObject successMessage;
 
-    private const string ERROR_MESSAGE = "Error Message";
+    private const string BLANK_MESSAGE = "Blank Error Message";
     private const string FAILURE_MESSAGE = "Failure Message";
     private const string SUCCESS_MESSAGE = "Success Message";
+    private const string SYNTAX_MESSAGE = "Syntax Error Message";
+
+
     private const string CONDITIONAL_TAG = "Conditional";
     // private const string EXECUTIONAL_TAG = "Executional";
     private const string PICK_TAG = "Q3_Pick";
@@ -61,9 +65,10 @@ public class QuestManager : MonoBehaviour
             particle.Stop();
         }
         
-        errorMessage = alertCanvas.transform.Find(ERROR_MESSAGE).GetComponent<FadeCanvas>();
+        blankMessage = alertCanvas.transform.Find(BLANK_MESSAGE).GetComponent<FadeCanvas>();
         failureMessage = alertCanvas.transform.Find(FAILURE_MESSAGE).GetComponent<FadeCanvas>();
         successMessage = alertCanvas.transform.Find(SUCCESS_MESSAGE).GetComponent<FadeCanvas>();
+        syntaxMessage = alertCanvas.transform.Find(SYNTAX_MESSAGE).GetComponent<FadeCanvas>();
         //successMessage = alertCanvas.transform.Find(SUCCESS_MESSAGE).gameObject;
     }
 
@@ -185,11 +190,16 @@ public class QuestManager : MonoBehaviour
                     XRGrabInteractable colorBlock = GetAttachedXRGrabInteractable(blockList[i]);
                     SelectBlock(colorBlock); //색 변화                        
                 }
+                else if (blockList[i].CompareTag("Untagged"))
+                {
+                    continue;
+                }
                 else
                 {
                     //에러창 뜨게하기
                     flag = false;
                     Debug.LogWarning("조건 블록 아님");
+                    syntaxMessage.SetAlpha(1.0f);
                 }
             }
             else
@@ -242,8 +252,8 @@ public class QuestManager : MonoBehaviour
         // 모든 소켓에 블록이 모두 채워지지 않은 경우 알림 메세지 출력
         if (blockList.Count < sockets.Length || IsSocketEmpty(blockList))
         {
-            errorMessage.SetAlpha(1.0f);
-            errorMessage.StartFadeOut();
+            blankMessage.SetAlpha(1.0f);
+            blankMessage.StartFadeOut();
             return;
         }
 

@@ -3212,7 +3212,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uBE48\uCE78\uC744 \uBAA8\uB450 \uCC44\uC6CC\uC8FC\uC138\uC694!"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: bc45a50f433fa46049ce73c05572031d, type: 2}
+  m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: -9153181360668451590, guid: bc45a50f433fa46049ce73c05572031d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
