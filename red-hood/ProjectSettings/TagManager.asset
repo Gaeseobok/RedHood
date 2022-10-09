@@ -15,6 +15,7 @@ TagManager:
   - Q3_Pick
   - Q3_Pass
   - QuestModel
+  - CubeMapCharacter
   layers:
   - Default
   - TransparentFX
