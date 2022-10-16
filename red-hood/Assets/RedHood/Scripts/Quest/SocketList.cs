@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-// ¼ÒÄÏ°ú ¼ÒÄÏ¿¡ ºÎÂøµÈ ºí·ÏµéÀ» Á¶ÀÛÇÑ´Ù.
+// ì†Œì¼“ê³¼ ì†Œì¼“ì— ë¶€ì°©ëœ ë¸”ë¡ë“¤ì„ ì¡°ì‘í•œë‹¤.
 public class SocketList : MonoBehaviour
 {
     private XRInteractionManager interactionManager;
@@ -22,7 +22,7 @@ public class SocketList : MonoBehaviour
         variableBlocks = new XRGrabInteractable[socketNum];
     }
 
-    // ¼ÒÄÏ¿¡ ÇöÀç ºÎÂøµÈ ºí·ÏÀ» ÀúÀåÇÏ°í ¸®ÅÏÇÑ´Ù. (ºÎÂøµÈ ºí·ÏÀÌ ¾øÀ¸¸é null ¸®ÅÏ)
+    // ì†Œì¼“ì— í˜„ì¬ ë¶€ì°©ëœ ë¸”ë¡ì„ ì €ì¥í•˜ê³  ë¦¬í„´í•œë‹¤. (ë¶€ì°©ëœ ë¸”ë¡ì´ ì—†ìœ¼ë©´ null ë¦¬í„´)
     public XRGrabInteractable SetCurrentBlock(int idx)
     {
         IXRSelectInteractable attachedBlock = sockets[idx].firstInteractableSelected;
@@ -30,7 +30,7 @@ public class SocketList : MonoBehaviour
         return blocks[idx];
     }
 
-    // ºí·Ï ³»ºÎ º¯¼ö ¼ÒÄÏ(Socket_Variable)¿¡ º¯¼ö ºí·ÏÀÌ Á¸ÀçÇÑ´Ù¸é ÇØ´ç º¯¼ö ºí·ÏÀ» ¸®ÅÏÇÑ´Ù.
+    // ë¸”ë¡ ë‚´ë¶€ ë³€ìˆ˜ ì†Œì¼“(Socket_Variable)ì— ë³€ìˆ˜ ë¸”ë¡ì´ ì¡´ì¬í•œë‹¤ë©´ í•´ë‹¹ ë³€ìˆ˜ ë¸”ë¡ì„ ë¦¬í„´í•œë‹¤.
     internal XRGrabInteractable GetCurrentVariableBlock(XRGrabInteractable block)
     {
         XRSocketInteractor variableSocket = block.GetComponentInChildren<XRSocketInteractor>();
@@ -43,26 +43,26 @@ public class SocketList : MonoBehaviour
         return null;
     }
 
-    // ºñ¾îÀÖ´Â ¼ÒÄÏÀÌ ÀÖ´ÂÁö È®ÀÎÇÑ´Ù.
+    // ë¹„ì–´ìˆëŠ” ì†Œì¼“ì´ ìˆëŠ”ì§€ í™•ì¸í•œë‹¤.
     internal bool IsSocketEmpty()
     {
         XRSocketInteractor variableSocket;
 
         for (int i = 0; i < socketNum; i++)
         {
-            // ¼ÒÄÏÀÌ ºñÈ°¼ºÈ­µÈ °æ¿ì
+            // ì†Œì¼“ì´ ë¹„í™œì„±í™”ëœ ê²½ìš°
             if (!sockets[i].gameObject.activeInHierarchy)
             {
-                // ¼ÒÄÏÀÌ ºñ¾îÀÖ´Ù¸é true ¸®ÅÏ
+                // ì†Œì¼“ì´ ë¹„ì–´ìˆë‹¤ë©´ true ë¦¬í„´
                 if (blocks[i] == null)
                     return true;
 
-                // ºí·Ï ³»ºÎ ¼ÒÄÏÀÌ ºñ¾îÀÖ´Ù¸é true ¸®ÅÏ
+                // ë¸”ë¡ ë‚´ë¶€ ì†Œì¼“ì´ ë¹„ì–´ìˆë‹¤ë©´ true ë¦¬í„´
                 variableSocket = blocks[i].GetComponentInChildren<XRSocketInteractor>();
                 if (variableSocket != null && variableBlocks[i] == null)
                     return true;
             }
-            // ¼ÒÄÏÀÌ È°¼ºÈ­µÈ °æ¿ì, ÇöÀç ºÎÂøµÈ ºí·ÏÀ» »õ·Î °¡Á®¿È
+            // ì†Œì¼“ì´ í™œì„±í™”ëœ ê²½ìš°, í˜„ì¬ ë¶€ì°©ëœ ë¸”ë¡ì„ ìƒˆë¡œ ê°€ì ¸ì˜´
             else
             {
                 XRGrabInteractable block = SetCurrentBlock(i);
@@ -78,11 +78,11 @@ public class SocketList : MonoBehaviour
                 }
             }
         }
-        // ºó ¼ÒÄÏÀÌ ¾ø´Ù¸é false ¸®ÅÏ
+        // ë¹ˆ ì†Œì¼“ì´ ì—†ë‹¤ë©´ false ë¦¬í„´
         return false;
     }
 
-    // ¼ÒÄÏ°ú ¼ÒÄÏ¿¡ ºÎÂøµÈ ºí·ÏÀ» È°¼ºÈ­ÇÑ´Ù.
+    // ì†Œì¼“ê³¼ ì†Œì¼“ì— ë¶€ì°©ëœ ë¸”ë¡ì„ í™œì„±í™”í•œë‹¤.
     internal void ActivateSocket(int idx)
     {
         if (sockets[idx].gameObject.activeInHierarchy)
@@ -104,7 +104,7 @@ public class SocketList : MonoBehaviour
         }
     }
 
-    // ¼ÒÄÏ°ú ¼ÒÄÏ¿¡ ºÎÂøµÈ ºí·ÏÀ» ºñÈ°¼ºÈ­ÇÑ´Ù.
+    // ì†Œì¼“ê³¼ ì†Œì¼“ì— ë¶€ì°©ëœ ë¸”ë¡ì„ ë¹„í™œì„±í™”í•œë‹¤.
     internal void InactivateSocket(int idx)
     {
         if (!sockets[idx].gameObject.activeInHierarchy)

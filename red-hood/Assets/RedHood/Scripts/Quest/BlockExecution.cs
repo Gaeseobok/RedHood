@@ -4,29 +4,29 @@ using UnityEngine.XR.Interaction.Toolkit;
 using TMPro;
 using System;
 
-// ÄÚµù º¸µåÀÇ ¹öÆ°À» ´­·¶À» ¶§ ºí·ÏÀ» ÃÊ±âÈ­ÇÏ°Å³ª ½ÇÇàÇÑ´Ù. (¸®¼Â & ½ºÅ¸Æ®)
+// ì½”ë”© ë³´ë“œì˜ ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ ë¸”ë¡ì„ ì´ˆê¸°í™”í•˜ê±°ë‚˜ ì‹¤í–‰í•œë‹¤. (ë¦¬ì…‹ & ìŠ¤íƒ€íŠ¸)
 public class BlockExecution : MonoBehaviour
 {
     public static Coroutine CurrentRoutine { private set; get; } = null;
 
-    [Tooltip("¼ÒÄÏ ¸®½ºÆ®(¼ÒÄÏµéÀÇ »óÀ§ ¿ÀºêÁ§Æ®)")]
+    [Tooltip("ì†Œì¼“ ë¦¬ìŠ¤íŠ¸(ì†Œì¼“ë“¤ì˜ ìƒìœ„ ì˜¤ë¸Œì íŠ¸)")]
     [SerializeField] private SocketList socketList;
 
-    [Tooltip("¾Ë¸² ¸Ş¼¼Áö¸¦ Ãâ·ÂÇÒ Äµ¹ö½º")]
+    [Tooltip("ì•Œë¦¼ ë©”ì„¸ì§€ë¥¼ ì¶œë ¥í•  ìº”ë²„ìŠ¤")]
     [SerializeField] private Canvas alertCanvas;
 
-    [Tooltip("´ÙÀ½ ÄÚµå ºí·ÏÀÌ ½ÇÇàµÉ ¶§±îÁöÀÇ Áö¿¬ ½Ã°£")]
+    [Tooltip("ë‹¤ìŒ ì½”ë“œ ë¸”ë¡ì´ ì‹¤í–‰ë  ë•Œê¹Œì§€ì˜ ì§€ì—° ì‹œê°„")]
     [SerializeField] private float ExecuteDelay = 1.0f;
 
     private SocketListScroll scrollComponent;
 
-    // ¼ÒÄÏµéÀÇ »óÅÂ¸¦ Ç¥ÇöÇÏ´Â ¿ÀºêÁ§Æ®
+    // ì†Œì¼“ë“¤ì˜ ìƒíƒœë¥¼ í‘œí˜„í•˜ëŠ” ì˜¤ë¸Œì íŠ¸
     private ChangeMaterial[] pointers;
 
-    // °¢ ¼ÒÄÏÀÇ Á¤´ä ¸®½ºÆ®
+    // ê° ì†Œì¼“ì˜ ì •ë‹µ ë¦¬ìŠ¤íŠ¸
     private AnswerConfirmation[] answers;
 
-    // »óÈ² º° ¾Ë¸² ¸Ş¼¼Áö Ãâ·ÂÀ» À§ÇÑ º¯¼ö
+    // ìƒí™© ë³„ ì•Œë¦¼ ë©”ì„¸ì§€ ì¶œë ¥ì„ ìœ„í•œ ë³€ìˆ˜
 
     private FadeCanvas errorMessage;
     private FadeCanvas failureMessage;
@@ -52,26 +52,26 @@ public class BlockExecution : MonoBehaviour
         successMessage = alertCanvas.transform.Find(SUCCESS_MESSAGE).GetComponent<FadeCanvas>();
     }
 
-    // ¸®¼Â ¹öÆ°ÀÌ ´­·¯Á³À» ¶§, ¼ÒÄÏ¿¡ ºÎÂøµÈ ¸ğµç ºí·ÏÀ» Á¦°ÅÇÑ´Ù.
+    // ë¦¬ì…‹ ë²„íŠ¼ì´ ëˆŒëŸ¬ì¡Œì„ ë•Œ, ì†Œì¼“ì— ë¶€ì°©ëœ ëª¨ë“  ë¸”ë¡ì„ ì œê±°í•œë‹¤.
     public void OnResetButtonPress()
     {
         scrollComponent.ResetScroll();
 
-        // ¸ğµç ºí·Ï Á¦°ÅÇÏ±â
+        // ëª¨ë“  ë¸”ë¡ ì œê±°í•˜ê¸°
         for (int i = 0; i < socketList.socketNum; i++)
             socketList.DestroyBlocks(i);
 
-        // ÀÎ½ºÅÏ½ºÈ­µÈ Äù½ºÆ®¿ë ¸ğµ¨µé ¸ğµÎ Á¦°ÅÇÏ±â
+        // ì¸ìŠ¤í„´ìŠ¤í™”ëœ í€˜ìŠ¤íŠ¸ìš© ëª¨ë¸ë“¤ ëª¨ë‘ ì œê±°í•˜ê¸°
         GameObject[] questModels = GameObject.FindGameObjectsWithTag(QUEST_MODEL_TAG);
 
         foreach (GameObject model in questModels)
             Destroy(model);
     }
 
-    // ÇÃ·¹ÀÌ ¹öÆ°ÀÌ ´­·¯Á³À» ¶§, ¸ğµç ºí·ÏÀ» ½ÇÇàÇÑ´Ù.
+    // í”Œë ˆì´ ë²„íŠ¼ì´ ëˆŒëŸ¬ì¡Œì„ ë•Œ, ëª¨ë“  ë¸”ë¡ì„ ì‹¤í–‰í•œë‹¤.
     public void OnStartButtonPress()
     {
-        // ¸ğµç ¼ÒÄÏ¿¡ ºí·ÏÀÌ ¸ğµÎ Ã¤¿öÁöÁö ¾ÊÀº °æ¿ì ¾Ë¸² ¸Ş¼¼Áö Ãâ·Â
+        // ëª¨ë“  ì†Œì¼“ì— ë¸”ë¡ì´ ëª¨ë‘ ì±„ì›Œì§€ì§€ ì•Šì€ ê²½ìš° ì•Œë¦¼ ë©”ì„¸ì§€ ì¶œë ¥
         if (socketList.IsSocketEmpty())
         {
             errorMessage.SetAlpha(1.0f);
@@ -79,13 +79,13 @@ public class BlockExecution : MonoBehaviour
             return;
         }
 
-        // ¸ğµç ºí·Ï ½ÇÇàÇÏ±â
+        // ëª¨ë“  ë¸”ë¡ ì‹¤í–‰í•˜ê¸°
         scrollComponent.ResetScroll();
         StopAllCoroutines();
         CurrentRoutine = StartCoroutine(ExecuteBlockCodes());
     }
 
-    // ºí·ÏÀÇ Activated ÀÌº¥Æ®¸¦ È°¼ºÈ­ÇÑ´Ù.
+    // ë¸”ë¡ì˜ Activated ì´ë²¤íŠ¸ë¥¼ í™œì„±í™”í•œë‹¤.
     private void ActivateBlock(XRGrabInteractable block)
     {
         ActivateEventArgs args = new();
@@ -93,13 +93,13 @@ public class BlockExecution : MonoBehaviour
         block.activated.Invoke(args);
     }
 
-    // ÀÏÁ¤ °£°İÀ¸·Î ºí·ÏÀ» ÇÏ³ª¾¿ ½ÇÇàÇÑ´Ù.
+    // ì¼ì • ê°„ê²©ìœ¼ë¡œ ë¸”ë¡ì„ í•˜ë‚˜ì”© ì‹¤í–‰í•œë‹¤.
     private IEnumerator ExecuteBlockCodes()
     {
         int iterStartIdx = -1, iterNum = 0, curIterNum = 0;
         bool isClear = true;
 
-        // TODO: pointer »ö ÀÚµ¿À¸·Î ½ºÅ©·Ñ¿¡ ¸Â°Ô È°¼ºÈ­ÇÏ±â
+        // TODO: pointer ìƒ‰ ìë™ìœ¼ë¡œ ìŠ¤í¬ë¡¤ì— ë§ê²Œ í™œì„±í™”í•˜ê¸°
         foreach (ChangeMaterial pointer in pointers)
             pointer.ChangeToDefaultMaterial();
 
@@ -139,7 +139,7 @@ public class BlockExecution : MonoBehaviour
                 pointers[i].ChangeToDefaultMaterial();
         }
 
-        // Á¤´ä ¿©ºÎ¿¡ µû¶ó ÆË¾÷À» ¶ç¿î´Ù
+        // ì •ë‹µ ì—¬ë¶€ì— ë”°ë¼ íŒì—…ì„ ë„ìš´ë‹¤
         if (isClear)
         {
             successMessage.SetAlpha(1.0f);
