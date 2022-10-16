@@ -1,17 +1,20 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 using TMPro;
-using System;
+
+using static UnityEngine.Random;
+
 
 public class QuestManager : MonoBehaviour
 {
     public Coroutine CurrentRoutine { private set; get; } = null;
 
-    [Tooltip("소켓들의 상위 오브젝트")]
-    [SerializeField] private GameObject socketsObject;
+    [Tooltip("소켓 리스트(소켓들의 상위 오브젝트)")]
+    [SerializeField] private SocketList socketList;
 
     [Tooltip("알림 메세지를 출력할 캔버스")]
     [SerializeField] private Canvas alertCanvas;
@@ -19,11 +22,24 @@ public class QuestManager : MonoBehaviour
     [Tooltip("다음 코드 블록이 실행될 때까지의 지연 시간")]
     [SerializeField] private float delay = 2.0f;
 
-    [Tooltip("Flower Indicators")]
+    [Tooltip("Flower Indicator Particles")]
     [SerializeField] private GameObject particleEffect;
 
-    // 코드 블록이 위치하는 소켓들
-    private XRSocketInteractor[] sockets;
+    [Tooltip("flower model")]
+    [SerializeField] private GameObject [] flowerModel;
+
+    // position of flower instantiation
+    public Vector3 flowerPosition;
+    // rotation of flower instantiation
+    public Vector3 flowerRotation;
+    private GameObject instFlower;
+    private Rigidbody instFlowerRigidbody;
+    // power to move instantiated flower
+    public float power;
+    // number of flower instantiation
+    public int flowerNum;
+
+    private SocketListScroll scrollComponent;
 
     // 소켓들의 상태를 표현하는 오브젝트
     private ChangeMaterial[] pointers;
@@ -32,123 +48,63 @@ public class QuestManager : MonoBehaviour
     ParticleSystem [] particles;
 
     // 상황 별 알림 메세지 출력을 위한 변수
-    private FadeCanvas blankMessage;
+    private FadeCanvas errorMessage;
     private FadeCanvas failureMessage;
     private FadeCanvas successMessage;
-    private FadeCanvas syntaxMessage;
 
-    //private GameObject failureMessage;
-    //private GameObject successMessage;
-
-    private const string BLANK_MESSAGE = "Blank Error Message";
+    private const string ERROR_MESSAGE = "Error Message";
     private const string FAILURE_MESSAGE = "Failure Message";
     private const string SUCCESS_MESSAGE = "Success Message";
-    private const string SYNTAX_MESSAGE = "Syntax Error Message";
 
-
-    private const string CONDITIONAL_TAG = "Conditional";
-    // private const string EXECUTIONAL_TAG = "Executional";
-    private const string PICK_TAG = "Q3_Pick";
-    private const string PASS_TAG = "Q3_Pass";
+    private const string IF_TAG = "If";
+    private const string YELLOW_TAG = "Untagged";
+    private const string VIOLET_TAG = "QuestModel";
+    private const string LEFT_TAG = "Left";
+    private const string RIGHT_TAG = "Right";
 
     private void Start()
     {
-        sockets = socketsObject.GetComponentsInChildren<XRSocketInteractor>();
-        pointers = socketsObject.GetComponentsInChildren<ChangeMaterial>();
+        scrollComponent = GetComponent<SocketListScroll>();
+        pointers = socketList.GetComponentsInChildren<ChangeMaterial>(includeInactive: true);
 
         // particle system off
         particles = particleEffect.GetComponentsInChildren<ParticleSystem>();
         foreach(ParticleSystem particle in particles)
-        {
-            // var emission = particle.emission;
-            // emission.enabled = false;
             particle.Stop();
-        }
-        
-        blankMessage = alertCanvas.transform.Find(BLANK_MESSAGE).GetComponent<FadeCanvas>();
+
+        errorMessage = alertCanvas.transform.Find(ERROR_MESSAGE).GetComponent<FadeCanvas>();
         failureMessage = alertCanvas.transform.Find(FAILURE_MESSAGE).GetComponent<FadeCanvas>();
         successMessage = alertCanvas.transform.Find(SUCCESS_MESSAGE).GetComponent<FadeCanvas>();
-        syntaxMessage = alertCanvas.transform.Find(SYNTAX_MESSAGE).GetComponent<FadeCanvas>();
-        //successMessage = alertCanvas.transform.Find(SUCCESS_MESSAGE).gameObject;
     }
 
-    // 소켓에 위치한 모든 블록을 리스트 형태로 리턴한다.
-    private List<XRGrabInteractable> GetAttachedBlockList()
+    // 리셋 버튼이 눌러졌을 때, 소켓에 부착된 모든 블록을 제거한다.
+    public void OnResetButtonPress()
     {
-        List<XRGrabInteractable> blockList = new();
-        foreach (XRSocketInteractor socket in sockets)
-        {
-            List<IXRSelectInteractable> attachedBlocks = socket.interactablesSelected;
-            if (attachedBlocks.Count != 0)
-                blockList.Add((XRGrabInteractable)attachedBlocks[0]);
-        }
-        return blockList;
-    }
+        scrollComponent.ResetScroll();
 
-    // 블록 내부 변수 소켓(Socket_Variable)에 변수 블록이 존재한다면 해당 변수 블록을 리턴한다.
-    private GameObject GetAttachedVariableBlock(XRGrabInteractable block)
-    {
-        XRSocketInteractor variableSocket = block.GetComponentInChildren<XRSocketInteractor>();
-        if (variableSocket != null)
-        {
-            List<IXRSelectInteractable> variableBlocks = variableSocket.interactablesSelected;
-            if (variableBlocks.Count > 0)
-            {
-                XRGrabInteractable variableBlock = (XRGrabInteractable)variableSocket.interactablesSelected[0];
-                return variableBlock.gameObject;
-            }
-        }
-        return null;
-    }
-
-    // 변수 블록 XRGrabInteractable 형태로 리턴
-    private XRGrabInteractable GetAttachedXRGrabInteractable(XRGrabInteractable block)
-    {
-        XRSocketInteractor variableSocket = block.GetComponentInChildren<XRSocketInteractor>();
-        if (variableSocket != null)
-        {
-            List<IXRSelectInteractable> variableBlocks = variableSocket.interactablesSelected;
-            if (variableBlocks.Count > 0)
-            {
-                XRGrabInteractable variableBlock = (XRGrabInteractable)variableSocket.interactablesSelected[0];
-                return variableBlock;
-            }
-        }
-        return null;
-    }
-
-    // 리셋 버튼이 눌러졌을 때, 소켓에 위치한 모든 블록을 제거한다.
-    public void PressResetButton()
-    {
-        // 블록 리스트 가져오기
-        List<XRGrabInteractable> blockList = GetAttachedBlockList();
         // 모든 블록 제거하기
-        foreach (XRGrabInteractable block in blockList)
-        {
-            // 변수 블록이 존재한다면 제거하기
-            GameObject variableBlock = GetAttachedVariableBlock(block);
-            if (variableBlock != null)
-                Destroy(variableBlock);
-            Destroy(block.gameObject);
-        }
-
-        //remove failure canvas
+        for (int i = 0; i < socketList.socketNum; i++)
+            socketList.DestroyBlocks(i);
     }
 
-    // 블록 내부에 비어있는 변수 소켓(Socket_Variable)이 있는지 계산한다.
-    private bool IsSocketEmpty(List<XRGrabInteractable> blockList)
+    // 플레이 버튼이 눌러졌을 때, 모든 블록을 실행한다.
+    public void OnStartButtonPress()
     {
-        foreach (XRGrabInteractable block in blockList)
+        // 모든 소켓에 블록이 모두 채워지지 않은 경우 알림 메세지 출력
+        if (socketList.IsSocketEmpty())
         {
-            XRSocketInteractor variableSocket = block.GetComponentInChildren<XRSocketInteractor>();
-            if (variableSocket != null)
-            {
-                List<IXRSelectInteractable> variableBlocks = variableSocket.interactablesSelected;
-                if (variableBlocks.Count == 0)
-                    return true;
-            }
+            errorMessage.SetAlpha(1.0f);
+            errorMessage.StartFadeOut();
+            return;
         }
-        return false;
+
+        foreach (ChangeMaterial pointer in pointers)
+            pointer.ChangeToDefaultMaterial();
+
+        // 모든 블록 실행하기
+        //scrollComponent.ResetScroll();
+        StopAllCoroutines();
+        CurrentRoutine = StartCoroutine(ExecuteBlockCodes());
     }
 
     // 블록의 Activated 이벤트를 활성화한다.
@@ -159,6 +115,13 @@ public class QuestManager : MonoBehaviour
         block.activated.Invoke(args);
     }
 
+    private void DeactivateBlock(XRGrabInteractable block)
+    {
+        DeactivateEventArgs args = new();
+        args.interactableObject = block;
+        block.deactivated.Invoke(args);
+    }
+
     private void SelectBlock(XRGrabInteractable block)
     {
         SelectEnterEventArgs args = new();
@@ -166,99 +129,111 @@ public class QuestManager : MonoBehaviour
         block.selectEntered.Invoke(args);
     }
 
-    // 일정 간격으로 블록을 하나씩 실행한다.
-    private IEnumerator ExecuteBlockCodes(List<XRGrabInteractable> blockList)
+    private GameObject AddFlower()
     {
-        Boolean flag = true;
+        int r = Range(0,flowerModel.Length);
+        instFlower = Instantiate(flowerModel[r], flowerPosition, Quaternion.Euler(flowerRotation));
+        instFlower.tag = flowerModel[r].tag;
+        return instFlower;
+    }
 
-        foreach (ChangeMaterial pointer in pointers)
-            pointer.ChangeToDefaultMaterial();
-    
+    // 일정 간격으로 블록을 하나씩 실행한다.
+    private IEnumerator ExecuteBlockCodes()
+    {
+        bool isClear = true;
+        bool isClassified = false;
 
-        for (int i = 0; i < blockList.Count; i++)
+        pointers[0].ChangeToActivatedMaterial();
+        yield return new WaitForSeconds(delay/2);
+        pointers[0].ChangeToDefaultMaterial();
+
+        for(int j = 0; j < flowerNum && isClear; j++)
         {
-            Debug.LogWarning($"현재 블록 인덱스: {i}");
-            pointers[i].ChangeToActivatedMaterial();
-
-            int temp = i%2;
-
-            if(temp == 0)
+            instFlower = AddFlower();
+            instFlowerRigidbody = instFlower.GetComponent<Rigidbody>();
+            isClassified = false;
+            
+            for(int i = 1; i < socketList.socketNum -1 && isClear; i+=2)
             {
-                if (blockList[i].CompareTag(CONDITIONAL_TAG))
+                if(isClassified == true)
+                    break;
+                
+                // scrollComponent.SetScroll(i);
+                XRGrabInteractable conBlock = socketList.SetCurrentBlock(i);
+                XRGrabInteractable exeBlock = socketList.SetCurrentBlock(i+1);
+
+                if(conBlock.CompareTag(IF_TAG))
                 {
-                    // 조건블록일 때
-                    XRGrabInteractable colorBlock = GetAttachedXRGrabInteractable(blockList[i]);
-                    SelectBlock(colorBlock); //색 변화                        
-                }
-                else if (blockList[i].CompareTag("Untagged"))
-                {
-                    continue;
-                }
-                else
-                {
-                    //에러창 뜨게하기
-                    flag = false;
-                    Debug.LogWarning("조건 블록 아님");
-                    syntaxMessage.SetAlpha(1.0f);
-                }
-            }
-            else
-            {
-                XRGrabInteractable variableBlock = GetAttachedXRGrabInteractable(blockList[i-1]);
-                if (blockList[i].CompareTag(PICK_TAG))
-                {
-                    Debug.LogWarning("담기 블록");
-                    ActivateBlock(variableBlock);
-                    if(variableBlock.CompareTag(PICK_TAG))
+                    XRGrabInteractable colorBlock = socketList.GetCurrentVariableBlock(conBlock);
+                    if(colorBlock != null)
                     {
-                        flag = true;
-                        Debug.LogWarning("주어진 꽃");
-                        
+                        if (colorBlock.CompareTag(instFlower.tag))
+                        {
+                            pointers[i].ChangeToActivatedMaterial();
+                            SelectBlock(colorBlock);
+                            yield return new WaitForSeconds(delay);
+                            pointers[i].ChangeToDefaultMaterial();
+                            yield return new WaitForSeconds(delay/4);
+
+                            pointers[i+1].ChangeToActivatedMaterial();
+                            yield return new WaitForSeconds(delay/2);                        
+                            ActivateBlock(exeBlock);
+                            yield return new WaitForSeconds(delay/2);
+                            if(exeBlock.CompareTag(LEFT_TAG))
+                                instFlowerRigidbody.AddForce(Vector3.left * power);
+                            else if(exeBlock.CompareTag(RIGHT_TAG))
+                                instFlowerRigidbody.AddForce(Vector3.right * power);
+                            yield return new WaitForSeconds(delay); // 있어야 실행됨
+                            DeactivateBlock(exeBlock);
+                            pointers[i+1].ChangeToDefaultMaterial();
+
+                            isClassified = true;
+                            isClear = colorBlock.CompareTag(exeBlock.tag) || (exeBlock.CompareTag(LEFT_TAG) && colorBlock.CompareTag(YELLOW_TAG)) 
+                                                                            || (exeBlock.CompareTag(RIGHT_TAG) && colorBlock.CompareTag(VIOLET_TAG));
+                        }
                     }
                     else
                     {
-                        flag = false;
-                        Debug.LogWarning("주어진 꽃 아님");
+                        pointers[i].ChangeToActivatedMaterial();
+                        yield return new WaitForSeconds(delay);
+                        pointers[i].ChangeToDefaultMaterial();
+                        yield return new WaitForSeconds(delay/4);
+
+                        pointers[i+1].ChangeToActivatedMaterial(); 
+                        yield return new WaitForSeconds(delay/2);                       
+                        ActivateBlock(exeBlock);
+                        yield return new WaitForSeconds(delay/2);
+                        if(exeBlock.CompareTag(LEFT_TAG))
+                            instFlowerRigidbody.AddForce(Vector3.left * power);
+                        else if(exeBlock.CompareTag(RIGHT_TAG))
+                            instFlowerRigidbody.AddForce(Vector3.right * power);
+                        yield return new WaitForSeconds(delay); // 있어야 실행됨
+                        DeactivateBlock(exeBlock);
+                        pointers[i+1].ChangeToDefaultMaterial();
+
+                        isClassified = true;
+                        isClear = instFlower.CompareTag(exeBlock.tag) || (exeBlock.CompareTag(LEFT_TAG) && instFlower.CompareTag(YELLOW_TAG))
+                                                                        || (exeBlock.CompareTag(RIGHT_TAG) && instFlower.CompareTag(VIOLET_TAG));
                     }
                 }
-                else if(blockList[i].CompareTag(CONDITIONAL_TAG))
+                else
                 {
-                    flag = false;
-                    Debug.LogWarning("실행 블록 아님");
+                    isClear = false;
                 }
+                yield return new WaitForSeconds(delay);
             }
-            yield return new WaitForSeconds(delay);
-            pointers[i].ChangeToDefaultMaterial();
-
-            if(!flag)
-            {
-                failureMessage.SetAlpha(1.0f);
-                break;
-            }
+            Destroy(instFlower);
         }
-
-        if(flag)
+        pointers[socketList.socketNum-1].ChangeToActivatedMaterial();
+        if (isClear)
         {
             successMessage.SetAlpha(1.0f);
+            successMessage.StartFadeOut();
         }
-    }
-
-    public void PressStartButton()
-    {
-
-        // 블록 리스트 가져오기
-        List<XRGrabInteractable> blockList = GetAttachedBlockList();
-
-        // 모든 소켓에 블록이 모두 채워지지 않은 경우 알림 메세지 출력
-        if (blockList.Count < sockets.Length || IsSocketEmpty(blockList))
+        else
         {
-            blankMessage.SetAlpha(1.0f);
-            blankMessage.StartFadeOut();
-            return;
+            failureMessage.SetAlpha(1.0f);
+            failureMessage.StartFadeOut();
         }
-
-        // 모든 블록 실행하기
-        StopAllCoroutines();
-        CurrentRoutine = StartCoroutine(ExecuteBlockCodes(blockList));
     }
 }

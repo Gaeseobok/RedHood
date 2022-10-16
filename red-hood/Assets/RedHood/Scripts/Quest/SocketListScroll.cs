@@ -1,30 +1,29 @@
 using System.Collections;
 using UnityEngine;
-
-// ½ºÅ©·Ñ ¹öÆ°À» ´­·¶À» ¶§ ÄÚµù º¸µåÀÇ ¼ÒÄÏ ¸®½ºÆ®µéÀ» ½ºÅ©·ÑÇÑ´Ù.
+// ìŠ¤í¬ë¡¤ ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ ì½”ë”© ë³´ë“œì˜ ì†Œì¼“ ë¦¬ìŠ¤íŠ¸ë“¤ì„ ìŠ¤í¬ë¡¤í•œë‹¤.
 public class SocketListScroll : MonoBehaviour
 {
     public static Coroutine CurrentRoutine { private set; get; } = null;
 
-    [Tooltip("¼ÒÄÏ ¸®½ºÆ®(¼ÒÄÏµéÀÇ »óÀ§ ¿ÀºêÁ§Æ®)")]
+    [Tooltip("ì†Œì¼“ ë¦¬ìŠ¤íŠ¸(ì†Œì¼“ë“¤ì˜ ìƒìœ„ ì˜¤ë¸Œì íŠ¸)")]
     [SerializeField] private SocketList socketList;
 
-    [Tooltip("½ºÅ©·Ñ¹Ù ¿ÀºêÁ§Æ®")]
+    [Tooltip("ìŠ¤í¬ë¡¤ë°” ì˜¤ë¸Œì íŠ¸")]
     [SerializeField] private Transform scrollBar;
 
-    [Tooltip("¹öÆ°À» °è¼Ó ´©¸£°í ÀÖÀ» ¶§, ´ÙÀ½ ½ºÅ©·Ñ±îÁöÀÇ Áö¿¬ ½Ã°£")]
+    [Tooltip("ë²„íŠ¼ì„ ê³„ì† ëˆ„ë¥´ê³  ìˆì„ ë•Œ, ë‹¤ìŒ ìŠ¤í¬ë¡¤ê¹Œì§€ì˜ ì§€ì—° ì‹œê°„")]
     [SerializeField] private float scrollDelay = 1.0f;
 
-    // ÇöÀç º¸ÀÌ´Â Ã¹ ¹øÂ° ¼ÒÄÏÀÇ ÀÎµ¦½º
+    // í˜„ì¬ ë³´ì´ëŠ” ì²« ë²ˆì§¸ ì†Œì¼“ì˜ ì¸ë±ìŠ¤
     private static int firstVisibleIndex = 0;
 
-    // ÇÑ ¹ø¿¡ º¸ÀÌ´Â ¼ÒÄÏÀÇ ÃÖ´ë °³¼ö
+    // í•œ ë²ˆì— ë³´ì´ëŠ” ì†Œì¼“ì˜ ìµœëŒ€ ê°œìˆ˜
     private const int MAX_VISIBLE_SOCKETS = 7;
 
-    // ¼ÒÄÏ °£ °£°İ
+    // ì†Œì¼“ ê°„ ê°„ê²©
     private const float SOCKET_INTERVAL = 0.05f;
 
-    // ½ºÅ©·Ñ¹Ù ÀÌµ¿ ¹üÀ§
+    // ìŠ¤í¬ë¡¤ë°” ì´ë™ ë²”ìœ„
     private const float SCROLLBAR_RANGE = 0.28f;
 
     private Vector3 direction = new(0.0f, SOCKET_INTERVAL, 0.0f);
@@ -48,10 +47,10 @@ public class SocketListScroll : MonoBehaviour
 
     private void CalcScrollBarDirection()
     {
-        // ½ºÅ©·ÑÇØ¾ß ÇÏ´Â ¼ÒÄÏÀÇ °³¼ö
+        // ìŠ¤í¬ë¡¤í•´ì•¼ í•˜ëŠ” ì†Œì¼“ì˜ ê°œìˆ˜
         float scrollSocketNum = socketList.socketNum - MAX_VISIBLE_SOCKETS;
 
-        // ½ºÅ©·ÑÀÌ ÇÊ¿ä ¾øÀ¸¸é, ½ºÅ©·Ñ¹Ù ºñÈ°¼ºÈ­
+        // ìŠ¤í¬ë¡¤ì´ í•„ìš” ì—†ìœ¼ë©´, ìŠ¤í¬ë¡¤ë°” ë¹„í™œì„±í™”
         if (scrollSocketNum <= 0)
         {
             scrollBar.gameObject.SetActive(false);
@@ -61,10 +60,10 @@ public class SocketListScroll : MonoBehaviour
         scrollBarDirection = new(0.0f, -(SCROLLBAR_RANGE / scrollSocketNum), 0.0f);
     }
 
-    // ¼ÒÄÏ ¸®½ºÆ®¸¦ À§·Î ½ºÅ©·ÑÇÏ±â ½ÃÀÛÇÑ´Ù.
+    // ì†Œì¼“ ë¦¬ìŠ¤íŠ¸ë¥¼ ìœ„ë¡œ ìŠ¤í¬ë¡¤í•˜ê¸° ì‹œì‘í•œë‹¤.
     public void StartScrollUp()
     {
-        // ´õÀÌ»ó ½ºÅ©·ÑÇÒ ¼ÒÄÏÀÌ ¾øÀ¸¸é ½ºÅ©·ÑÇÏÁö ¾Ê´Â´Ù.
+        // ë”ì´ìƒ ìŠ¤í¬ë¡¤í•  ì†Œì¼“ì´ ì—†ìœ¼ë©´ ìŠ¤í¬ë¡¤í•˜ì§€ ì•ŠëŠ”ë‹¤.
         if (firstVisibleIndex == 0)
             return;
 
@@ -72,10 +71,10 @@ public class SocketListScroll : MonoBehaviour
         CurrentRoutine = StartCoroutine(ScrollUp());
     }
 
-    // ¼ÒÄÏ ¸®½ºÆ®¸¦ ¾Æ·¡·Î ½ºÅ©·ÑÇÏ±â ½ÃÀÛÇÑ´Ù.
+    // ì†Œì¼“ ë¦¬ìŠ¤íŠ¸ë¥¼ ì•„ë˜ë¡œ ìŠ¤í¬ë¡¤í•˜ê¸° ì‹œì‘í•œë‹¤.
     public void StartScrollDown()
     {
-        // ´õÀÌ»ó ½ºÅ©·ÑÇÒ ¼ÒÄÏÀÌ ¾øÀ¸¸é ½ºÅ©·ÑÇÏÁö ¾Ê´Â´Ù.
+        // ë”ì´ìƒ ìŠ¤í¬ë¡¤í•  ì†Œì¼“ì´ ì—†ìœ¼ë©´ ìŠ¤í¬ë¡¤í•˜ì§€ ì•ŠëŠ”ë‹¤.
         if (firstVisibleIndex + MAX_VISIBLE_SOCKETS >= socketList.socketNum)
             return;
 
@@ -83,7 +82,7 @@ public class SocketListScroll : MonoBehaviour
         CurrentRoutine = StartCoroutine(ScrollDown());
     }
 
-    // ½ºÅ©·ÑÀ» ¸ØÃá´Ù.
+    // ìŠ¤í¬ë¡¤ì„ ë©ˆì¶˜ë‹¤.
     public void StopScroll()
     {
         StopAllCoroutines();
@@ -115,7 +114,7 @@ public class SocketListScroll : MonoBehaviour
         }
     }
 
-    // ½ºÅ©·ÑÀ» ÃÊ±âÈ­ÇÑ´Ù.
+    // ìŠ¤í¬ë¡¤ì„ ì´ˆê¸°í™”í•œë‹¤.
     internal void ResetScroll()
     {
         socketList.transform.localPosition = defaultPosition;
@@ -135,7 +134,7 @@ public class SocketListScroll : MonoBehaviour
         firstVisibleIndex = 0;
     }
 
-    // ÀÎµ¦½º¿¡ ¸Â´Â À§Ä¡·Î ½ºÅ©·Ñ
+    // ì¸ë±ìŠ¤ì— ë§ëŠ” ìœ„ì¹˜ë¡œ ìŠ¤í¬ë¡¤
     internal void SetScroll(int index)
     {
         int scrollNum = index - (MAX_VISIBLE_SOCKETS / 2);
