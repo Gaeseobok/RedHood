@@ -4,18 +4,14 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - SnowmanAcc
-  - SuccessWindow
   - CodeSocket
   - IterationStart
   - IterationEnd
-  - Conditional
-  - Q3_Red
-  - Q3_Green
-  - Q3_Pick
-  - Q3_Pass
   - QuestModel
   - CubeMapCharacter
+  - Left
+  - Right
+  - If
   layers:
   - Default
   - TransparentFX
