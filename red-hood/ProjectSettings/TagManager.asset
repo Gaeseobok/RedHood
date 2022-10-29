@@ -3,18 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - CodeSocket
-  - IterationStart
-  - IterationEnd
-  - QuestModel
-<<<<<<< HEAD
-=======
-  - CubeMapCharacter
->>>>>>> main
-  - Left
-  - Right
-  - If
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -22,9 +11,9 @@ TagManager:
   - 
   - Water
   - UI
-  - Left Hand
-  - Right Hand
-  - Coding Board
+  - 
+  - 
+  - 
   - 
   - 
   - 
