@@ -8,6 +8,10 @@ TagManager:
   - IterationStart
   - IterationEnd
   - QuestModel
+<<<<<<< HEAD
+=======
+  - CubeMapCharacter
+>>>>>>> main
   - Left
   - Right
   - If
