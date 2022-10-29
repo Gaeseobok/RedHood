@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:red-hood/Assets/RedHood/Prefabs 1.meta
+guid: b70c20fe8f7214672bc29ed829776e7e
+========
 guid: 887d565afd3264a4da0c208fd09d1cb7
+>>>>>>>> main:red-hood/Assets/RedHood/Prefabs/Quest/CubeMap.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
