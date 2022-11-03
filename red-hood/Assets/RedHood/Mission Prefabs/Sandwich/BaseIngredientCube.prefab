@@ -16,9 +16,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 8e302629c22be4b7d88cf9210995b953, type: 2}
     - target: {fileID: 4906587249469278423, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+      propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4906587249469278423, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+      propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4906587249469278423, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
       propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 4563815249113706377}
+    - target: {fileID: 4906587249469278423, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+      propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4906587249469278423, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
       propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Add
@@ -26,6 +38,10 @@ PrefabInstance:
     - target: {fileID: 4906587249469278423, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
       propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: AddIngredient, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4906587249469278423, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+      propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6090249851108585557, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
       propertyPath: m_Materials.Array.data[0]

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -12,11 +13,15 @@ public class BlockActivation : MonoBehaviour
 
     private XRGrabInteractable block;
     private XRSocketInteractor socket;
+    private BlockIteration blockIteration;
+
+    private const string ITER_END_TAG = "IterEndBlock";
 
     private void Start()
     {
         block = GetComponent<XRGrabInteractable>();
         socket = GetComponentInChildren<XRSocketInteractor>();
+        blockIteration = GetComponent<BlockIteration>();
     }
 
     // Active event 함수를 실행한다.
@@ -30,10 +35,10 @@ public class BlockActivation : MonoBehaviour
     }
 
     // 다음 연결된 블록을 가져온다.
-    private XRGrabInteractable GetNextBlock()
+    public BlockActivation GetNextBlock()
     {
         IXRSelectInteractable nextBlock = socket.firstInteractableSelected;
-        return nextBlock == null ? null : (XRGrabInteractable)nextBlock;
+        return nextBlock == null ? null : ((XRGrabInteractable)nextBlock).GetComponent<BlockActivation>();
     }
 
     // 현재 블록의 색상을 변경한다. (실행되고 있을 때)
@@ -45,11 +50,14 @@ public class BlockActivation : MonoBehaviour
 
     private IEnumerator ExecuteNextBlock()
     {
+        ActivateBlock();
+
         yield return new WaitForSeconds(ActiveDelay);
-        XRGrabInteractable nextBlock = GetNextBlock();
+
+        BlockActivation nextBlock = GetNextBlock();
         if (nextBlock != null)
         {
-            nextBlock.GetComponent<BlockActivation>().ExecuteBlock();
+            nextBlock.ExecuteBlock();
         }
         SetColorActive();
     }
@@ -58,7 +66,16 @@ public class BlockActivation : MonoBehaviour
     public void ExecuteBlock()
     {
         SetColorActive();
-        ActivateBlock();
+
+        if (blockIteration != null)
+        {
+            blockIteration.SetIteration(this);
+            if (CompareTag(ITER_END_TAG))
+            {
+                ActivateBlock();
+                return;
+            }
+        }
 
         StopAllCoroutines();
         CurrentRoutine = StartCoroutine(ExecuteNextBlock());

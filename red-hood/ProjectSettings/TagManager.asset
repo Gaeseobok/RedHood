@@ -6,6 +6,8 @@ TagManager:
   tags:
   - QuestModel
   - StartButton
+  - IterStartBlock
+  - IterEndBlock
   layers:
   - Default
   - TransparentFX
