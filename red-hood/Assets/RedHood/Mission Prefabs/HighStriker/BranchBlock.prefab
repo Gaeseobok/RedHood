@@ -306,6 +306,7 @@ GameObject:
   - component: {fileID: 7702639005601710273}
   - component: {fileID: 2302509897537169399}
   - component: {fileID: 5335727033870971823}
+  - component: {fileID: 7415884758206147548}
   m_Layer: 0
   m_Name: BranchBlock
   m_TagString: Untagged
@@ -417,6 +418,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7415884758206147548}
+        m_TargetAssemblyTypeName: BranchBlock, Assembly-CSharp
+        m_MethodName: Branch
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_Deactivated:
     m_PersistentCalls:
       m_Calls: []
@@ -511,6 +524,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a2d8ef33b4d67f41b8a715265ec8b2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7415884758206147548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3843393010704871413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c41aaf0978c7694fb89cdfffcea6577, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3849792016642760622

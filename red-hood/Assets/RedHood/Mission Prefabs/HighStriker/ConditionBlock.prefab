@@ -108,7 +108,7 @@ Transform:
   m_Children:
   - {fileID: 7638638572064004336}
   m_Father: {fileID: 7345414425141993057}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &7733922249210386666
 SphereCollider:
@@ -291,7 +291,7 @@ Transform:
   m_Children:
   - {fileID: 3240831567698852876}
   m_Father: {fileID: 7345414425141993057}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!33 &5146215717456859897
 MeshFilter:
@@ -356,6 +356,37 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1222459004670670913
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7481528766510000848}
+  m_Layer: 0
+  m_Name: Attach
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7481528766510000848
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1222459004670670913}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.04, y: -0.06, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7345414425141993057}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2214189370145472821
 GameObject:
   m_ObjectHideFlags: 0
@@ -414,6 +445,7 @@ GameObject:
   - component: {fileID: 1493266349073674724}
   - component: {fileID: 8515031635653164848}
   - component: {fileID: 5089304776793487171}
+  - component: {fileID: 6835627207318283238}
   m_Layer: 0
   m_Name: ConditionBlock
   m_TagString: Untagged
@@ -433,10 +465,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7481528766510000848}
+  - {fileID: 2502688965766001496}
   - {fileID: 277187048820712109}
   - {fileID: 6073051274483310719}
   - {fileID: 975388643410518393}
-  - {fileID: 2502688965766001496}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -520,6 +553,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6835627207318283238}
+        m_TargetAssemblyTypeName: ConditionBlock, Assembly-CSharp
+        m_MethodName: CompareVariables
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_Deactivated:
     m_PersistentCalls:
       m_Calls: []
@@ -550,7 +595,7 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
-  m_AttachTransform: {fileID: 0}
+  m_AttachTransform: {fileID: 7481528766510000848}
   m_UseDynamicAttach: 0
   m_MatchAttachPosition: 1
   m_MatchAttachRotation: 1
@@ -616,6 +661,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2d8ef33b4d67f41b8a715265ec8b2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6835627207318283238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2538373630515854112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76663b5498f330c4686cbf610acec0e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3651229319724433824
 GameObject:
   m_ObjectHideFlags: 0
@@ -628,7 +685,7 @@ GameObject:
   - component: {fileID: 5990100545853010160}
   - component: {fileID: 6665936905431793085}
   m_Layer: 0
-  m_Name: VariableSocket
+  m_Name: RightVariableSocket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -749,7 +806,7 @@ Transform:
   m_Children:
   - {fileID: 3216580952429675700}
   m_Father: {fileID: 7345414425141993057}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!33 &3936607380749963739
 MeshFilter:
@@ -826,7 +883,7 @@ GameObject:
   - component: {fileID: 5347994752733785249}
   - component: {fileID: 7545809827223168137}
   m_Layer: 0
-  m_Name: VariableSocket
+  m_Name: LeftVariableSocket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -947,7 +1004,7 @@ Transform:
   m_Children:
   - {fileID: 5288982671790934241}
   m_Father: {fileID: 7345414425141993057}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!33 &4735000658291750710
 MeshFilter:

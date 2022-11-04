@@ -8,6 +8,8 @@ TagManager:
   - StartButton
   - IterStartBlock
   - IterEndBlock
+  - TrueCube
+  - FalseCube
   layers:
   - Default
   - TransparentFX

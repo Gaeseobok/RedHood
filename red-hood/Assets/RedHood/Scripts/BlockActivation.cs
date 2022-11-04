@@ -13,7 +13,8 @@ public class BlockActivation : MonoBehaviour
 
     private XRGrabInteractable block;
     private XRSocketInteractor socket;
-    private BlockIteration blockIteration;
+    private IterationBlock iterBlock;
+    private BranchBlock branchBlock;
 
     private const string ITER_END_TAG = "IterEndBlock";
 
@@ -21,7 +22,8 @@ public class BlockActivation : MonoBehaviour
     {
         block = GetComponent<XRGrabInteractable>();
         socket = GetComponentInChildren<XRSocketInteractor>();
-        blockIteration = GetComponent<BlockIteration>();
+        iterBlock = GetComponent<IterationBlock>();
+        branchBlock = GetComponent<BranchBlock>();
     }
 
     // Active event 함수를 실행한다.
@@ -59,6 +61,7 @@ public class BlockActivation : MonoBehaviour
         {
             nextBlock.ExecuteBlock();
         }
+
         SetColorActive();
     }
 
@@ -67,16 +70,22 @@ public class BlockActivation : MonoBehaviour
     {
         SetColorActive();
 
-        if (blockIteration != null)
+        if (iterBlock != null)
         {
-            blockIteration.SetIteration(this);
+            iterBlock.SetIteration();
             if (CompareTag(ITER_END_TAG))
             {
                 ActivateBlock();
                 return;
             }
         }
+        if (branchBlock != null)
+        {
+            ActivateBlock();
+            return;
+        }
 
+        // 다음 블록 트리거
         StopAllCoroutines();
         CurrentRoutine = StartCoroutine(ExecuteNextBlock());
     }
