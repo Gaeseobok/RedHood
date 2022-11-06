@@ -1,8 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
+[RequireComponent(typeof(XRGrabInteractable), typeof(SoundActivation))]
 // 현재 블록과 다음 블록을 실행시킨다.
 public class BlockActivation : MonoBehaviour
 {
@@ -34,6 +34,7 @@ public class BlockActivation : MonoBehaviour
             interactableObject = block
         };
         block.activated.Invoke(args);
+        GetComponent<SoundActivation>().PlayActivatedSound();
     }
 
     // 다음 연결된 블록을 가져온다.

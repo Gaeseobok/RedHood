@@ -129,8 +129,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4858883405989554050, guid: 5e7d8752c52dc344986f8e53b81c59f6, type: 3}
       propertyPath: m_Name
-      value: Booing
+      value: BooingCube
       objectReference: {fileID: 0}
+    - target: {fileID: 8854025028555986878, guid: 5e7d8752c52dc344986f8e53b81c59f6, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 79e6baad2fd414b82a6d49ce1568d2e5, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e7d8752c52dc344986f8e53b81c59f6, type: 3}
 --- !u!224 &5720623382941095786 stripped
