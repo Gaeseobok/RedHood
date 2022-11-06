@@ -271,6 +271,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: StartButton
       objectReference: {fileID: 0}
+    - target: {fileID: 4906587249469278423, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+      propertyPath: m_InteractionLayers.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7516258406141157388, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
       propertyPath: m_RootOrder
       value: 0
