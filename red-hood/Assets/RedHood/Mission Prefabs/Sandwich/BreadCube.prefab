@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1161141674033732180, guid: ef14eacfe2c12424bb652a43fb747993, type: 3}
+      propertyPath: ObjectModel
+      value: 
+      objectReference: {fileID: 6946156847863369590, guid: d249ad8b59e524d118bbf6668fe009dd, type: 3}
     - target: {fileID: 3360147647426820667, guid: ef14eacfe2c12424bb652a43fb747993, type: 3}
       propertyPath: m_Name
       value: BreadCube
@@ -15,10 +19,6 @@ PrefabInstance:
       propertyPath: ingredientModel
       value: 
       objectReference: {fileID: 6946156847863369590, guid: d249ad8b59e524d118bbf6668fe009dd, type: 3}
-    - target: {fileID: 4730629587303913852, guid: ef14eacfe2c12424bb652a43fb747993, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4730629587641405682, guid: ef14eacfe2c12424bb652a43fb747993, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -67,7 +67,8 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4563815249113706377, guid: ef14eacfe2c12424bb652a43fb747993, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ef14eacfe2c12424bb652a43fb747993, type: 3}
 --- !u!4 &4595608075549718586 stripped
 Transform:
