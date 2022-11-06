@@ -5,11 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - QuestModel
-  - StartButton
   - IterStartBlock
   - IterEndBlock
   - TrueCube
   - FalseCube
+  - IterationStart
   layers:
   - Default
   - TransparentFX

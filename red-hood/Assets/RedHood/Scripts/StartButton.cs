@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 // 스타트 버튼
 public class StartButton : MonoBehaviour

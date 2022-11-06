@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 // 버튼에 이벤트를 결합한다.
+[RequireComponent(typeof(ConfigurableJoint))]
 public class PhysicsButton : MonoBehaviour
 {
     // 이벤트가 발생하는 역치 (버튼의 눌림 정도)
@@ -29,9 +28,14 @@ public class PhysicsButton : MonoBehaviour
     private void Update()
     {
         if (!isPressed && GetPressingIndex() + threshold >= 1)
+        {
             Pressed();
+        }
+
         if (isPressed && GetPressingIndex() - threshold <= 0)
+        {
             Released();
+        }
     }
 
     private void Pressed()
@@ -52,7 +56,10 @@ public class PhysicsButton : MonoBehaviour
         pressingIdx = Mathf.Abs(pressingIdx);
 
         if (pressingIdx < deadZone)
+        {
             return 0.0f;
+        }
+
         return Mathf.Clamp(pressingIdx, 0f, 1f);
     }
 }
