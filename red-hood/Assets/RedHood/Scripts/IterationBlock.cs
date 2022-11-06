@@ -1,10 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
+[RequireComponent(typeof(BlockActivation))]
 public class IterationBlock : MonoBehaviour
 {
     private static Stack<BlockActivation> iterStartBlockStack = new();
@@ -42,13 +41,14 @@ public class IterationBlock : MonoBehaviour
             try
             {
                 nextBlock = iterStartBlockStack.Pop();
-            } catch (InvalidOperationException)
+            }
+            catch (InvalidOperationException)
             {
                 // TODO: 에러 처리(문제 오답)
                 Debug.LogWarning("반복 에러: 반복 시작 블록이 존재하지 않음");
                 return;
             }
-            
+
             XRSocketInteractor variableSocket = blockActivation.transform.Find(VAR_SOCKET).GetComponent<XRSocketInteractor>();
             IXRSelectInteractable attach = variableSocket.firstInteractableSelected;
             if (attach != null)

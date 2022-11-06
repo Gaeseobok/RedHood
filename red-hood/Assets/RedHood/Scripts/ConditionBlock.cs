@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
+[RequireComponent(typeof(BlockActivation))]
 public class ConditionBlock : MonoBehaviour
 {
     private XRSocketInteractor leftSocket;
