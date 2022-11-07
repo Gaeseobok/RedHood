@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7516258407556589954}
   - component: {fileID: 3527955615882780499}
   - component: {fileID: 6252910109227126130}
+  - component: {fileID: 2061976488401281073}
   m_Layer: 0
   m_Name: Socket
   m_TagString: Untagged
@@ -78,7 +79,7 @@ MonoBehaviour:
   m_SelectEntered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7913339606128577629}
+      - m_Target: {fileID: 2061976488401281073}
         m_TargetAssemblyTypeName: SoundActivation, Assembly-CSharp
         m_MethodName: OnBlockAttached
         m_Mode: 1
@@ -111,6 +112,20 @@ MonoBehaviour:
   m_SocketActive: 1
   m_InteractableHoverScale: 1
   m_RecycleDelayTime: 1
+--- !u!114 &2061976488401281073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 524717471573787467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3183069a606a62047aa0f015e7a8dfce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attachingSound: {fileID: 0}
+  activatedSound: {fileID: 0}
 --- !u!1 &524717472318393029
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,6 +163,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7516258407556589954}
+  - {fileID: 5635405305841330744}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -279,19 +295,7 @@ MonoBehaviour:
       m_Calls: []
   m_Activated:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7913339606128577629}
-        m_TargetAssemblyTypeName: SoundActivation, Assembly-CSharp
-        m_MethodName: PlayActivatedSound
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_Deactivated:
     m_PersistentCalls:
       m_Calls: []
@@ -531,3 +535,65 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &203324396474288900
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7516258406141157388}
+    m_Modifications:
+    - target: {fileID: 5541293629894779196, guid: f730039357abea044b860e9633716d63, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541293629894779196, guid: f730039357abea044b860e9633716d63, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541293629894779196, guid: f730039357abea044b860e9633716d63, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541293629894779196, guid: f730039357abea044b860e9633716d63, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541293629894779196, guid: f730039357abea044b860e9633716d63, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541293629894779196, guid: f730039357abea044b860e9633716d63, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541293629894779196, guid: f730039357abea044b860e9633716d63, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541293629894779196, guid: f730039357abea044b860e9633716d63, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541293629894779196, guid: f730039357abea044b860e9633716d63, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541293629894779196, guid: f730039357abea044b860e9633716d63, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541293629894779196, guid: f730039357abea044b860e9633716d63, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5544549251979975494, guid: f730039357abea044b860e9633716d63, type: 3}
+      propertyPath: m_Name
+      value: FX_Firework_Trails
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f730039357abea044b860e9633716d63, type: 3}
+--- !u!4 &5635405305841330744 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5541293629894779196, guid: f730039357abea044b860e9633716d63, type: 3}
+  m_PrefabInstance: {fileID: 203324396474288900}
+  m_PrefabAsset: {fileID: 0}

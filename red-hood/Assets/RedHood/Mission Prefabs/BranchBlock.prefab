@@ -205,6 +205,7 @@ GameObject:
   - component: {fileID: 1522300782004892806}
   - component: {fileID: 7154108190340661901}
   - component: {fileID: 3360576415489027175}
+  - component: {fileID: 8662024868502796414}
   m_Layer: 0
   m_Name: DownSocket
   m_TagString: Untagged
@@ -271,7 +272,19 @@ MonoBehaviour:
       m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8662024868502796414}
+        m_TargetAssemblyTypeName: SoundActivation, Assembly-CSharp
+        m_MethodName: OnBlockAttached
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
       m_Calls: []
@@ -293,6 +306,20 @@ MonoBehaviour:
   m_SocketActive: 1
   m_InteractableHoverScale: 1
   m_RecycleDelayTime: 1
+--- !u!114 &8662024868502796414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3045601617446937678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3183069a606a62047aa0f015e7a8dfce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attachingSound: {fileID: 0}
+  activatedSound: {fileID: 0}
 --- !u!1 &3843393010704871413
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,6 +785,7 @@ GameObject:
   - component: {fileID: 24442851037197926}
   - component: {fileID: 5790909485024872404}
   - component: {fileID: 832045725262643132}
+  - component: {fileID: 2806316667703408894}
   m_Layer: 0
   m_Name: UpSocket
   m_TagString: Untagged
@@ -824,7 +852,19 @@ MonoBehaviour:
       m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2806316667703408894}
+        m_TargetAssemblyTypeName: SoundActivation, Assembly-CSharp
+        m_MethodName: OnBlockAttached
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
       m_Calls: []
@@ -846,6 +886,20 @@ MonoBehaviour:
   m_SocketActive: 1
   m_InteractableHoverScale: 1
   m_RecycleDelayTime: 1
+--- !u!114 &2806316667703408894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4565056339847427380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3183069a606a62047aa0f015e7a8dfce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attachingSound: {fileID: 0}
+  activatedSound: {fileID: 0}
 --- !u!1 &5296834718820987170
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,6 +13,8 @@ public class BlockActivation : MonoBehaviour
 
     private XRGrabInteractable block;
     private XRSocketInteractor socket;
+    private SoundActivation soundActivation;
+    private new ParticleSystem particleSystem;
     private IterationBlock iterBlock;
     private BranchBlock branchBlock;
 
@@ -22,6 +24,8 @@ public class BlockActivation : MonoBehaviour
     {
         block = GetComponent<XRGrabInteractable>();
         socket = GetComponentInChildren<XRSocketInteractor>();
+        soundActivation = GetComponent<SoundActivation>();
+        particleSystem = GetComponentInChildren<ParticleSystem>();
         iterBlock = GetComponent<IterationBlock>();
         branchBlock = GetComponent<BranchBlock>();
     }
@@ -34,7 +38,13 @@ public class BlockActivation : MonoBehaviour
             interactableObject = block
         };
         block.activated.Invoke(args);
-        GetComponent<SoundActivation>().PlayActivatedSound();
+
+        soundActivation.PlayActivatedSound();
+
+        if (particleSystem != null)
+        {
+            particleSystem.Play();
+        }
     }
 
     // 다음 연결된 블록을 가져온다.

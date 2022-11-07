@@ -6,7 +6,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 [RequireComponent(typeof(BlockActivation))]
 public class IterationBlock : MonoBehaviour
 {
-    private static Stack<BlockActivation> iterStartBlockStack = new();
+    private static readonly Stack<BlockActivation> iterStartBlockStack = new();
 
     private const string ITER_START_BLOCK = "IterStartBlock";
     private const string ITER_END_BLOCK = "IterEndBlock";
@@ -14,7 +14,8 @@ public class IterationBlock : MonoBehaviour
 
     private BlockActivation blockActivation;
     private BlockActivation nextBlock = null;
-    private bool setup = false;
+    private static bool setup = false;
+    private static bool isFirstBlock = true;
     private int iterNum = -1;
 
     private void Start()
@@ -32,8 +33,12 @@ public class IterationBlock : MonoBehaviour
 
         if (blockActivation.CompareTag(ITER_START_BLOCK))
         {
+            if (isFirstBlock)
+            {
+                iterStartBlockStack.Clear();
+                isFirstBlock = false;
+            }
             Debug.Log("반복 시작!!");
-
             iterStartBlockStack.Push(blockActivation);
         }
         else if (blockActivation.CompareTag(ITER_END_BLOCK))
@@ -61,9 +66,13 @@ public class IterationBlock : MonoBehaviour
             {
                 Debug.LogWarning("반복 에러: 변수 블록이 존재하지 않음");
             }
-        }
 
-        setup = true;
+            if (iterStartBlockStack.Count == 0)
+            {
+                setup = true;
+                isFirstBlock = true;
+            }
+        }
     }
 
     // 반복문 실행

@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-[RequireComponent(typeof(AudioSource))]
 public class SoundActivation : MonoBehaviour
 {
     //[Tooltip("블록을 잡을 때 재생되는 오디오 클립")]
@@ -14,13 +13,12 @@ public class SoundActivation : MonoBehaviour
     [SerializeField] private AudioClip activatedSound;
 
     private AudioSource audioSource;
-    private BlockActivation blockActivation;
     private XRSocketInteractor socket;
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        blockActivation = GetComponent<BlockActivation>();
+        socket = GetComponent<XRSocketInteractor>();
     }
 
     //public void PlayHoldingSound()
@@ -31,22 +29,31 @@ public class SoundActivation : MonoBehaviour
 
     private void PlayAttachingSound()
     {
-        audioSource.clip = attachingSound;
-        audioSource.Play();
+        if (audioSource != null)
+        {
+            audioSource.clip = attachingSound;
+            audioSource.Play();
+        }
     }
 
     public void OnBlockAttached()
     {
-        BlockActivation attachedBlock = blockActivation.GetNextBlock();
-        if (attachedBlock != null)
+        if (socket != null)
         {
-            attachedBlock.GetComponent<SoundActivation>().PlayAttachingSound();
+            IXRSelectInteractable attachedBlock = socket.firstInteractableSelected;
+            if (attachedBlock != null)
+            {
+                ((XRGrabInteractable)attachedBlock).GetComponent<SoundActivation>().PlayAttachingSound();
+            }
         }
     }
 
     public void PlayActivatedSound()
     {
-        audioSource.clip = activatedSound;
-        audioSource.Play();
+        if (audioSource != null)
+        {
+            audioSource.clip = activatedSound;
+            audioSource.Play();
+        }
     }
 }
