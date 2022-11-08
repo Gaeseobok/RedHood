@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - QuestModel
+  - IterStartBlock
+  - IterEndBlock
+  - TrueCube
+  - FalseCube
+  - IterationStart
   layers:
   - Default
   - TransparentFX

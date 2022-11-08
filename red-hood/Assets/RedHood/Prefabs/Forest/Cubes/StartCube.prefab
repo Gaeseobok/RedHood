@@ -306,8 +306,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uC2DC\uC791"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 0}
-  m_sharedMaterial: {fileID: -9000219804800352780, guid: 811a5d873e0d9ad449a6db23dcd6814d, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 811a5d873e0d9ad449a6db23dcd6814d, type: 2}
+  m_sharedMaterial: {fileID: 3695037899403299564, guid: 811a5d873e0d9ad449a6db23dcd6814d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -504,6 +504,10 @@ PrefabInstance:
     - target: {fileID: 1581083648291314675, guid: ab40925b895f30043a764852d87e9f1c, type: 3}
       propertyPath: m_Convex
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2746304064032845884, guid: ab40925b895f30043a764852d87e9f1c, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2746304064032845884, guid: ab40925b895f30043a764852d87e9f1c, type: 3}
       propertyPath: m_Materials.Array.data[0]

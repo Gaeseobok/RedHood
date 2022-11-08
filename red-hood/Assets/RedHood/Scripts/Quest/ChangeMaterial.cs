@@ -1,50 +1,56 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
-// 오브젝트의 머티리얼을 토글한다.
-// 소켓에 호버(Hover Entered/Hover Exited)할 때마다 소켓의 색상(머티리얼)을 변경하기 위한 스크립트
+// 오브젝트의 머티리얼을 변경한다.
 public class ChangeMaterial : MonoBehaviour
 {
-    [Tooltip("블록이 소켓에 Hover 또는 Select된 상태일 때, 포인터의 머티리얼")]
+    [SerializeField] private Material hoveredMaterial;
     [SerializeField] private Material selectedMaterial;
 
-    [Tooltip("블록이 Activate될 때, 포인터의 머티리얼")]
-    [SerializeField] private Material activatedMaterial;
+    private XRSimpleInteractable interactable;
 
-    private Material defaultMaterial;
-    private MeshRenderer [] renderers;
-    private bool isChanged = false;
-       
+    private Material[] defaultMaterials;
+    private MeshRenderer[] renderers;
+
     private void Start()
     {
-        renderers = GetComponentsInChildren<MeshRenderer>();
-        defaultMaterial = renderers[0].material;
+        interactable = GetComponent<XRSimpleInteractable>();
+        renderers = GetComponentsInChildren<MeshRenderer>(true);
+        defaultMaterials = new Material[renderers.Length];
+        for (int i = 0; i < renderers.Length; i++)
+        {
+            defaultMaterials[i] = renderers[i].material;
+        }
+    }
+    public void ToggleMaterials()
+    {
+        if (interactable.isSelected)
+        {
+            SetMaterials(selectedMaterial);
+        }
+        else if (interactable.isHovered)
+        {
+            SetMaterials(hoveredMaterial);
+        }
+        else
+        {
+            RevertMaterials();
+        }
     }
 
-    private void SetMaterials(Material newMaterial)
+    private void SetMaterials(Material material)
     {
         foreach (MeshRenderer renderer in renderers)
-            renderer.material = newMaterial;
+        {
+            renderer.material = material;
+        }
     }
 
-    public void ChangeToDefaultMaterial()
+    private void RevertMaterials()
     {
-        SetMaterials(defaultMaterial);
-    }
-
-    public void ChangeToSelectedMaterial()
-    {
-        if (isChanged)
-            SetMaterials(defaultMaterial);
-        else
-            SetMaterials(selectedMaterial);
-
-        isChanged = !isChanged;
-    }
-
-    public void ChangeToActivatedMaterial()
-    {
-        SetMaterials(activatedMaterial);
+        for (int i = 0; i < renderers.Length; i++)
+        {
+            renderers[i].material = defaultMaterials[i];
+        }
     }
 }
