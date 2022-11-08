@@ -6,7 +6,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 [RequireComponent(typeof(BlockActivation))]
 public class IterationBlock : MonoBehaviour
 {
-    private static readonly Stack<BlockActivation> iterStartBlockStack = new();
+    internal static readonly Stack<BlockActivation> iterStartBlockStack = new();
+    private static readonly Stack<int> iterNumStack = new();
 
     private const string ITER_START_BLOCK = "IterStartBlock";
     private const string ITER_END_BLOCK = "IterEndBlock";
@@ -14,63 +15,70 @@ public class IterationBlock : MonoBehaviour
 
     private BlockActivation blockActivation;
     private BlockActivation nextBlock = null;
-    private static bool setup = false;
     private static bool isFirstBlock = true;
-    private int iterNum = -1;
 
     private void Start()
     {
         blockActivation = GetComponent<BlockActivation>();
     }
 
+    private void ResetIteration()
+    {
+        isFirstBlock = true;
+
+        if (nextBlock != null)
+        {
+            nextBlock.GetComponentInChildren<ParticleSystem>().Stop();
+        }
+        GetComponentInChildren<ParticleSystem>().Stop();
+    }
+
     // 반복 블록 변수 설정
     public void SetIteration()
     {
-        if (setup)
+        if (iterStartBlockStack.Count > 0 &&
+            (iterStartBlockStack.Peek() == blockActivation || iterStartBlockStack.Peek() == nextBlock))
         {
             return;
         }
 
-        if (blockActivation.CompareTag(ITER_START_BLOCK))
+        if (CompareTag(ITER_START_BLOCK))
         {
             if (isFirstBlock)
             {
                 iterStartBlockStack.Clear();
+                iterNumStack.Clear();
                 isFirstBlock = false;
             }
-            Debug.Log("반복 시작!!");
             iterStartBlockStack.Push(blockActivation);
         }
-        else if (blockActivation.CompareTag(ITER_END_BLOCK))
+        else if (CompareTag(ITER_END_BLOCK))
         {
             try
             {
-                nextBlock = iterStartBlockStack.Pop();
+                nextBlock = iterStartBlockStack.Peek();
             }
             catch (InvalidOperationException)
             {
                 // TODO: 에러 처리(문제 오답)
                 Debug.LogWarning("반복 에러: 반복 시작 블록이 존재하지 않음");
+                ResetIteration();
                 return;
             }
 
-            XRSocketInteractor variableSocket = blockActivation.transform.Find(VAR_SOCKET).GetComponent<XRSocketInteractor>();
+            XRSocketInteractor variableSocket = transform.Find(VAR_SOCKET).GetComponent<XRSocketInteractor>();
             IXRSelectInteractable attach = variableSocket.firstInteractableSelected;
             if (attach != null)
             {
                 XRGrabInteractable variableBlock = (XRGrabInteractable)attach;
-                iterNum = variableBlock.GetComponent<VariableBlock>().GetInt();
-                Debug.Log("반복 변수: " + iterNum);
+                int iterNum = variableBlock.GetComponent<VariableBlock>().GetInt();
+                iterNumStack.Push(iterNum);
             }
             else
             {
                 Debug.LogWarning("반복 에러: 변수 블록이 존재하지 않음");
-            }
-
-            if (iterStartBlockStack.Count == 0)
-            {
-                setup = true;
-                isFirstBlock = true;
+                ResetIteration();
+                return;
             }
         }
     }
@@ -78,26 +86,35 @@ public class IterationBlock : MonoBehaviour
     // 반복문 실행
     public void Iterate()
     {
-        iterNum--;
+        if (iterNumStack.Count == 0)
+        {
+            return;
+        }
+
+        int iterNum = iterNumStack.Pop();
+        iterNumStack.Push(--iterNum);
+
         if (iterNum > 0)
         {
             // 반복 횟수가 남았다면 반복문 다시 실행
             nextBlock.ExecuteBlock();
-            Debug.Log("반복 변수: " + iterNum);
-
         }
         else
         {
-            Debug.Log("반복 끝!!");
             // 반복이 끝났다면 반복문 빠져나옴
-            BlockActivation nextBlock = blockActivation.GetNextBlock();
+            _ = iterStartBlockStack.Pop();
+            _ = iterNumStack.Pop();
+            ResetIteration();
+            if (iterStartBlockStack.Count > 0)
+            {
+                isFirstBlock = false;
+            }
+
+            nextBlock = blockActivation.GetNextBlock();
             if (nextBlock != null)
             {
                 nextBlock.ExecuteBlock();
             }
-
-            // TODO: IterStartBlock, IterEndBlock 포인터 끄기
         }
     }
-
 }

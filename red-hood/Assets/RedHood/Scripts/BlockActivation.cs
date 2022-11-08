@@ -33,18 +33,18 @@ public class BlockActivation : MonoBehaviour
     // Active event 함수를 실행한다.
     private void ActivateBlock()
     {
-        ActivateEventArgs args = new()
-        {
-            interactableObject = block
-        };
-        block.activated.Invoke(args);
-
         soundActivation.PlayActivatedSound();
 
         if (particleSystem != null)
         {
             particleSystem.Play();
         }
+
+        ActivateEventArgs args = new()
+        {
+            interactableObject = block
+        };
+        block.activated.Invoke(args);
     }
 
     // 다음 연결된 블록을 가져온다.
@@ -52,13 +52,6 @@ public class BlockActivation : MonoBehaviour
     {
         IXRSelectInteractable nextBlock = socket.firstInteractableSelected;
         return nextBlock == null ? null : ((XRGrabInteractable)nextBlock).GetComponent<BlockActivation>();
-    }
-
-    // 현재 블록의 색상을 변경한다. (실행되고 있을 때)
-    private void SetColorActive()
-    {
-        // TODO: 블록 실행 이펙트 추가
-        return;
     }
 
     private IEnumerator ExecuteNextBlock()
@@ -72,15 +65,11 @@ public class BlockActivation : MonoBehaviour
         {
             nextBlock.ExecuteBlock();
         }
-
-        SetColorActive();
     }
 
     // 블록을 실행하고, 다음 블록을 트리거한다.
     public void ExecuteBlock()
     {
-        SetColorActive();
-
         if (iterBlock != null)
         {
             iterBlock.SetIteration();
