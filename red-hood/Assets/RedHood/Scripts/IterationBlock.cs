@@ -28,9 +28,9 @@ public class IterationBlock : MonoBehaviour
 
         if (nextBlock != null)
         {
-            nextBlock.GetComponentInChildren<ParticleSystem>().Stop();
+            nextBlock.GetComponentInChildren<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         }
-        GetComponentInChildren<ParticleSystem>().Stop();
+        GetComponentInChildren<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
     }
 
     // 반복 블록 변수 설정

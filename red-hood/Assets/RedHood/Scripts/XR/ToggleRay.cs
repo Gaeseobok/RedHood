@@ -15,7 +15,7 @@ public class ToggleRay : MonoBehaviour
     private void Awake()
     {
         rayInteractor = GetComponent<XRRayInteractor>();
-        reticleRenderer = GetComponent<XRInteractorLineVisual>().reticle.GetComponentInChildren<SpriteRenderer>();
+        //reticleRenderer = GetComponent<XRInteractorLineVisual>().reticle.GetComponentInChildren<SpriteRenderer>();
         SwitchInteractors(false);
     }
 
@@ -39,16 +39,16 @@ public class ToggleRay : MonoBehaviour
 
     public bool TouchingObject()
     {
-        List<IXRInteractable> targets = new List<IXRInteractable>();
+        List<IXRInteractable> targets = new();
         directInteractor.GetValidTargets(targets);
-        return (targets.Count > 0);
+        return targets.Count > 0;
     }
 
     private void SwitchInteractors(bool value)
     {
         isSwitched = value;
         rayInteractor.enabled = value;
-        reticleRenderer.enabled = value;
+        //reticleRenderer.enabled = value;
         directInteractor.enabled = !value;
     }
 }
