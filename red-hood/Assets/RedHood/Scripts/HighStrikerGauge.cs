@@ -8,7 +8,7 @@ public class HighStrikerGauge : MonoBehaviour
     private XRGrabInteractable interactable;
     private int variable;
 
-    private int[] scoreBounds = { 100, 200, 300, 400 };
+    private static readonly int[] scoreBounds = { 100, 200, 300, 400 };
     private static readonly MeshRenderer[] bars = new MeshRenderer[4];
 
     private const string GAUGE_BARS = "HighStrikerGaugeBars";

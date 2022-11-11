@@ -825,7 +825,6 @@ GameObject:
   - component: {fileID: 5990100545853010160}
   - component: {fileID: 6665936905431793085}
   - component: {fileID: 5679531940115330954}
-  - component: {fileID: 5480312976599145126}
   m_Layer: 0
   m_Name: RightVariableSocket
   m_TagString: Untagged
@@ -941,18 +940,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attachingSound: {fileID: 0}
   activatedSound: {fileID: 0}
---- !u!114 &5480312976599145126
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3651229319724433824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06aded653e2442647aca167116814dc2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4176015842954020607
 GameObject:
   m_ObjectHideFlags: 0
