@@ -83,6 +83,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3024104503279640858, guid: 5e7d8752c52dc344986f8e53b81c59f6, type: 3}
+      propertyPath: activatedSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 46bfaa5ad14e8488d98c6492c5fe248b, type: 3}
     - target: {fileID: 3200104706615594315, guid: 5e7d8752c52dc344986f8e53b81c59f6, type: 3}
       propertyPath: m_RootOrder
       value: 0

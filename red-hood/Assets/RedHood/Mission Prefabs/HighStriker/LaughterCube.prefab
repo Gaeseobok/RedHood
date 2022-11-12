@@ -83,6 +83,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3024104503279640858, guid: 5e7d8752c52dc344986f8e53b81c59f6, type: 3}
+      propertyPath: activatedSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b494f3f28f2834cfb85245e744aa794f, type: 3}
     - target: {fileID: 3200104706615594315, guid: 5e7d8752c52dc344986f8e53b81c59f6, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -129,7 +133,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4858883405989554050, guid: 5e7d8752c52dc344986f8e53b81c59f6, type: 3}
       propertyPath: m_Name
-      value: ClapCube 1
+      value: LaughterCube
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e7d8752c52dc344986f8e53b81c59f6, type: 3}

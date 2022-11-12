@@ -7,6 +7,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4122888341136242208, guid: 93a6a66cbf59a47608e2c37c70f12c2c, type: 3}
+      propertyPath: activatedSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 761d43e90986c4679867177c5cf0c99e, type: 3}
+    - target: {fileID: 4122888341136242208, guid: 93a6a66cbf59a47608e2c37c70f12c2c, type: 3}
+      propertyPath: attachingSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 04dab0abbbea94b298f4be964ca6ba04, type: 3}
     - target: {fileID: 5896336016991990481, guid: 93a6a66cbf59a47608e2c37c70f12c2c, type: 3}
       propertyPath: m_text
       value: 200
