@@ -675,7 +675,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3183069a606a62047aa0f015e7a8dfce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attachingSound: {fileID: 8300000, guid: 379165f9cc85efd43aa2820c87e78777, type: 3}
+  attachingSound: {fileID: 8300000, guid: df750d6f4823141a3b8e190a12302c7a, type: 3}
   activatedSound: {fileID: 8300000, guid: 379165f9cc85efd43aa2820c87e78777, type: 3}
 --- !u!1 &3849792016642760622
 GameObject:
