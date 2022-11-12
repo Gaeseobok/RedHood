@@ -36,7 +36,7 @@ public class HighStrikerGauge : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag(CODING_ZONE) && IsSelectedBySocket())
+        if (other.CompareTag(CODING_ZONE))
         {
             SetGaugeBarVisibility(false);
         }
