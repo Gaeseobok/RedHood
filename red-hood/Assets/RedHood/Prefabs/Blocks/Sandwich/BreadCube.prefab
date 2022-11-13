@@ -67,6 +67,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7218767682964129221, guid: ef14eacfe2c12424bb652a43fb747993, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4563815249113706377, guid: ef14eacfe2c12424bb652a43fb747993, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ef14eacfe2c12424bb652a43fb747993, type: 3}
@@ -141,6 +145,10 @@ PrefabInstance:
     - target: {fileID: 6946156847863369590, guid: d249ad8b59e524d118bbf6668fe009dd, type: 3}
       propertyPath: m_Name
       value: Bread
+      objectReference: {fileID: 0}
+    - target: {fileID: 6946156847863369590, guid: d249ad8b59e524d118bbf6668fe009dd, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -1886287596359860012, guid: d249ad8b59e524d118bbf6668fe009dd, type: 3}

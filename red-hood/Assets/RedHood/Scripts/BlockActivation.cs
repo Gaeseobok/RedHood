@@ -21,6 +21,10 @@ public class BlockActivation : MonoBehaviour
 
     private const string ITER_END_TAG = "IterEndBlock";
 
+    private const string TEST_SCENE = "BoardTestScene";
+    private const string HOME_SCENE = "CottageScene";
+    private const string FOREST_SCENE = "ForestScene";
+
     private void Start()
     {
         block = GetComponent<XRGrabInteractable>();
@@ -69,6 +73,10 @@ public class BlockActivation : MonoBehaviour
             {
                 nextBlock.ExecuteBlock();
             }
+            else
+            {
+                ConfirmCodes();
+            }
         }
     }
 
@@ -93,5 +101,16 @@ public class BlockActivation : MonoBehaviour
         // 다음 블록 트리거
         StopAllCoroutines();
         CurrentRoutine = StartCoroutine(ExecuteNextBlock());
+    }
+
+    // 
+    private void ConfirmCodes()
+    {
+        if (gameObject.scene.name.Equals(TEST_SCENE))
+        {
+            SandwichMission component = gameObject.AddComponent<SandwichMission>();
+            component.CheckAnswer();
+            Destroy(component);
+        }
     }
 }

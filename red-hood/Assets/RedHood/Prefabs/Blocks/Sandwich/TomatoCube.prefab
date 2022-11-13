@@ -63,6 +63,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7218767682964129221, guid: ef14eacfe2c12424bb652a43fb747993, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4563815249113706377, guid: ef14eacfe2c12424bb652a43fb747993, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ef14eacfe2c12424bb652a43fb747993, type: 3}
@@ -137,6 +141,10 @@ PrefabInstance:
     - target: {fileID: 8162649081272021617, guid: ec946d8c7bce74aae9fc6419867f660c, type: 3}
       propertyPath: m_Name
       value: Tomato
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162649081272021617, guid: ec946d8c7bce74aae9fc6419867f660c, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -9188327457077071204, guid: ec946d8c7bce74aae9fc6419867f660c, type: 3}

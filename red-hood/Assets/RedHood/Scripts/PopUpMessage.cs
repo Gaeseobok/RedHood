@@ -9,7 +9,7 @@ public class PopUpMessage : MonoBehaviour
     private static GameObject errorWindow;
     private static GameObject successWindow;
 
-    private const float delay = 5.0f;
+    private const float closeDelay = 5.0f;
 
     private const string ERROR_WINDOW = "ErrorWindow";
     private const string SUCCESS_WINDOW = "SuccessWindow";
@@ -55,8 +55,14 @@ public class PopUpMessage : MonoBehaviour
 
     private IEnumerator DeactivateWindow(GameObject window)
     {
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(closeDelay);
 
         window.SetActive(false);
+    }
+
+    internal void CloseAll()
+    {
+        errorWindow.SetActive(false);
+        successWindow.SetActive(false);
     }
 }
