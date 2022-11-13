@@ -676,7 +676,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attachingSound: {fileID: 8300000, guid: df750d6f4823141a3b8e190a12302c7a, type: 3}
-  activatedSound: {fileID: 8300000, guid: 379165f9cc85efd43aa2820c87e78777, type: 3}
+  activatedSound: {fileID: 0}
 --- !u!1 &3849792016642760622
 GameObject:
   m_ObjectHideFlags: 0
