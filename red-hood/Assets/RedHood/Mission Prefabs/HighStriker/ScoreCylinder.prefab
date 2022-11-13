@@ -27,6 +27,10 @@ PrefabInstance:
       propertyPath: m_fontSizeBase
       value: 0.024
       objectReference: {fileID: 0}
+    - target: {fileID: 6015117994075942663, guid: 93a6a66cbf59a47608e2c37c70f12c2c, type: 3}
+      propertyPath: m_InteractionLayers.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 6134627675897858221, guid: 93a6a66cbf59a47608e2c37c70f12c2c, type: 3}
       propertyPath: m_RootOrder
       value: 0

@@ -10,6 +10,8 @@ TagManager:
   - TrueCube
   - FalseCube
   - IterationStart
+  - HighStrikerGaugeBars
+  - CodingZone
   layers:
   - Default
   - TransparentFX
@@ -17,7 +19,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Grab
   - 
   - 
   - 
