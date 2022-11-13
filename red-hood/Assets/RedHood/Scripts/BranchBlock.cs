@@ -1,9 +1,12 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
+[RequireComponent(typeof(BlockActivation))]
 public class BranchBlock : MonoBehaviour
 {
     private bool condition = false;
+
+    private PopUpMessage popUpMessage;
 
     private XRSocketInteractor upSocket;
     private XRSocketInteractor downSocket;
@@ -14,6 +17,7 @@ public class BranchBlock : MonoBehaviour
 
     private void Start()
     {
+        popUpMessage = GetComponent<PopUpMessage>();
         upSocket = transform.Find(UP_SOCKET).GetComponent<XRSocketInteractor>();
         downSocket = transform.Find(DOWN_SOCKET).GetComponent<XRSocketInteractor>();
     }
@@ -30,8 +34,8 @@ public class BranchBlock : MonoBehaviour
 
         if (upAttach == null || downAttach == null)
         {
-            // TODO: 에러 처리(문제 오답)
-            Debug.Log("분기 오류: 결과 블록이 존재하지 않음");
+            string text = "결과 블록이 존재하지 않아요";
+            popUpMessage.ActivateErrorWindow(text);
             return;
         }
 
@@ -43,8 +47,8 @@ public class BranchBlock : MonoBehaviour
 
         if (isUpTrue == isDownTrue)
         {
-            // TODO: 에러 처리(문제 오답)
-            Debug.Log("분기 오류: 결과 블록의 유형이 같음");
+            string text = "모든 종류의 결과 블록을 붙여주세요";
+            popUpMessage.ActivateErrorWindow(text);
             return;
         }
 
@@ -52,11 +56,11 @@ public class BranchBlock : MonoBehaviour
 
         if (condition)
         {
-            nextBlock = (isUpTrue) ? upBlock : downBlock;
+            nextBlock = isUpTrue ? upBlock : downBlock;
         }
         else
         {
-            nextBlock = (isUpTrue) ? downBlock : upBlock;
+            nextBlock = isUpTrue ? downBlock : upBlock;
         }
 
         nextBlock.ExecuteBlock();

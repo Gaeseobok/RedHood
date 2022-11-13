@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-[RequireComponent(typeof(XRGrabInteractable), typeof(SoundActivation))]
+[RequireComponent(typeof(XRGrabInteractable), typeof(SoundActivation), typeof(PopUpMessage))]
 // 현재 블록과 다음 블록을 실행시킨다.
 public class BlockActivation : MonoBehaviour
 {
@@ -14,6 +14,7 @@ public class BlockActivation : MonoBehaviour
     private XRGrabInteractable block;
     private XRSocketInteractor socket;
     private SoundActivation soundActivation;
+    private PopUpMessage popUpMessage;
     private new ParticleSystem particleSystem;
     private IterationBlock iterBlock;
     private BranchBlock branchBlock;
@@ -25,6 +26,7 @@ public class BlockActivation : MonoBehaviour
         block = GetComponent<XRGrabInteractable>();
         socket = GetComponentInChildren<XRSocketInteractor>();
         soundActivation = GetComponent<SoundActivation>();
+        popUpMessage = GetComponent<PopUpMessage>();
         particleSystem = GetComponentInChildren<ParticleSystem>();
         iterBlock = GetComponent<IterationBlock>();
         branchBlock = GetComponent<BranchBlock>();
@@ -60,10 +62,13 @@ public class BlockActivation : MonoBehaviour
 
         yield return new WaitForSeconds(ActiveDelay);
 
-        BlockActivation nextBlock = GetNextBlock();
-        if (nextBlock != null)
+        if (!popUpMessage.isActivated())
         {
-            nextBlock.ExecuteBlock();
+            BlockActivation nextBlock = GetNextBlock();
+            if (nextBlock != null)
+            {
+                nextBlock.ExecuteBlock();
+            }
         }
     }
 

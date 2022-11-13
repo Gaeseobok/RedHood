@@ -12,6 +12,9 @@ TagManager:
   - IterationStart
   - HighStrikerGaugeBars
   - CodingZone
+  - IterationEnd
+  - SuccessWindow
+  - ErrorWindow
   layers:
   - Default
   - TransparentFX

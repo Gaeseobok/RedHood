@@ -364,7 +364,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: -90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -5, y: 0}
+  m_AnchoredPosition: {x: -25, y: 0}
   m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1700193011196559676
@@ -617,7 +617,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1700193011824422909}
-  - component: {fileID: 1700193011824422908}
   m_Layer: 0
   m_Name: RW_LP_CP_Character_CookieManBigRigged
   m_TagString: Untagged
@@ -641,26 +640,6 @@ Transform:
   m_Father: {fileID: 1700193010679067222}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &1700193011824422908
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1700193011824422910}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0810fe5e0f909454d85fbdfc3f6cf7c9, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1700193011944784450
 GameObject:
   m_ObjectHideFlags: 0
@@ -797,9 +776,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1700193012068414306}
+  - component: {fileID: 282855221303929425}
   m_Layer: 0
   m_Name: Cookie_S
-  m_TagString: Untagged
+  m_TagString: SuccessWindow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -812,8 +792,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1700193012068414307}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.96, y: 0.9, z: -2.75}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1700193010679067222}
@@ -821,6 +801,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &282855221303929425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700193012068414307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59c5c27c6a201c944871be59ae66d816, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1700193012206430630
 GameObject:
   m_ObjectHideFlags: 0
@@ -832,7 +824,6 @@ GameObject:
   - component: {fileID: 1700193012206430618}
   - component: {fileID: 1700193012206430619}
   - component: {fileID: 1700193012206430628}
-  - component: {fileID: 1700193012206430629}
   m_Layer: 0
   m_Name: Capsule (1)
   m_TagString: Untagged
@@ -906,20 +897,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &1700193012206430629
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1700193012206430630}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1700193012248004776
 GameObject:
   m_ObjectHideFlags: 0
@@ -961,7 +938,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1700193012338260040}
   - component: {fileID: 1700193012338260046}
-  - component: {fileID: 1700193012338260047}
   m_Layer: 0
   m_Name: RW_LP_CP_Character_CookieManBigMesh
   m_TagString: Untagged
@@ -1057,20 +1033,6 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.003323257, y: 0.2772617, z: -0.012629822}
     m_Extent: {x: 0.66173524, y: 0.8650949, z: 0.21678542}
   m_DirtyAABB: 0
---- !u!64 &1700193012338260047
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1700193012338260041}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!1 &1700193012415723068
 GameObject:
   m_ObjectHideFlags: 0

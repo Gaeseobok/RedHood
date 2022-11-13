@@ -17,9 +17,12 @@ public class IterationBlock : MonoBehaviour
     private BlockActivation nextBlock = null;
     private static bool isFirstBlock = true;
 
+    private PopUpMessage popUpMessage;
+
     private void Start()
     {
         blockActivation = GetComponent<BlockActivation>();
+        popUpMessage = GetComponent<PopUpMessage>();
     }
 
     private void ResetIteration()
@@ -60,8 +63,8 @@ public class IterationBlock : MonoBehaviour
             }
             catch (InvalidOperationException)
             {
-                // TODO: 에러 처리(문제 오답)
-                Debug.LogWarning("반복 에러: 반복 시작 블록이 존재하지 않음");
+                string text = "반복 시작 블록이 존재하지 않아요";
+                popUpMessage.ActivateErrorWindow(text);
                 ResetIteration();
                 return;
             }
@@ -76,7 +79,8 @@ public class IterationBlock : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("반복 에러: 변수 블록이 존재하지 않음");
+                string text = "변수 블록이 존재하지 않아요";
+                popUpMessage.ActivateErrorWindow(text);
                 ResetIteration();
                 return;
             }
