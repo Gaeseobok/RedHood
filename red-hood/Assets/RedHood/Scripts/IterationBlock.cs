@@ -94,6 +94,8 @@ public class IterationBlock : MonoBehaviour
         int iterNum = iterNumStack.Pop();
         iterNumStack.Push(--iterNum);
 
+        // TODO: 변수 블록 숫자 감소
+
         if (iterNum > 0)
         {
             // 반복 횟수가 남았다면 반복문 다시 실행
