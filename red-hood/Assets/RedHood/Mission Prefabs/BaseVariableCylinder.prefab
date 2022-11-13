@@ -649,5 +649,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3183069a606a62047aa0f015e7a8dfce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attachingSound: {fileID: 8300000, guid: 379165f9cc85efd43aa2820c87e78777, type: 3}
-  activatedSound: {fileID: 8300000, guid: 379165f9cc85efd43aa2820c87e78777, type: 3}
+  attachingSound: {fileID: 8300000, guid: 761d43e90986c4679867177c5cf0c99e, type: 3}
+  activatedSound: {fileID: 8300000, guid: 761d43e90986c4679867177c5cf0c99e, type: 3}
