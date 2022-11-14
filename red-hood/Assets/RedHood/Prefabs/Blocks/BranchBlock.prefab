@@ -677,7 +677,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attachingSound: {fileID: 8300000, guid: df750d6f4823141a3b8e190a12302c7a, type: 3}
-<<<<<<< HEAD:red-hood/Assets/RedHood/Prefabs/Blocks/BranchBlock.prefab
   activatedSound: {fileID: 8300000, guid: 379165f9cc85efd43aa2820c87e78777, type: 3}
 --- !u!114 &7885025091879347386
 MonoBehaviour:
@@ -691,9 +690,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9899dc6c9eb8d649a8aefc4ff7a414e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-=======
-  activatedSound: {fileID: 0}
->>>>>>> 82462b1909678ebe1498f587f7c615c6cf2e4abb:red-hood/Assets/RedHood/Mission Prefabs/BranchBlock.prefab
 --- !u!1 &3849792016642760622
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5896336016991990481, guid: a437b2adb821f6c47ab2071bf9896990, type: 3}
       propertyPath: m_text
-      value: "\uC810\uC218"
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 5896336016991990481, guid: a437b2adb821f6c47ab2071bf9896990, type: 3}
       propertyPath: m_fontSize
@@ -69,7 +69,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8824648371606114255, guid: a437b2adb821f6c47ab2071bf9896990, type: 3}
       propertyPath: m_Name
-      value: ScoreCylinder
+      value: 200Cylinder
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a437b2adb821f6c47ab2071bf9896990, type: 3}
