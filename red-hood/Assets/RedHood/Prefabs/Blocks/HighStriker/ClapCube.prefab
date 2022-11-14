@@ -86,7 +86,7 @@ PrefabInstance:
     - target: {fileID: 3024104503279640858, guid: 5e7d8752c52dc344986f8e53b81c59f6, type: 3}
       propertyPath: activatedSound
       value: 
-      objectReference: {fileID: 8300000, guid: 0246276f70af447c08eafd0a8e313e9c, type: 3}
+      objectReference: {fileID: 8300000, guid: 5caf62cea001a9d4a850c78ed5dd5403, type: 3}
     - target: {fileID: 3200104706615594315, guid: 5e7d8752c52dc344986f8e53b81c59f6, type: 3}
       propertyPath: m_RootOrder
       value: 0
