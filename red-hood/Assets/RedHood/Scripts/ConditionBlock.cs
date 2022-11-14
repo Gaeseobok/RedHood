@@ -6,6 +6,7 @@ public class ConditionBlock : MonoBehaviour
 {
     private XRSocketInteractor socket;
     private BlockActivation blockActivation;
+    private PopUpMessage popUpMessage;
 
     private string RIGHT_SOCKET = "Right";
 
@@ -13,6 +14,7 @@ public class ConditionBlock : MonoBehaviour
     {
         socket = transform.Find(RIGHT_SOCKET).GetComponentInChildren<XRSocketInteractor>();
         blockActivation = GetComponent<BlockActivation>();
+        popUpMessage = GetComponent<PopUpMessage>();
     }
 
     public void CompareVariables()
@@ -21,8 +23,8 @@ public class ConditionBlock : MonoBehaviour
 
         if (attach == null)
         {
-            // TODO: 에러 처리(문제 오답)
-            Debug.Log("조건문 오류: 변수 블록이 존재하지 않음");
+            string text = "변수 블록이 존재하지 않아요";
+            popUpMessage.ActivateErrorWindow(text);
             return;
         }
 
@@ -38,8 +40,8 @@ public class ConditionBlock : MonoBehaviour
         }
         else
         {
-            // TODO: 에러 처리(문제 오답)
-            Debug.Log("조건문 오류: 분기 블록이 존재하지 않음");
+            string text = "분기 블록이 존재하지 않아요";
+            popUpMessage.ActivateErrorWindow(text);
         }
     }
 

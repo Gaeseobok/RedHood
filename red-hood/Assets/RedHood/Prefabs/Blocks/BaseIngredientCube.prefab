@@ -1,0 +1,126 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3020103051291128062
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 524717472318393029, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+      propertyPath: m_Name
+      value: BaseIngredientCube
+      objectReference: {fileID: 0}
+    - target: {fileID: 1460817649400920966, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8e302629c22be4b7d88cf9210995b953, type: 2}
+    - target: {fileID: 4906587249469278423, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+      propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4906587249469278423, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+      propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4906587249469278423, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+      propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1161141674033732180}
+    - target: {fileID: 4906587249469278423, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+      propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4906587249469278423, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+      propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: InstantiateObj
+      objectReference: {fileID: 0}
+    - target: {fileID: 4906587249469278423, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+      propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ObjectInstantiation, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4906587249469278423, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+      propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6090249851108585557, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8e302629c22be4b7d88cf9210995b953, type: 2}
+    - target: {fileID: 7516258406141157388, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7516258406141157388, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7516258406141157388, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7516258406141157388, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7516258406141157388, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7516258406141157388, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7516258406141157388, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7516258406141157388, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7516258406141157388, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7516258406141157388, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7516258406141157388, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7913339606128577629, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+      propertyPath: activatedSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 231506b2a83eb2142878966a7bc5b9ac, type: 3}
+    - target: {fileID: 7913339606128577629, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+      propertyPath: attachingSound
+      value: 
+      objectReference: {fileID: 8300000, guid: ce329a4adc24d422c8bccf49f8b74e11, type: 3}
+    - target: {fileID: 8131838894433858813, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8e302629c22be4b7d88cf9210995b953, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+--- !u!1 &3360147647426820667 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 524717472318393029, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+  m_PrefabInstance: {fileID: 3020103051291128062}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1161141674033732180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3360147647426820667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 664b2bb588c77524c9961cef2afc286b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectModel: {fileID: 0}
+  modelPosition: {x: -0.3, y: 1, z: -3}

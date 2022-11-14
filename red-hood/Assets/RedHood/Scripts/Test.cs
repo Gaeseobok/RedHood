@@ -10,7 +10,7 @@ public class Test : MonoBehaviour
         }
         else if (gameObject.CompareTag("IterEndBlock"))
         {
-            Debug.Log("반복 시작 블록 실행");
+            Debug.Log("반복 끝 블록 실행");
         }
         else if (GetComponent<ConditionBlock>())
         {

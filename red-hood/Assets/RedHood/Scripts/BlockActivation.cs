@@ -2,29 +2,35 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-[RequireComponent(typeof(XRGrabInteractable), typeof(SoundActivation))]
+[RequireComponent(typeof(XRGrabInteractable), typeof(SoundActivation), typeof(PopUpMessage))]
 // 현재 블록과 다음 블록을 실행시킨다.
 public class BlockActivation : MonoBehaviour
 {
     public Coroutine CurrentRoutine { private set; get; } = null;
 
     [Tooltip("블록의 실행 시간")]
-    [SerializeField] private float ActiveDelay = 1.5f;
+    public float ActiveDelay = 1.5f;
 
     private XRGrabInteractable block;
     private XRSocketInteractor socket;
     private SoundActivation soundActivation;
+    private PopUpMessage popUpMessage;
     private new ParticleSystem particleSystem;
     private IterationBlock iterBlock;
     private BranchBlock branchBlock;
 
     private const string ITER_END_TAG = "IterEndBlock";
 
+    private const string TEST_SCENE = "BoardTestScene";
+    private const string HOME_SCENE = "CottageScene";
+    private const string FOREST_SCENE = "ForestScene";
+
     private void Start()
     {
         block = GetComponent<XRGrabInteractable>();
         socket = GetComponentInChildren<XRSocketInteractor>();
         soundActivation = GetComponent<SoundActivation>();
+        popUpMessage = GetComponent<PopUpMessage>();
         particleSystem = GetComponentInChildren<ParticleSystem>();
         iterBlock = GetComponent<IterationBlock>();
         branchBlock = GetComponent<BranchBlock>();
@@ -58,12 +64,19 @@ public class BlockActivation : MonoBehaviour
     {
         ActivateBlock();
 
-        yield return new WaitForSeconds(ActiveDelay);
-
-        BlockActivation nextBlock = GetNextBlock();
-        if (nextBlock != null)
+        if (!popUpMessage.isActivated())
         {
-            nextBlock.ExecuteBlock();
+            yield return new WaitForSeconds(ActiveDelay);
+
+            BlockActivation nextBlock = GetNextBlock();
+            if (nextBlock != null)
+            {
+                nextBlock.ExecuteBlock();
+            }
+            else
+            {
+                ConfirmCodes();
+            }
         }
     }
 
@@ -72,10 +85,13 @@ public class BlockActivation : MonoBehaviour
     {
         if (iterBlock != null)
         {
-            iterBlock.SetIteration();
+            bool isValid = iterBlock.SetIteration();
             if (CompareTag(ITER_END_TAG))
             {
-                ActivateBlock();
+                if (isValid)
+                {
+                    ActivateBlock();
+                }
                 return;
             }
         }
@@ -88,5 +104,16 @@ public class BlockActivation : MonoBehaviour
         // 다음 블록 트리거
         StopAllCoroutines();
         CurrentRoutine = StartCoroutine(ExecuteNextBlock());
+    }
+
+    // 
+    private void ConfirmCodes()
+    {
+        if (gameObject.scene.name.Equals(TEST_SCENE))
+        {
+            SandwichMission component = gameObject.AddComponent<SandwichMission>();
+            component.CheckAnswer();
+            Destroy(component);
+        }
     }
 }
