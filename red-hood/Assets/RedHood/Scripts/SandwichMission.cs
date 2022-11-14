@@ -7,15 +7,21 @@ public class SandwichMission : MonoBehaviour
     private const string LETTUCE = "Lettuce";
     private const string TOMATO = "Tomato";
 
-    private static readonly string[] answer1 = { BREAD, LETTUCE, TOMATO, CHEESE, BREAD };
-    private static readonly string[] answer2 = { BREAD, LETTUCE, LETTUCE, LETTUCE,
-                                                TOMATO, TOMATO, TOMATO, CHEESE, CHEESE, CHEESE, BREAD };
-    private static readonly string[][] answer = { answer1, answer2, answer2 };
+    private static readonly string[] ans1 = { BREAD, LETTUCE, TOMATO, CHEESE, BREAD };
+    private static readonly string[] ans2 = { BREAD, LETTUCE, TOMATO, CHEESE,
+                                                     LETTUCE, TOMATO, CHEESE,
+                                                     LETTUCE, TOMATO, CHEESE,BREAD };
+    private static readonly string[][] answer = { ans1 };
 
     private static int stage = 0;
 
     public void CheckAnswer()
     {
+        if (stage > answer.Length)
+        {
+            return;
+        }
+
         GameObject[] questModels = GameObject.FindGameObjectsWithTag("QuestModel");
 
         string text = "";
@@ -51,12 +57,20 @@ public class SandwichMission : MonoBehaviour
 
         if (isCorrect)
         {
-            // 정답인 경우, 정답을 알리는 메세지를 출력하고 모든 블록과 실행 결과를 제거
-            msg.ActivateSuccessWindow();
+            if (++stage == answer.Length)
+            {
+                // 미션 클리어 시, 클리어를 알리는 메세지와 사운드 활성화
+                msg.ActivateClearWindow();
+                msg.PlayClearSound();
+            }
+            else
+            {
+                // 정답인 경우, 정답을 알리는 메세지와 사운드 활성화
+                msg.ActivateSuccessWindow();
+                msg.PlaySuccessSound();
 
-            //TODO: 다음 문제 설명창 활성화
-            msg.PlaySuccessSound();
-            stage++;
+                //TODO: 다음 문제 설명창 활성화
+            }
         }
         else
         {

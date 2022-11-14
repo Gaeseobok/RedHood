@@ -15,6 +15,7 @@ TagManager:
   - IterationEnd
   - SuccessWindow
   - FailureWindow
+  - ClearWindow
   layers:
   - Default
   - TransparentFX

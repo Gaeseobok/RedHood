@@ -8,14 +8,20 @@ public class PopUpMessage : MonoBehaviour
 
     private static GameObject failureWindow;
     private static GameObject successWindow;
+    private static GameObject clearWindow;
     private static AudioSource failureAudio;
     private static AudioSource successAudio;
-    private static Vector3 defaultScale;
+    private static AudioSource clearAudio;
+
+    private static Vector3 defaultScale = Vector3.one;
 
     private const float closeDelay = 5.0f;
 
     private const string FAILURE_WINDOW = "FailureWindow";
     private const string SUCCESS_WINDOW = "SuccessWindow";
+    private const string CLEAR_WINDOW = "ClearWindow";
+
+    private const string OPEN_GIFT_ANIM = "OpenGift";
 
     private void Start()
     {
@@ -23,13 +29,18 @@ public class PopUpMessage : MonoBehaviour
         {
             failureWindow = gameObject;
             failureAudio = gameObject.GetComponent<AudioSource>();
-            defaultScale = transform.localScale;
             gameObject.SetActive(false);
         }
         else if (CompareTag(SUCCESS_WINDOW))
         {
             successWindow = gameObject;
             successAudio = gameObject.GetComponent<AudioSource>();
+            gameObject.SetActive(false);
+        }
+        else if (CompareTag(CLEAR_WINDOW))
+        {
+            clearWindow = gameObject;
+            clearAudio = gameObject.GetComponent<AudioSource>();
             gameObject.SetActive(false);
         }
     }
@@ -62,6 +73,15 @@ public class PopUpMessage : MonoBehaviour
         CurrentRoutine = StartCoroutine(DeactivateWindow(successWindow));
     }
 
+    internal void ActivateClearWindow()
+    {
+        StopAllCoroutines();
+        clearWindow.transform.localScale = defaultScale;
+        clearWindow.SetActive(true);
+        clearWindow.GetComponentInChildren<Animator>().Play(OPEN_GIFT_ANIM);
+        CurrentRoutine = StartCoroutine(DeactivateWindow(clearWindow));
+    }
+
     private IEnumerator DeactivateWindow(GameObject window)
     {
         yield return new WaitForSeconds(closeDelay);
@@ -91,5 +111,10 @@ public class PopUpMessage : MonoBehaviour
     internal void PlaySuccessSound()
     {
         successAudio.Play();
+    }
+
+    internal void PlayClearSound()
+    {
+        clearAudio.Play();
     }
 }
