@@ -7,11 +7,11 @@ public class SandwichMission : MonoBehaviour
     private const string LETTUCE = "Lettuce";
     private const string TOMATO = "Tomato";
 
-    private static readonly string[] ans1 = { BREAD, LETTUCE, TOMATO, CHEESE, BREAD };
-    private static readonly string[] ans2 = { BREAD, LETTUCE, TOMATO, CHEESE,
+    private static readonly string[] stage1 = { BREAD, LETTUCE, TOMATO, CHEESE, BREAD };
+    private static readonly string[] stage2 = { BREAD, LETTUCE, TOMATO, CHEESE,
                                                      LETTUCE, TOMATO, CHEESE,
                                                      LETTUCE, TOMATO, CHEESE,BREAD };
-    private static readonly string[][] answer = { ans1 };
+    private static readonly string[][] answer = { stage2 };
 
     private static int stage = 0;
 

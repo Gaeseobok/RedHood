@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -6,8 +7,10 @@ using UnityEngine.XR.Interaction.Toolkit;
 [RequireComponent(typeof(BlockActivation))]
 public class IterationBlock : MonoBehaviour
 {
+    public Coroutine CurrentRoutine { private set; get; } = null;
+
     internal static readonly Stack<BlockActivation> iterStartBlockStack = new();
-    private static readonly Stack<int> iterNumStack = new();
+    private static readonly Stack<VariableBlock> iterNumBlockStack = new();
 
     private const string ITER_START_BLOCK = "IterStartBlock";
     private const string ITER_END_BLOCK = "IterEndBlock";
@@ -25,6 +28,7 @@ public class IterationBlock : MonoBehaviour
         popUpMessage = GetComponent<PopUpMessage>();
     }
 
+    // 반복문의 설정을 초기화한다.
     private void ResetIteration()
     {
         isFirstBlock = true;
@@ -32,17 +36,18 @@ public class IterationBlock : MonoBehaviour
         if (nextBlock != null)
         {
             nextBlock.GetComponentInChildren<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            nextBlock = null;
         }
         GetComponentInChildren<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
     }
 
-    // 반복 블록 변수 설정
-    public void SetIteration()
+    // 반복문의 변수들을 설정한다.
+    public bool SetIteration()
     {
-        if (iterStartBlockStack.Count > 0 &&
+        if (!isFirstBlock && iterStartBlockStack.Count > 0 &&
             (iterStartBlockStack.Peek() == blockActivation || iterStartBlockStack.Peek() == nextBlock))
         {
-            return;
+            return true;
         }
 
         if (CompareTag(ITER_START_BLOCK))
@@ -50,7 +55,7 @@ public class IterationBlock : MonoBehaviour
             if (isFirstBlock)
             {
                 iterStartBlockStack.Clear();
-                iterNumStack.Clear();
+                iterNumBlockStack.Clear();
                 isFirstBlock = false;
             }
             iterStartBlockStack.Push(blockActivation);
@@ -66,7 +71,7 @@ public class IterationBlock : MonoBehaviour
                 string text = "반복 시작 블록이 존재하지 않아요";
                 popUpMessage.ActivateErrorWindow(text);
                 ResetIteration();
-                return;
+                return false;
             }
 
             XRSocketInteractor variableSocket = transform.Find(VAR_SOCKET).GetComponent<XRSocketInteractor>();
@@ -74,31 +79,33 @@ public class IterationBlock : MonoBehaviour
             if (attach != null)
             {
                 XRGrabInteractable variableBlock = (XRGrabInteractable)attach;
-                int iterNum = variableBlock.GetComponent<VariableBlock>().GetInt();
-                iterNumStack.Push(iterNum);
+                VariableBlock iterNumBlock = variableBlock.GetComponent<VariableBlock>();
+                iterNumBlockStack.Push(iterNumBlock);
             }
             else
             {
                 string text = "변수 블록이 존재하지 않아요";
                 popUpMessage.ActivateErrorWindow(text);
                 ResetIteration();
-                return;
+                return false;
             }
         }
+        return true;
     }
 
-    // 반복문 실행
+    // 반복문을 실행한다.
     public void Iterate()
     {
-        if (iterNumStack.Count == 0)
+        if (iterNumBlockStack.Count == 0)
         {
             return;
         }
 
-        int iterNum = iterNumStack.Pop();
-        iterNumStack.Push(--iterNum);
-
-        // TODO: 변수 블록 숫자 감소
+        // 변수 블록의 숫자를 감소시킴
+        VariableBlock iterNumBlock = iterNumBlockStack.Pop();
+        int iterNum = iterNumBlock.GetInt() - 1;
+        iterNumBlock.SetInt(iterNum);
+        iterNumBlockStack.Push(iterNumBlock);
 
         if (iterNum > 0)
         {
@@ -109,7 +116,7 @@ public class IterationBlock : MonoBehaviour
         {
             // 반복이 끝났다면 반복문 빠져나옴
             _ = iterStartBlockStack.Pop();
-            _ = iterNumStack.Pop();
+            _ = iterNumBlockStack.Pop();
             ResetIteration();
             if (iterStartBlockStack.Count > 0)
             {
@@ -119,8 +126,26 @@ public class IterationBlock : MonoBehaviour
             nextBlock = blockActivation.GetNextBlock();
             if (nextBlock != null)
             {
-                nextBlock.ExecuteBlock();
+                StopAllCoroutines();
+                CurrentRoutine = StartCoroutine(ExecuteNextBlockWithDelay());
             }
+
+            // 변수 블록의 숫자를 다시 초기 값으로 설정
+            CurrentRoutine = StartCoroutine(ResetIterNum(iterNumBlock));
         }
+    }
+
+    // 다음 블록을 실행하기 전 ActiveDelay만큼 기다린다.
+    private IEnumerator ExecuteNextBlockWithDelay()
+    {
+        yield return new WaitForSeconds(blockActivation.ActiveDelay);
+        nextBlock.ExecuteBlock();
+    }
+
+    // ActiveDelay만큼 기다린 후 변수 블록의 숫자를 초기 값으로 설정한다.
+    private IEnumerator ResetIterNum(VariableBlock iterNumBlock)
+    {
+        yield return new WaitForSeconds(blockActivation.ActiveDelay);
+        iterNumBlock.SetDefaultInt();
     }
 }

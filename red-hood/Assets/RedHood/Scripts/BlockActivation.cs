@@ -9,7 +9,7 @@ public class BlockActivation : MonoBehaviour
     public Coroutine CurrentRoutine { private set; get; } = null;
 
     [Tooltip("블록의 실행 시간")]
-    [SerializeField] private float ActiveDelay = 1.5f;
+    public float ActiveDelay = 1.5f;
 
     private XRGrabInteractable block;
     private XRSocketInteractor socket;
@@ -85,10 +85,13 @@ public class BlockActivation : MonoBehaviour
     {
         if (iterBlock != null)
         {
-            iterBlock.SetIteration();
+            bool isValid = iterBlock.SetIteration();
             if (CompareTag(ITER_END_TAG))
             {
-                ActivateBlock();
+                if (isValid)
+                {
+                    ActivateBlock();
+                }
                 return;
             }
         }
