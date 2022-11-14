@@ -64,10 +64,10 @@ public class BlockActivation : MonoBehaviour
     {
         ActivateBlock();
 
-        yield return new WaitForSeconds(ActiveDelay);
-
         if (!popUpMessage.isActivated())
         {
+            yield return new WaitForSeconds(ActiveDelay);
+
             BlockActivation nextBlock = GetNextBlock();
             if (nextBlock != null)
             {

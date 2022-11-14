@@ -8,6 +8,11 @@ public class SandwichMission : MonoBehaviour
     private const string TOMATO = "Tomato";
 
     private static readonly string[] answer1 = { BREAD, LETTUCE, TOMATO, CHEESE, BREAD };
+    private static readonly string[] answer2 = { BREAD, LETTUCE, LETTUCE, LETTUCE,
+                                                TOMATO, TOMATO, TOMATO, CHEESE, CHEESE, CHEESE, BREAD };
+    private static readonly string[][] answer = { answer1, answer2, answer2 };
+
+    private static int stage = 0;
 
     public void CheckAnswer()
     {
@@ -21,12 +26,12 @@ public class SandwichMission : MonoBehaviour
             msg = gameObject.AddComponent<PopUpMessage>();
         }
 
-        if (questModels.Length < answer1.Length)
+        if (questModels.Length < answer[stage].Length)
         {
             text = "재료가 더 필요해요!";
             isCorrect = false;
         }
-        else if (questModels.Length > answer1.Length)
+        else if (questModels.Length > answer[stage].Length)
         {
             text = "재료가 너무 많이 들어갔어요!";
             isCorrect = false;
@@ -35,7 +40,7 @@ public class SandwichMission : MonoBehaviour
         {
             for (int i = 0; i < questModels.Length; i++)
             {
-                if (!questModels[i].name.StartsWith(answer1[i]))
+                if (!questModels[i].name.StartsWith(answer[stage][i]))
                 {
                     text = "재료의 순서가 달라요!";
                     isCorrect = false;
@@ -46,11 +51,17 @@ public class SandwichMission : MonoBehaviour
 
         if (isCorrect)
         {
+            // 정답인 경우, 정답을 알리는 메세지를 출력하고 모든 블록과 실행 결과를 제거
             msg.ActivateSuccessWindow();
+
+            //TODO: 다음 문제 설명창 활성화
+            msg.PlaySuccessSound();
+            stage++;
         }
         else
         {
             msg.ActivateErrorWindow(text);
+            msg.PlayFailureSound();
         }
     }
 }

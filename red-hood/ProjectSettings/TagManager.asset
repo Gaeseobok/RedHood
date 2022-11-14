@@ -14,7 +14,7 @@ TagManager:
   - CodingZone
   - IterationEnd
   - SuccessWindow
-  - ErrorWindow
+  - FailureWindow
   layers:
   - Default
   - TransparentFX
