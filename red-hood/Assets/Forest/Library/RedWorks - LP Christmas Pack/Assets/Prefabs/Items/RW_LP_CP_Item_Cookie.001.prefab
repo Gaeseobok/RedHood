@@ -1,19 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!64 &64798386164363612
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4328981133047580127}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: 20fe5a5be8d41174cbae1805bdea662f, type: 3}
 --- !u!1001 &4328981133047546751
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24,6 +10,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 20fe5a5be8d41174cbae1805bdea662f, type: 3}
       propertyPath: m_Name
       value: RW_LP_CP_Item_Cookie.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 20fe5a5be8d41174cbae1805bdea662f, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 20fe5a5be8d41174cbae1805bdea662f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -38,6 +28,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 20fe5a5be8d41174cbae1805bdea662f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 20fe5a5be8d41174cbae1805bdea662f, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -47,14 +41,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 20fe5a5be8d41174cbae1805bdea662f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 20fe5a5be8d41174cbae1805bdea662f, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 20fe5a5be8d41174cbae1805bdea662f, type: 3}
-      propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 20fe5a5be8d41174cbae1805bdea662f, type: 3}
@@ -77,7 +63,19 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 20fe5a5be8d41174cbae1805bdea662f, type: 3}
 --- !u!1 &4328981133047580127 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 100000, guid: 20fe5a5be8d41174cbae1805bdea662f,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 20fe5a5be8d41174cbae1805bdea662f, type: 3}
   m_PrefabInstance: {fileID: 4328981133047546751}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &2167102805625017002
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4328981133047580127}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.18862933, y: 0.027915496, z: 0.16909656}
+  m_Center: {x: 0.0017444139, y: 0.01216697, z: -0.010721455}
