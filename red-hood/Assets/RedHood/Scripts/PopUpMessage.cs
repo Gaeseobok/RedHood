@@ -13,7 +13,7 @@ public class PopUpMessage : MonoBehaviour
     private static AudioSource successAudio;
     private static AudioSource clearAudio;
 
-    private static Vector3 defaultScale = Vector3.one;
+    private static Vector3 defaultScale;
 
     private const float closeDelay = 5.0f;
 
@@ -29,6 +29,7 @@ public class PopUpMessage : MonoBehaviour
         {
             failureWindow = gameObject;
             failureAudio = gameObject.GetComponent<AudioSource>();
+            defaultScale = transform.localScale;
             gameObject.SetActive(false);
         }
         else if (CompareTag(SUCCESS_WINDOW))

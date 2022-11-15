@@ -109,7 +109,7 @@ public class BlockActivation : MonoBehaviour
     // 
     private void ConfirmCodes()
     {
-        if (gameObject.scene.name.Equals(TEST_SCENE))
+        if (gameObject.scene.name.Equals(HOME_SCENE))
         {
             SandwichMission component = gameObject.AddComponent<SandwichMission>();
             component.CheckAnswer();
