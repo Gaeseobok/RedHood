@@ -13,19 +13,26 @@ public class SoundActivation : MonoBehaviour
     [SerializeField] private AudioClip activatedSound;
 
     private AudioSource audioSource;
+    private AudioClip collisionSound;
     private XRSocketInteractor socket;
 
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        if (TryGetComponent(out audioSource))
+        {
+            collisionSound = audioSource.clip;
+        }
         socket = GetComponent<XRSocketInteractor>();
     }
 
-    //public void PlayHoldingSound()
-    //{
-    //    audioSource.clip = holdingSound;
-    //    audioSource.Play();
-    //}
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (audioSource != null)
+        {
+            audioSource.clip = collisionSound;
+            audioSource.Play();
+        }
+    }
 
     private void PlayAttachingSound()
     {

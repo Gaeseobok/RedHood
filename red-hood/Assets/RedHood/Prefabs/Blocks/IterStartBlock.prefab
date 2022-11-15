@@ -114,6 +114,7 @@ GameObject:
   - component: {fileID: 3044981321999296977}
   - component: {fileID: 8351096559997427260}
   - component: {fileID: -7755262873189823038}
+  - component: {fileID: 6010778205716408633}
   m_Layer: 6
   m_Name: IterStartBlock
   m_TagString: IterStartBlock
@@ -340,9 +341,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 7bef0064f8567430cac22499c6b93d4f, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -438,8 +439,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3183069a606a62047aa0f015e7a8dfce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attachingSound: {fileID: 8300000, guid: ce329a4adc24d422c8bccf49f8b74e11, type: 3}
-  activatedSound: {fileID: 8300000, guid: 379165f9cc85efd43aa2820c87e78777, type: 3}
+  attachingSound: {fileID: 8300000, guid: af66162561d2eed40ad49268cab318bb, type: 3}
+  activatedSound: {fileID: 8300000, guid: af66162561d2eed40ad49268cab318bb, type: 3}
 --- !u!114 &-7755262873189823038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -450,6 +451,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9899dc6c9eb8d649a8aefc4ff7a414e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6010778205716408633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3364299558983204888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59c5c27c6a201c944871be59ae66d816, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3508661216911195617

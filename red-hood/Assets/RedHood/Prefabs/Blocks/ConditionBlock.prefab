@@ -477,6 +477,7 @@ GameObject:
   - component: {fileID: 815810563448301411}
   - component: {fileID: 2777177306996172179}
   - component: {fileID: 8778550878396673008}
+  - component: {fileID: 6621149404894582892}
   m_Layer: 6
   m_Name: ConditionBlock
   m_TagString: Untagged
@@ -715,10 +716,10 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 7bef0064f8567430cac22499c6b93d4f, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
+  m_Volume: 0.7
+  m_Pitch: 1.1
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -813,8 +814,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3183069a606a62047aa0f015e7a8dfce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attachingSound: {fileID: 8300000, guid: 379165f9cc85efd43aa2820c87e78777, type: 3}
-  activatedSound: {fileID: 8300000, guid: 379165f9cc85efd43aa2820c87e78777, type: 3}
+  attachingSound: {fileID: 8300000, guid: d8d04c6f80a1140db85ede568dab1f51, type: 3}
+  activatedSound: {fileID: 8300000, guid: d8d04c6f80a1140db85ede568dab1f51, type: 3}
 --- !u!114 &8778550878396673008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -825,6 +826,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9899dc6c9eb8d649a8aefc4ff7a414e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6621149404894582892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2538373630515854112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59c5c27c6a201c944871be59ae66d816, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3651229319724433824

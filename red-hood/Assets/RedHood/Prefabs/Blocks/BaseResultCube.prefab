@@ -135,6 +135,10 @@ PrefabInstance:
       propertyPath: m_InteractionLayers.m_Bits
       value: 32
       objectReference: {fileID: 0}
+    - target: {fileID: 5604652011688719675, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6090249851108585557, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -183,6 +187,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7913339606128577629, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+      propertyPath: activatedSound
+      value: 
+      objectReference: {fileID: 8300000, guid: add2d69d7e7814947a64361159868172, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
 --- !u!4 &7647927713932690085 stripped
