@@ -1,15 +1,19 @@
 ﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit;
 
+[RequireComponent(typeof(AudioSource))]
 public class TeleportAreaWithFade : TeleportationArea
 {
     private FadeCanvas fadeCanvas = null;
+    private AudioSource audioSource;
 
     protected override void Awake()
     {
         base.Awake();
         fadeCanvas = FindObjectOfType<FadeCanvas>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     protected override void OnSelectEntered(SelectEnterEventArgs args)
@@ -17,35 +21,45 @@ public class TeleportAreaWithFade : TeleportationArea
         base.OnSelectEntered(args);
 
         if (teleportTrigger == TeleportTrigger.OnSelectEntered)
+        {
             StartCoroutine(FadeSequence(base.OnSelectEntered, args));
+        }
     }
 
     protected override void OnSelectExited(SelectExitEventArgs args)
     {
         if (teleportTrigger == TeleportTrigger.OnSelectExited)
+        {
             StartCoroutine(FadeSequence(base.OnSelectExited, args));
+        }
     }
 
     protected override void OnActivated(ActivateEventArgs args)
     {
         if (teleportTrigger == TeleportTrigger.OnActivated)
+        {
             StartCoroutine(FadeSequence(base.OnActivated, args));
+        }
     }
 
     protected override void OnDeactivated(DeactivateEventArgs args)
     {
         if (teleportTrigger == TeleportTrigger.OnDeactivated)
+        {
             StartCoroutine(FadeSequence(base.OnDeactivated, args));
+        }
     }
 
     private IEnumerator FadeSequence<T>(UnityAction<T> action, T args)
         where T : BaseInteractionEventArgs
     {
         fadeCanvas.StartFadeIn();
+        audioSource.PlayOneShot(audioSource.clip, 0.6f);
 
         yield return fadeCanvas.CurrentRoutine;
         action.Invoke(args);
 
+        audioSource.PlayOneShot(audioSource.clip, 0.6f);
         fadeCanvas.StartFadeOut();
     }
 }
