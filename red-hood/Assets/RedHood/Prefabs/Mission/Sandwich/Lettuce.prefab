@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5791036261138998615}
   - component: {fileID: 753106505312824108}
   - component: {fileID: -5252655589589318517}
-  - component: {fileID: 7768886543554335475}
+  - component: {fileID: -5041361932998331759}
   m_Layer: 0
   m_Name: Lettuce
   m_TagString: QuestModel
@@ -212,7 +212,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &7768886543554335475
+--- !u!114 &-5041361932998331759
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -221,6 +221,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 6366507735119711369}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cd45b7f905549d4e8b02e16acbfcf66, type: 3}
+  m_Script: {fileID: 11500000, guid: 3183069a606a62047aa0f015e7a8dfce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attachingSound: {fileID: 0}
+  activatedSound: {fileID: 0}
