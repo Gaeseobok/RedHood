@@ -5,8 +5,6 @@ using UnityEngine.XR.Interaction.Toolkit;
 // 떨어진 블록을 일정 시간 후 자동으로 씬에서 제거한다.
 public class DestroyUnselectedBlock : MonoBehaviour
 {
-    public Coroutine CurrentRoutine { private set; get; } = null;
-
     private XRGrabInteractable interactable;
     private MeshRenderer[] renderers;
     private Color[] defaultColors;
@@ -40,7 +38,7 @@ public class DestroyUnselectedBlock : MonoBehaviour
         }
         else if (time >= threshold)
         {
-            CurrentRoutine = StartCoroutine(DestroyObjectWithDelay(delay));
+            StartCoroutine(DestroyObjectWithDelay(delay));
             for (int i = 0; i < renderers.Length; i++)
             {
                 renderers[i].material.color = Color.Lerp(defaultColors[i], Color.clear, (time - threshold) / delay);

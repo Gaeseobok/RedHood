@@ -16,6 +16,7 @@ TagManager:
   - SuccessWindow
   - FailureWindow
   - ClearWindow
+  - DescriptionWindow
   layers:
   - Default
   - TransparentFX

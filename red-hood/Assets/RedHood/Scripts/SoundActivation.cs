@@ -3,9 +3,6 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class SoundActivation : MonoBehaviour
 {
-    //[Tooltip("블록을 잡을 때 재생되는 오디오 클립")]
-    //[SerializeField] private AudioClip holdingSound;
-
     [Tooltip("블록을 부착할 때 재생되는 오디오 클립")]
     [SerializeField] private AudioClip attachingSound;
 
@@ -27,10 +24,19 @@ public class SoundActivation : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        // 코드 블록 간의 충돌에는 효과음을 재생하지 않는다
+        if ((GetComponent<DestroyUnselectedBlock>() != null &&
+            collision.gameObject.GetComponent<DestroyUnselectedBlock>() != null) ||
+            collision.gameObject.CompareTag("CodingZone") || collision.gameObject.CompareTag("Player"))
+        {
+            return;
+        }
+
+        // 효과음 재생
         if (audioSource != null)
         {
             audioSource.clip = collisionSound;
-            audioSource.Play();
+            audioSource.PlayOneShot(audioSource.clip, 0.2f);
         }
     }
 

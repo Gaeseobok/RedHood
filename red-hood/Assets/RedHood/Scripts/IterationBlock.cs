@@ -69,7 +69,8 @@ public class IterationBlock : MonoBehaviour
             catch (InvalidOperationException)
             {
                 string text = "반복 시작 블록이 존재하지 않아요";
-                popUpMessage.ActivateErrorWindow(text);
+                popUpMessage.ActivateFailureWindow(text);
+                popUpMessage.PlayFailureSound();
                 ResetIteration();
                 return false;
             }
@@ -85,7 +86,8 @@ public class IterationBlock : MonoBehaviour
             else
             {
                 string text = "변수 블록이 존재하지 않아요";
-                popUpMessage.ActivateErrorWindow(text);
+                popUpMessage.ActivateFailureWindow(text);
+                popUpMessage.PlayFailureSound();
                 ResetIteration();
                 return false;
             }

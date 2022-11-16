@@ -7,21 +7,18 @@ public class SandwichMission : MonoBehaviour
     private const string LETTUCE = "Lettuce";
     private const string TOMATO = "Tomato";
 
-    private static readonly string[] stage1 = { BREAD, LETTUCE, TOMATO, CHEESE, BREAD };
-    private static readonly string[] stage2 = { BREAD, LETTUCE, TOMATO, CHEESE,
-                                                     LETTUCE, TOMATO, CHEESE,
-                                                     LETTUCE, TOMATO, CHEESE,BREAD };
-    private static readonly string[][] answer = { stage2 };
+    private static readonly string[] stage1 = { BREAD, LETTUCE, CHEESE, TOMATO, BREAD };
+    private static readonly string[] stage2 = { BREAD, LETTUCE, CHEESE, TOMATO,
+                                                     LETTUCE, CHEESE, TOMATO,
+                                                     LETTUCE, CHEESE, TOMATO, BREAD };
+    private static readonly string[] stage3 = { BREAD, TOMATO, CHEESE, CHEESE, CHEESE, LETTUCE,
+                                                       TOMATO, CHEESE, CHEESE, CHEESE, LETTUCE, BREAD };
+    private static readonly string[][] answer = { stage1, stage2, stage2, stage3 };
 
     private static int stage = 0;
 
     public void CheckAnswer()
     {
-        if (stage > answer.Length)
-        {
-            return;
-        }
-
         GameObject[] questModels = GameObject.FindGameObjectsWithTag("QuestModel");
 
         string text = "";
@@ -30,6 +27,13 @@ public class SandwichMission : MonoBehaviour
         if (!TryGetComponent(out PopUpMessage msg))
         {
             msg = gameObject.AddComponent<PopUpMessage>();
+        }
+
+        if (stage >= answer.Length)
+        {
+            msg.ActivateClearWindow();
+            msg.PlayClearSound();
+            return;
         }
 
         if (questModels.Length < answer[stage].Length)
@@ -57,7 +61,7 @@ public class SandwichMission : MonoBehaviour
 
         if (isCorrect)
         {
-            if (++stage == answer.Length)
+            if (++stage >= answer.Length)
             {
                 // 미션 클리어 시, 클리어를 알리는 메세지와 사운드 활성화
                 msg.ActivateClearWindow();
@@ -68,13 +72,18 @@ public class SandwichMission : MonoBehaviour
                 // 정답인 경우, 정답을 알리는 메세지와 사운드 활성화
                 msg.ActivateSuccessWindow();
                 msg.PlaySuccessSound();
-
-                //TODO: 다음 문제 설명창 활성화
             }
+
+            // 다음 문제 설명창 활성화
+            msg.SetDescWindow(stage - 1, false);
+            msg.SetDescWindow(stage, true);
+
+            ResetButton reset = gameObject.AddComponent<ResetButton>();
+            reset.DestroyBlocks();
         }
         else
         {
-            msg.ActivateErrorWindow(text);
+            msg.ActivateFailureWindow(text);
             msg.PlayFailureSound();
         }
     }

@@ -24,7 +24,8 @@ public class ConditionBlock : MonoBehaviour
         if (attach == null)
         {
             string text = "변수 블록이 존재하지 않아요";
-            popUpMessage.ActivateErrorWindow(text);
+            popUpMessage.ActivateFailureWindow(text);
+            popUpMessage.PlayFailureSound();
             return;
         }
 
@@ -41,7 +42,8 @@ public class ConditionBlock : MonoBehaviour
         else
         {
             string text = "분기 블록이 존재하지 않아요";
-            popUpMessage.ActivateErrorWindow(text);
+            popUpMessage.ActivateFailureWindow(text);
+            popUpMessage.PlayFailureSound();
         }
     }
 

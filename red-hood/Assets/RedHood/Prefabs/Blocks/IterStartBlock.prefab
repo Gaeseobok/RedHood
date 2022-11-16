@@ -151,7 +151,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3364299558983204888}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 30
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -306,7 +306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95b4577e9560ab34aadbc1bcff417945, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActiveDelay: 1.5
+  ActiveDelay: 0.8
 --- !u!114 &7023512274402337075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,7 +343,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 7bef0064f8567430cac22499c6b93d4f, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.7
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
