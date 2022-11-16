@@ -12,7 +12,11 @@ public class ResetButton : MonoBehaviour
     public void OnResetButtonPress()
     {
         DestroyResults();
+        DestroyBlocks();
+    }
 
+    internal void DestroyBlocks()
+    {
         BlockActivation block = startBlock.GetNextBlock();
         if (block != null)
         {

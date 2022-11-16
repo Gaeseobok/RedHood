@@ -35,7 +35,8 @@ public class BranchBlock : MonoBehaviour
         if (upAttach == null || downAttach == null)
         {
             string text = "결과 블록이 존재하지 않아요";
-            popUpMessage.ActivateErrorWindow(text);
+            popUpMessage.ActivateFailureWindow(text);
+            popUpMessage.PlayFailureSound();
             return;
         }
 
@@ -48,7 +49,8 @@ public class BranchBlock : MonoBehaviour
         if (isUpTrue == isDownTrue)
         {
             string text = "모든 종류의 결과 블록을 붙여주세요";
-            popUpMessage.ActivateErrorWindow(text);
+            popUpMessage.ActivateFailureWindow(text);
+            popUpMessage.PlayFailureSound();
             return;
         }
 

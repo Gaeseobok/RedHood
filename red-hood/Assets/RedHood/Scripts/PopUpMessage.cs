@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -9,19 +10,42 @@ public class PopUpMessage : MonoBehaviour
     private static GameObject failureWindow;
     private static GameObject successWindow;
     private static GameObject clearWindow;
+    private static GameObject[] descWindows = null;
+
     private static AudioSource failureAudio;
     private static AudioSource successAudio;
     private static AudioSource clearAudio;
 
-    private static Vector3 defaultScale = Vector3.one;
+    private static Vector3 defaultScale;
 
     private const float closeDelay = 5.0f;
 
     private const string FAILURE_WINDOW = "FailureWindow";
     private const string SUCCESS_WINDOW = "SuccessWindow";
     private const string CLEAR_WINDOW = "ClearWindow";
+    private const string DESC_WINDOW = "DescWindow_M1-";
 
     private const string OPEN_GIFT_ANIM = "OpenGift";
+
+    private const int descWindowNum = 5;
+
+    private void Awake()
+    {
+        if (descWindows != null)
+        {
+            return;
+        }
+
+        descWindows = new GameObject[descWindowNum];
+        for (int i = 0; i < descWindowNum; i++)
+        {
+            string name = DESC_WINDOW + Convert.ToString(i + 1);
+            descWindows[i] = GameObject.Find(name);
+            descWindows[i].SetActive(false);
+        }
+
+        descWindows[0].SetActive(true);
+    }
 
     private void Start()
     {
@@ -29,6 +53,7 @@ public class PopUpMessage : MonoBehaviour
         {
             failureWindow = gameObject;
             failureAudio = gameObject.GetComponent<AudioSource>();
+            defaultScale = transform.localScale;
             gameObject.SetActive(false);
         }
         else if (CompareTag(SUCCESS_WINDOW))
@@ -50,7 +75,7 @@ public class PopUpMessage : MonoBehaviour
         return failureWindow.activeSelf || successWindow.activeSelf;
     }
 
-    internal void ActivateErrorWindow(string text = null)
+    internal void ActivateFailureWindow(string text = null)
     {
         StopAllCoroutines();
 
@@ -116,5 +141,10 @@ public class PopUpMessage : MonoBehaviour
     internal void PlayClearSound()
     {
         clearAudio.Play();
+    }
+
+    internal void SetDescWindow(int number, bool state)
+    {
+        descWindows[number].SetActive(state);
     }
 }

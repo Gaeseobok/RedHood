@@ -1,19 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!64 &64532207710807864
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4285107846236540292}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: ea1f0d2acce3ee644b396d38644c05bf, type: 3}
 --- !u!1001 &4285107846236506916
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26,16 +12,24 @@ PrefabInstance:
       value: RW_LP_CP_Item_BurningCandle.003
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ea1f0d2acce3ee644b396d38644c05bf, type: 3}
-      propertyPath: m_LocalPosition.x
+      propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: ea1f0d2acce3ee644b396d38644c05bf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.121702194
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ea1f0d2acce3ee644b396d38644c05bf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.00021475554
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ea1f0d2acce3ee644b396d38644c05bf, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.23842597
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: ea1f0d2acce3ee644b396d38644c05bf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ea1f0d2acce3ee644b396d38644c05bf, type: 3}
       propertyPath: m_LocalRotation.x
@@ -48,14 +42,6 @@ PrefabInstance:
     - target: {fileID: 400000, guid: ea1f0d2acce3ee644b396d38644c05bf, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: ea1f0d2acce3ee644b396d38644c05bf, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: ea1f0d2acce3ee644b396d38644c05bf, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ea1f0d2acce3ee644b396d38644c05bf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -77,7 +63,19 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: ea1f0d2acce3ee644b396d38644c05bf, type: 3}
 --- !u!1 &4285107846236540292 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 100000, guid: ea1f0d2acce3ee644b396d38644c05bf,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 100000, guid: ea1f0d2acce3ee644b396d38644c05bf, type: 3}
   m_PrefabInstance: {fileID: 4285107846236506916}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &7098213321294270797
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4285107846236540292}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0900743, y: 0.41661948, z: 0.083839536}
+  m_Center: {x: -0.0017989874, y: 0.20830306, z: 0.0021992326}

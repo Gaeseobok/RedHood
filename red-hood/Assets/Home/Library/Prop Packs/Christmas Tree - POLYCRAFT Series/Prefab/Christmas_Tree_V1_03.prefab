@@ -11,7 +11,11 @@ GameObject:
   - component: {fileID: 473364}
   - component: {fileID: 3373908}
   - component: {fileID: 2393326}
-  - component: {fileID: 6467790}
+  - component: {fileID: 842403175487915701}
+  - component: {fileID: 4813663198013060121}
+  - component: {fileID: 3802237686342553796}
+  - component: {fileID: 8676114144842042481}
+  - component: {fileID: 6073090134208823856}
   m_Layer: 0
   m_Name: Christmas_Tree_V1_03
   m_TagString: Untagged
@@ -28,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 198084}
   m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -84,8 +88,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6467790
-MeshCollider:
+--- !u!65 &842403175487915701
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -94,7 +98,58 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 703f1a4cdc0c9f24e9c845016c1e3438, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0.6481274, z: 2}
+  m_Center: {x: -0.003192226, y: 0.28185964, z: -0.0015853841}
+--- !u!65 &4813663198013060121
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198084}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.65, y: 0.52451926, z: 1.65}
+  m_Center: {x: -0.003192226, y: 0.86899674, z: -0.012404496}
+--- !u!65 &3802237686342553796
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198084}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.2, y: 0.5708726, z: 1.2}
+  m_Center: {x: -0.003192226, y: 1.4175065, z: 0.003288388}
+--- !u!65 &8676114144842042481
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198084}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.7, y: 0.67627746, z: 0.7}
+  m_Center: {x: -0.003192226, y: 2.057345, z: -0.027674472}
+--- !u!65 &6073090134208823856
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198084}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.42060518, y: 1.15973, z: 0.3359922}
+  m_Center: {x: -0.0031927722, y: 2.9771955, z: 0.004413407}
