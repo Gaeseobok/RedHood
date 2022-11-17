@@ -42,7 +42,7 @@ public class HighStrikerHit : MonoBehaviour
         {
             barRenderers[i] = barsObject.GetChild(i).GetComponent<MeshRenderer>();
         }
-        defaultBarMaterial = GetComponent<MeshRenderer>().material;
+        defaultBarMaterial = barRenderers[0].material;
 
         audioSource = GetComponent<AudioSource>();
     }
@@ -90,7 +90,7 @@ public class HighStrikerHit : MonoBehaviour
         //double force = Math.Sqrt(Math.Pow(collisionForce.x, 2) + Math.Pow(collisionForce.y, 2) + Math.Pow(collisionForce.z, 2));
         //score = (float)force / maxScore;
 
-        score = collision.relativeVelocity.magnitude / 10.0f;
+        score = collision.relativeVelocity.magnitude;
         audioSource.PlayOneShot(collisionSound, score * 0.01f);
 
         Vector3 gauge;

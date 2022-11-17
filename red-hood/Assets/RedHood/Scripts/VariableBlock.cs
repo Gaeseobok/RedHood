@@ -58,11 +58,12 @@ public class VariableBlock : MonoBehaviour
         // 유저가 내려친 힘 값을 Score Cylinder에 저장
         score = value;
 
-        GameObject scoreCylinder = GameObject.FindGameObjectWithTag(SCORE_CYLINDER);
-        if (scoreCylinder != null)
+        GameObject[] scoreCylinder = GameObject.FindGameObjectsWithTag(SCORE_CYLINDER);
+        for (int i = 0; i < scoreCylinder.Length; i++)
         {
-            TMP_Text scoreTmp = scoreCylinder.GetComponent<TMP_Text>();
-            scoreTmp.SetText(Convert.ToString(value));
+            TMP_Text scoreTmp = scoreCylinder[i].GetComponentInChildren<TMP_Text>();
+            int text = Convert.ToInt16(value);
+            scoreTmp.SetText(Convert.ToString(text));
         }
     }
 

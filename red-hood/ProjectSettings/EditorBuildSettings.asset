@@ -5,13 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Forest/Scenes/ForestScene.unity
     guid: 63d51ed269b4d47c1b69da315050c70e
   - enabled: 0
     path: Assets/Grandma/Scene/GrandmaScene.unity
     guid: 9ce53a23b329044a392022163ff9932c
-  - enabled: 0
+  - enabled: 1
     path: Assets/Home/Scenes/CottageScene.unity
     guid: 5e802dec2ee5b488db7ff3b6ec24c37f
   - enabled: 0
