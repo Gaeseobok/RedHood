@@ -17,6 +17,7 @@ public class BlockActivation : MonoBehaviour
     private PopUpMessage popUpMessage;
     private new ParticleSystem particleSystem;
     private IterationBlock iterBlock;
+    private ConditionBlock conditionBlock;
     private BranchBlock branchBlock;
 
     private const string ITER_END_TAG = "IterEndBlock";
@@ -33,6 +34,7 @@ public class BlockActivation : MonoBehaviour
         popUpMessage = GetComponent<PopUpMessage>();
         particleSystem = GetComponentInChildren<ParticleSystem>();
         iterBlock = GetComponent<IterationBlock>();
+        conditionBlock = GetComponent<ConditionBlock>();
         branchBlock = GetComponent<BranchBlock>();
     }
 
@@ -60,9 +62,12 @@ public class BlockActivation : MonoBehaviour
         return nextBlock == null ? null : ((XRGrabInteractable)nextBlock).GetComponent<BlockActivation>();
     }
 
-    private IEnumerator ExecuteNextBlock()
+    internal IEnumerator ExecuteNextBlock()
     {
-        ActivateBlock();
+        if (conditionBlock == null)
+        {
+            ActivateBlock();
+        }
 
         if (!popUpMessage.isActivated())
         {
@@ -75,6 +80,7 @@ public class BlockActivation : MonoBehaviour
             }
             else
             {
+                // 블록을 끝까지 실행했으면 정답을 체크한다.
                 ConfirmCodes();
             }
         }
@@ -95,7 +101,7 @@ public class BlockActivation : MonoBehaviour
                 return;
             }
         }
-        if (branchBlock != null)
+        if (conditionBlock != null || branchBlock != null)
         {
             ActivateBlock();
             return;
@@ -106,14 +112,20 @@ public class BlockActivation : MonoBehaviour
         CurrentRoutine = StartCoroutine(ExecuteNextBlock());
     }
 
-    // 
+    // 미션에 따라 정답을 체크한다.
     private void ConfirmCodes()
     {
         if (gameObject.scene.name.Equals(HOME_SCENE))
         {
-            SandwichMission component = gameObject.AddComponent<SandwichMission>();
-            component.CheckAnswer();
-            Destroy(component);
+            SandwichMission sandwichMission = gameObject.AddComponent<SandwichMission>();
+            sandwichMission.CheckAnswer();
+            Destroy(sandwichMission);
+        }
+        else if (gameObject.scene.name.Equals(FOREST_SCENE))
+        {
+            HighStrikerMission highStrikerMission = gameObject.AddComponent<HighStrikerMission>();
+            highStrikerMission.CheckAnswer();
+            Destroy(highStrikerMission);
         }
     }
 }

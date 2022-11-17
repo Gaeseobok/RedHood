@@ -80,6 +80,7 @@ public class SandwichMission : MonoBehaviour
 
             ResetButton reset = gameObject.AddComponent<ResetButton>();
             reset.DestroyBlocks();
+            Destroy(reset);
         }
         else
         {

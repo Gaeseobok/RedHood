@@ -17,6 +17,9 @@ TagManager:
   - FailureWindow
   - ClearWindow
   - DescriptionWindow
+  - Left
+  - Right
+  - ScoreCylinder
   layers:
   - Default
   - TransparentFX
