@@ -10,6 +10,10 @@ TagManager:
   - TrueCube
   - FalseCube
   - IterationStart
+  - Down
+  - Up
+  - RIght
+  - Left
   layers:
   - Default
   - TransparentFX
