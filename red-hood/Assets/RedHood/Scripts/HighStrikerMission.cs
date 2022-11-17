@@ -84,8 +84,8 @@ public class HighStrikerMission : MonoBehaviour
             msg.PlayFailureSound();
         }
 
-        HighStrikerHit hit = gameObject.AddComponent<HighStrikerHit>();
-        hit.ResetForce();
-        Destroy(hit);
+        HighStrikerHit highStrikerHit = gameObject.AddComponent<HighStrikerHit>();
+        highStrikerHit.ResetScore();
+        Destroy(highStrikerHit);
     }
 }

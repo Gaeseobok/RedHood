@@ -2754,7 +2754,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0cc0b75cd309c74d80d8e4ae430f804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gauge: {fileID: 288533039458306395}
+  gaugeObject: {fileID: 288533039458306395}
   activatedBarMaterial: {fileID: 2100000, guid: 690e090cf858a4fba940bd635d2daab0, type: 2}
   translateDuration: 4
   collisionSound: {fileID: 8300000, guid: 0964d3a8cdd984e40b774466099f1905, type: 3}

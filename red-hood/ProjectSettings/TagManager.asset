@@ -19,6 +19,7 @@ TagManager:
   - DescriptionWindow
   - Left
   - Right
+  - ScoreCylinder
   layers:
   - Default
   - TransparentFX

@@ -12,6 +12,8 @@ public class VariableBlock : MonoBehaviour
     private int defaultNum;
     private static float score = 0.0f;
 
+    private const string SCORE_CYLINDER = "ScoreCylinder";
+
     private void Start()
     {
         interactable = GetComponent<XRGrabInteractable>();
@@ -45,16 +47,23 @@ public class VariableBlock : MonoBehaviour
         tmp.SetText(Convert.ToString(num));
     }
 
+    public float GetScore()
+    {
+        return score;
+    }
+
     // 변수를 저장한다
     public void SetScore(float value)
     {
         // 유저가 내려친 힘 값을 Score Cylinder에 저장
         score = value;
-    }
 
-    public float GetScore()
-    {
-        return score;
+        GameObject scoreCylinder = GameObject.FindGameObjectWithTag(SCORE_CYLINDER);
+        if (scoreCylinder != null)
+        {
+            TMP_Text scoreTmp = scoreCylinder.GetComponent<TMP_Text>();
+            scoreTmp.SetText(Convert.ToString(value));
+        }
     }
 
     public bool IsSelectedBySocket()

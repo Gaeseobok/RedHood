@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -6,7 +5,7 @@ using UnityEngine;
 public class HighStrikerHit : MonoBehaviour
 {
     [Tooltip("하이 스트라이커의 게이지 오브젝트")]
-    [SerializeField] private Transform gauge;
+    [SerializeField] private Transform gaugeObject;
 
     [Tooltip("활성화된 바의 머티리얼(게이지가 일정 점수를 넘어가면 해당 점수를 나타내는 바가 활성화된다)")]
     [SerializeField] private Material activatedBarMaterial;
@@ -19,17 +18,18 @@ public class HighStrikerHit : MonoBehaviour
 
     //private const float floor = 5000f;
     //private const float ceiling = 700000f;
-    private const float maxScore = 7000f;
-    private const float minGauge = 0.1f;
-    private const float maxGauge = 1.1f;
+    private const float maxScore = 1000000f;
+    private Vector3 minGauge = new(0.1f, 0.1f, 0.08f);
+    private Vector3 maxGauge = new(1.1f, 0.1f, 0.08f);
 
-    private static float force = 0.0f;
-    private float curX;
+    private static float score = 0.0f;
 
-    private static readonly float[] scaleBounds = { 0.16f, 0.39f, 0.62f, 0.83f };
+    private readonly float[] scaleBounds = { 0.16f, 0.39f, 0.62f, 0.83f };
+    private Vector3 pressed = new(0f, 0.1f, 0f);
+    private Vector3 released = new(0f, 0.2f, 0f);
 
-    private static MeshRenderer[] barRenderers = new MeshRenderer[4];
-    private static Material defaultBarMaterial;
+    private static readonly MeshRenderer[] barRenderers = new MeshRenderer[4];
+    private Material defaultBarMaterial;
     private AudioSource audioSource;
 
     private const string GAUGE_BARS = "HighStrikerGaugeBars";
@@ -45,30 +45,20 @@ public class HighStrikerHit : MonoBehaviour
         defaultBarMaterial = GetComponent<MeshRenderer>().material;
 
         audioSource = GetComponent<AudioSource>();
-
-        curX = minGauge;
     }
 
-    private void Update()
-    {
-        if (transform.localPosition.y > 0.2)
-        {
-            transform.localPosition = new Vector3(0f, 0.2f, 0f);
-        }
-        else if (transform.localPosition.y < 0.1)
-        {
-            transform.localPosition = new Vector3(0f, 0.1f, 0f);
-        }
-    }
-
-    private IEnumerator TranslateScaleX(float x)
+    private IEnumerator TranslateScaleX(Vector3 gauge)
     {
         float time = 0.0f;
 
         while (time < translateDuration)
         {
-            Vector3 newScale = Vector3.Lerp(new(minGauge, 0.1f, 0.08f), new((float)x, 0.1f, 0.08f), time / translateDuration);
-            gauge.transform.localScale = newScale;
+            // 게이지 바 크기 변경
+            Vector3 newScale = Vector3.Lerp(minGauge, gauge, time / translateDuration);
+            gaugeObject.transform.localScale = newScale;
+
+            // 버튼 위치 원래대로 변경
+            transform.localPosition = Vector3.Lerp(pressed, released, time / translateDuration);
 
             time += Time.deltaTime;
 
@@ -76,66 +66,79 @@ public class HighStrikerHit : MonoBehaviour
             {
                 barRenderers[i].material = newScale.x >= scaleBounds[i] ? activatedBarMaterial : defaultBarMaterial;
             }
-
             yield return null;
         }
 
+        // 점수 변수 설정
         VariableBlock variable = gameObject.AddComponent<VariableBlock>();
-        variable.SetScore((x - minGauge) * 500);
+        variable.SetScore(score * 500);
         Destroy(variable);
     }
 
-    private void SetGaugeScaleX(float x)
+    private IEnumerator OnSmashButton(Collision collision)
     {
-        Debug.Log($"현재 x: {curX}, new x: {x}");
-        if (true)
-        {
-            //curX = x;
+        float time = 0.0f;
 
-            StopAllCoroutines();
-            StartCoroutine(TranslateScaleX(x));
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (!collision.gameObject.CompareTag(QUEST_MODEL_TAG) || force != 0.0f)
+        while (time < 0.1f)
         {
-            return;
+            transform.localPosition = Vector3.Lerp(released, pressed, time / 0.5f);
+            time += Time.deltaTime;
+            yield return null;
         }
 
-        Vector3 collisionForce = collision.impulse / Time.fixedDeltaTime;
-        double p = Math.Sqrt(Math.Pow(collisionForce.x, 2) + Math.Pow(collisionForce.y, 2) + Math.Pow(collisionForce.z, 2));
-        force = (float)p / maxScore;
-        audioSource.PlayOneShot(collisionSound, force * 0.3f);
+        //Vector3 collisionForce = collision.impulse / Time.fixedDeltaTime;
+        //double force = Math.Sqrt(Math.Pow(collisionForce.x, 2) + Math.Pow(collisionForce.y, 2) + Math.Pow(collisionForce.z, 2));
+        //score = (float)force / maxScore;
 
-        Debug.Log("force: " + force + "\np: " + p);
+        score = collision.relativeVelocity.magnitude / 10.0f;
+        audioSource.PlayOneShot(collisionSound, score * 0.01f);
 
-        float x;
+        Vector3 gauge;
 
-        if (force < 0.1f)
+        if (score < 0.1f)
         {
-            x = minGauge;
+            gauge = minGauge;
+            score = 0.1f;
         }
-        else if (force >= 1.0f)
+        else if (score >= 1.0f)
         {
             audioSource.Play();
-            x = maxGauge;
+            gauge = maxGauge;
+            score = 1.0f;
         }
         else
         {
             audioSource.Play();
-            x = force + minGauge;
+            gauge = minGauge;
+            gauge.x += score;
         }
 
         StopAllCoroutines();
-        StartCoroutine(TranslateScaleX(x));
+        _ = StartCoroutine(TranslateScaleX(gauge));
 
         Destroy(collision.gameObject, translateDuration);
     }
 
-    public void ResetForce()
+    private void OnCollisionEnter(Collision collision)
     {
-        force = 0.0f;
+        if (collision.gameObject.CompareTag(QUEST_MODEL_TAG) && score == 0.0f)
+        {
+            StopAllCoroutines();
+            _ = StartCoroutine(OnSmashButton(collision));
+        }
+    }
+
+    public void ResetScore()
+    {
+        score = 0.0f;
+        //gaugeObject.transform.localScale = minGauge;
+        for (int i = 0; i < barRenderers.Length; i++)
+        {
+            barRenderers[i].material = defaultBarMaterial;
+        }
+
+        VariableBlock variable = gameObject.AddComponent<VariableBlock>();
+        variable.SetScore(0.0f);
+        Destroy(variable);
     }
 }

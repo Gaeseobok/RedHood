@@ -17,6 +17,7 @@ public class BlockActivation : MonoBehaviour
     private PopUpMessage popUpMessage;
     private new ParticleSystem particleSystem;
     private IterationBlock iterBlock;
+    private ConditionBlock conditionBlock;
     private BranchBlock branchBlock;
 
     private const string ITER_END_TAG = "IterEndBlock";
@@ -33,6 +34,7 @@ public class BlockActivation : MonoBehaviour
         popUpMessage = GetComponent<PopUpMessage>();
         particleSystem = GetComponentInChildren<ParticleSystem>();
         iterBlock = GetComponent<IterationBlock>();
+        conditionBlock = GetComponent<ConditionBlock>();
         branchBlock = GetComponent<BranchBlock>();
     }
 
@@ -60,9 +62,12 @@ public class BlockActivation : MonoBehaviour
         return nextBlock == null ? null : ((XRGrabInteractable)nextBlock).GetComponent<BlockActivation>();
     }
 
-    private IEnumerator ExecuteNextBlock()
+    internal IEnumerator ExecuteNextBlock()
     {
-        ActivateBlock();
+        if (conditionBlock == null)
+        {
+            ActivateBlock();
+        }
 
         if (!popUpMessage.isActivated())
         {
@@ -96,7 +101,7 @@ public class BlockActivation : MonoBehaviour
                 return;
             }
         }
-        if (branchBlock != null)
+        if (conditionBlock != null || branchBlock != null)
         {
             ActivateBlock();
             return;

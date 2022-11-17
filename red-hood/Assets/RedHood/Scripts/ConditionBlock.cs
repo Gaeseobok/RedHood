@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -31,7 +32,20 @@ public class ConditionBlock : MonoBehaviour
 
         VariableBlock intVar = ((XRGrabInteractable)attach).GetComponent<VariableBlock>();
 
-        bool condition = intVar.GetScore() > intVar.GetInt();
+        StopAllCoroutines();
+        StartCoroutine(WaitForScore(intVar));
+    }
+
+    private IEnumerator WaitForScore(VariableBlock variable)
+    {
+        while (variable.GetScore() == 0.0f)
+        {
+            yield return null;
+        }
+
+        bool condition = variable.GetScore() > variable.GetInt();
+
+        Debug.Log(variable.GetScore() + " > " + variable.GetInt() + " ? " + condition);
 
         BlockActivation nextBlock = blockActivation.GetNextBlock();
 
@@ -45,6 +59,8 @@ public class ConditionBlock : MonoBehaviour
             popUpMessage.ActivateFailureWindow(text);
             popUpMessage.PlayFailureSound();
         }
-    }
 
+        StopAllCoroutines();
+        StartCoroutine(blockActivation.ExecuteNextBlock());
+    }
 }
