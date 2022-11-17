@@ -91,6 +91,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: FalseCube
       objectReference: {fileID: 0}
+    - target: {fileID: 6101027379133165531, guid: 64cb949e90d53194484ce7d6b65ba6ba, type: 3}
+      propertyPath: m_InteractionLayers.m_Bits
+      value: 132
+      objectReference: {fileID: 0}
     - target: {fileID: 6262555955514790652, guid: 64cb949e90d53194484ce7d6b65ba6ba, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

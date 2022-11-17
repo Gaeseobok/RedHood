@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 9204960179983781374}
   m_Layer: 0
   m_Name: Hammer
-  m_TagString: Untagged
+  m_TagString: QuestModel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,7 +131,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7957796827298215147}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.085099615, y: 0.117675066, z: 0.98934734, w: 0.010125477}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.22, y: 0.24, z: 0.22}
   m_ConstrainProportionsScale: 0
@@ -140,7 +140,7 @@ Transform:
   - {fileID: 6160259000064716356}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -13.363, y: 10.109, z: 177.64}
 --- !u!33 &7957796827299113195
 MeshFilter:
   m_ObjectHideFlags: 0

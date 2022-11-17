@@ -235,7 +235,7 @@ MonoBehaviour:
   m_text: "\uC2DC\uC791"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 811a5d873e0d9ad449a6db23dcd6814d, type: 2}
-  m_sharedMaterial: {fileID: 3695037899403299564, guid: 811a5d873e0d9ad449a6db23dcd6814d, type: 2}
+  m_sharedMaterial: {fileID: -1093037020909844577, guid: 811a5d873e0d9ad449a6db23dcd6814d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -313,6 +313,22 @@ PrefabInstance:
       value: StartCube
       objectReference: {fileID: 0}
     - target: {fileID: 4906587249469278423, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+      propertyPath: m_ThrowOnDetach
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4906587249469278423, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+      propertyPath: m_TrackPosition
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4906587249469278423, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+      propertyPath: m_TrackRotation
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4906587249469278423, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+      propertyPath: m_RetainTransformParent
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4906587249469278423, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
       propertyPath: m_InteractionLayers.m_Bits
       value: 0
       objectReference: {fileID: 0}
@@ -383,6 +399,10 @@ PrefabInstance:
     - target: {fileID: 7691551302503377677, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
       propertyPath: m_UseGravity
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7691551302503377677, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
+      propertyPath: m_Constraints
+      value: 126
       objectReference: {fileID: 0}
     - target: {fileID: 7691551302503377677, guid: a1e87d90831d48e4393958120610f6a6, type: 3}
       propertyPath: m_IsKinematic

@@ -23,11 +23,16 @@ public class PopUpMessage : MonoBehaviour
     private const string FAILURE_WINDOW = "FailureWindow";
     private const string SUCCESS_WINDOW = "SuccessWindow";
     private const string CLEAR_WINDOW = "ClearWindow";
-    private const string DESC_WINDOW = "DescWindow_M1-";
+    private const string DESC_WINDOW = "DescWindow_M";
 
     private const string OPEN_GIFT_ANIM = "OpenGift";
 
-    private const int descWindowNum = 5;
+    private const string TEST_SCENE = "BoardTestScene";
+    private const string HOME_SCENE = "CottageScene";
+    private const string FOREST_SCENE = "ForestScene";
+
+    private const int m1DescWindowNum = 5;
+    private const int m2DescWindowNum = 4;
 
     private void Awake()
     {
@@ -36,15 +41,29 @@ public class PopUpMessage : MonoBehaviour
             return;
         }
 
-        descWindows = new GameObject[descWindowNum];
-        for (int i = 0; i < descWindowNum; i++)
+        if (gameObject.scene.name == HOME_SCENE)
         {
-            string name = DESC_WINDOW + Convert.ToString(i + 1);
-            descWindows[i] = GameObject.Find(name);
-            descWindows[i].SetActive(false);
+            descWindows = new GameObject[m1DescWindowNum];
+            for (int i = 0; i < m1DescWindowNum; i++)
+            {
+                string name = DESC_WINDOW + "1-" + Convert.ToString(i + 1);
+                descWindows[i] = GameObject.Find(name);
+                descWindows[i].SetActive(false);
+            }
+            descWindows[0].SetActive(true);
         }
 
-        descWindows[0].SetActive(true);
+        if (gameObject.scene.name == FOREST_SCENE)
+        {
+            descWindows = new GameObject[m2DescWindowNum];
+            for (int i = 0; i < m2DescWindowNum; i++)
+            {
+                string name = DESC_WINDOW + "2-" + Convert.ToString(i + 1);
+                descWindows[i] = GameObject.Find(name);
+                descWindows[i].SetActive(false);
+            }
+            descWindows[0].SetActive(true);
+        }
     }
 
     private void Start()
