@@ -8,6 +8,8 @@ using Random=UnityEngine.Random;
 
 public class GenerateCube : MonoBehaviour
 {
+    public Coroutine CurrentRoutine { private set; get; } = null;
+
     public GameObject Sockets;
     internal XRSocketInteractor [] SocketAttach;
 
@@ -64,11 +66,12 @@ public class GenerateCube : MonoBehaviour
     {
         if(socketIndex == 8)
         {
-            ActivateAnswer();
+            StopAllCoroutines();
+            CurrentRoutine = StartCoroutine(ActivateAnswer());
             socketIndex++;
         }
     }
-    
+
     // void MoveToObstacle(Transform obstacle)
     // {
     //     float step = speed * Time.deltaTime;
@@ -114,22 +117,10 @@ public class GenerateCube : MonoBehaviour
         }
     }
 
-    void ActivateAnswer()
+    IEnumerator ActivateAnswer()
     {
         for(int i = 0; i<8; i++)
         {
-            if(answers[i])
-            {
-                Debug.Log(i + "answer correct");
-                successWindows[i].enabled = true;
-            }
-            else
-            {
-                Debug.Log(i + "answer wrong");
-                errorWindows[i].enabled = true;
-                StartCoroutine(CamShake(2.0f, 4.0f));
-            }
-
             if(SocketAttach[i].CompareTag("Up"))
             {
                 ObstacleUp();
@@ -147,13 +138,26 @@ public class GenerateCube : MonoBehaviour
                 ObstacleRight();
             }
 
-            StartCoroutine(MakeDelay());
+            if(answers[i])
+            {
+                Debug.Log(i + "answer correct");
+                successWindows[i].enabled = true;
+            }
+            else
+            {
+                Debug.Log(i + "answer wrong");
+                errorWindows[i].enabled = true;
+                //StopAllCoroutines();
+                //CurrentRoutine = StartCoroutine(CamShake(2.0f, 4.0f));
+            }
+
+            yield return new WaitForSeconds(2.0f);
         }
     }
 
     IEnumerator CamShake(float duration, float magnitude)
     {
-        Vector3 orignalPosition = transform.position;
+        Vector3 orignalPosition = Camera.main.transform.position;
         float elapsed = 0f;
         
         while (elapsed < duration)
@@ -166,23 +170,11 @@ public class GenerateCube : MonoBehaviour
         }
         Camera.main.transform.position = orignalPosition;
     }
-    
-    // private void OnTriggerEnter(Collider other)
-    // {
-    //     colliderIndex++;
-    //     ActivateAnswer(colliderIndex);
-    //     Debug.Log(colliderIndex + "Collided");
-    // }
-
-    IEnumerator MakeDelay()
-    {
-        yield return new WaitForSeconds(30f);
-    }
 
     public void ObstacleUp()
     {
         Vector3 cameraPosition = Camera.main.transform.position;
-        cameraPosition += new Vector3(2f,-2f,2f);
+        cameraPosition += new Vector3(2f,-2f,5f);
         Quaternion obstacleRotation = Quaternion.Euler(-17.718f, 109.998f, 0);
         GameObject obstacle = Instantiate(upObstacle, cameraPosition, obstacleRotation);
         obstacle.transform.localScale = new Vector3(1.5f,0.7f,1.5f);
@@ -192,7 +184,7 @@ public class GenerateCube : MonoBehaviour
     public void ObstacleDown()
     {
         Vector3 cameraPosition = Camera.main.transform.position;
-        cameraPosition += new Vector3(1.5f,-0.8f,2f);
+        cameraPosition += new Vector3(1.5f,-0.8f,5f);
         Quaternion obstacleRotation = Quaternion.Euler(0f, 0f, 90f);
         GameObject obstacle = Instantiate(downObstacle, cameraPosition, obstacleRotation);
         obstacle.transform.localScale = new Vector3(1.3f,1.3f,1.3f);
@@ -202,7 +194,7 @@ public class GenerateCube : MonoBehaviour
     public void ObstacleLeft()
     {
         Vector3 cameraPosition = Camera.main.transform.position;
-        cameraPosition += new Vector3(-0.8f,-1.6f,2f);
+        cameraPosition += new Vector3(-0.8f,-2.3f,5f);
         Quaternion obstacleRotation = Quaternion.Euler(0f, 180f, 0f);
         GameObject obstacle = Instantiate(leftObstacle, cameraPosition, obstacleRotation);
         obstacle.transform.localScale = new Vector3(1f, 1f, 1f);
@@ -212,7 +204,7 @@ public class GenerateCube : MonoBehaviour
     public void ObstacleRight()
     {
         Vector3 cameraPosition = Camera.main.transform.position;
-        cameraPosition += new Vector3(1.1f,-1.6f,2f);
+        cameraPosition += new Vector3(1.1f,-2.3f,5f);
         Quaternion obstacleRotation = Quaternion.Euler(0f, 90f,0f);
         GameObject obstacle = Instantiate(rightObstacle, cameraPosition, obstacleRotation);
         obstacle.transform.localScale = new Vector3(1f, 1f, 1f);
