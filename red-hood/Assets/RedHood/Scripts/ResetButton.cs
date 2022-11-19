@@ -11,9 +11,12 @@ public class ResetButton : MonoBehaviour
     // 리셋 버튼을 누르면 모든 블록과 블록의 실행 결과를 제거한다.
     public void OnResetButtonPress()
     {
-        Debug.Log("리셋~");
         DestroyResults();
+        DestroyBlocks();
+    }
 
+    internal void DestroyBlocks()
+    {
         BlockActivation block = startBlock.GetNextBlock();
         if (block != null)
         {
@@ -47,13 +50,17 @@ public class ResetButton : MonoBehaviour
         Destroy(block);
     }
 
-    // 블록의 실행 결과를 제거한다.
-    private void DestroyResults()
+    // 블록의 실행 결과와 알림창을 모두 제거한다.
+    internal void DestroyResults()
     {
         GameObject[] results = GameObject.FindGameObjectsWithTag(QUEST_MODEL_TAG);
         foreach (GameObject result in results)
         {
             Destroy(result);
         }
+
+        PopUpMessage msg = gameObject.AddComponent<PopUpMessage>();
+        msg.CloseAll();
+        Destroy(msg);
     }
 }

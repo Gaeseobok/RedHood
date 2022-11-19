@@ -1,39 +1,51 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
 [RequireComponent(typeof(BlockActivation))]
 public class ConditionBlock : MonoBehaviour
 {
-    private XRSocketInteractor leftSocket;
-    private XRSocketInteractor rightSocket;
+    private XRSocketInteractor socket;
     private BlockActivation blockActivation;
+    private PopUpMessage popUpMessage;
 
-    private string LEFT_SOCKET = "Left";
     private string RIGHT_SOCKET = "Right";
 
     private void Start()
     {
-        leftSocket = transform.Find(LEFT_SOCKET).GetComponentInChildren<XRSocketInteractor>();
-        rightSocket = transform.Find(RIGHT_SOCKET).GetComponentInChildren<XRSocketInteractor>();
+        socket = transform.Find(RIGHT_SOCKET).GetComponentInChildren<XRSocketInteractor>();
         blockActivation = GetComponent<BlockActivation>();
+        popUpMessage = GetComponent<PopUpMessage>();
     }
 
     public void CompareVariables()
     {
-        IXRInteractable leftAttach = leftSocket.firstInteractableSelected;
-        IXRInteractable rightAttach = rightSocket.firstInteractableSelected;
+        IXRInteractable attach = socket.firstInteractableSelected;
 
-        if (leftAttach == null || rightAttach == null)
+        if (attach == null)
         {
-            // TODO: 에러 처리(문제 오답)
-            Debug.Log("조건문 오류: 변수 블록이 존재하지 않음");
+            string text = "변수 블록이 존재하지 않아요";
+            popUpMessage.ActivateFailureWindow(text);
+            popUpMessage.PlayFailureSound();
             return;
         }
 
-        VariableBlock scoreVar = ((XRGrabInteractable)leftAttach).GetComponent<VariableBlock>();
-        VariableBlock intVar = ((XRGrabInteractable)rightAttach).GetComponent<VariableBlock>();
+        VariableBlock intVar = ((XRGrabInteractable)attach).GetComponent<VariableBlock>();
 
-        bool condition = scoreVar.GetScore() > intVar.GetInt();
+        StopAllCoroutines();
+        StartCoroutine(WaitForScore(intVar));
+    }
+
+    private IEnumerator WaitForScore(VariableBlock variable)
+    {
+        while (variable.GetScore() == 0.0f)
+        {
+            yield return null;
+        }
+
+        bool condition = variable.GetScore() > variable.GetInt();
+
+        Debug.Log(variable.GetScore() + " > " + variable.GetInt() + " ? " + condition);
 
         BlockActivation nextBlock = blockActivation.GetNextBlock();
 
@@ -43,9 +55,12 @@ public class ConditionBlock : MonoBehaviour
         }
         else
         {
-            // TODO: 에러 처리(문제 오답)
-            Debug.Log("조건문 오류: 분기 블록이 존재하지 않음");
+            string text = "분기 블록이 존재하지 않아요";
+            popUpMessage.ActivateFailureWindow(text);
+            popUpMessage.PlayFailureSound();
         }
-    }
 
+        StopAllCoroutines();
+        StartCoroutine(blockActivation.ExecuteNextBlock());
+    }
 }
