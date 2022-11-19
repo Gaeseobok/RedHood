@@ -44,6 +44,9 @@ public class GenerateCube : MonoBehaviour
     public GameObject rightObstacle;
     public GameObject leftObstacle;
 
+    public AudioClip successAudio;
+    public AudioClip failureAudio;
+
     // Start is called before the first frame update
     void Awake()
     {   
@@ -60,6 +63,8 @@ public class GenerateCube : MonoBehaviour
             successWindow.enabled = false;
 
         generatedCubes = new XRGrabInteractable [8];
+
+        AudioSource audio = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -121,32 +126,38 @@ public class GenerateCube : MonoBehaviour
     {
         for(int i = 0; i<8; i++)
         {
-            if(SocketAttach[i].CompareTag("Up"))
-            {
-                ObstacleUp();
-            }
-            else if(SocketAttach[i].CompareTag("Down"))
-            {
-                ObstacleDown();
-            }
-            else if(SocketAttach[i].CompareTag("Left"))
-            {
-                ObstacleLeft();
-            }
-            else if(SocketAttach[i].CompareTag("Right"))
-            {
-                ObstacleRight();
-            }
+            // if(SocketAttach[i].CompareTag("Up"))
+            // {
+            //     ObstacleUp();
+            // }
+            // else if(SocketAttach[i].CompareTag("Down"))
+            // {
+            //     ObstacleDown();
+            // }
+            // else if(SocketAttach[i].CompareTag("Left"))
+            // {
+            //     ObstacleLeft();
+            // }
+            // else if(SocketAttach[i].CompareTag("Right"))
+            // {
+            //     ObstacleRight();
+            // }
 
             if(answers[i])
             {
                 Debug.Log(i + "answer correct");
                 successWindows[i].enabled = true;
+                // GetComponent<AudioSource>().clip = successAudio;
+                // GetComponent<AudioSource>().Play();
+                AudioSource.PlayClipAtPoint(successAudio, Camera.main.transform.position);
+                //successAudio.Play();
             }
             else
             {
                 Debug.Log(i + "answer wrong");
                 errorWindows[i].enabled = true;
+                //failureAudio.Play();
+                AudioSource.PlayClipAtPoint(failureAudio, Camera.main.transform.position);
                 //StopAllCoroutines();
                 //CurrentRoutine = StartCoroutine(CamShake(2.0f, 4.0f));
             }
@@ -174,7 +185,7 @@ public class GenerateCube : MonoBehaviour
     public void ObstacleUp()
     {
         Vector3 cameraPosition = Camera.main.transform.position;
-        cameraPosition += new Vector3(2f,-2f,5f);
+        cameraPosition += new Vector3(2f,-2.5f,10f);
         Quaternion obstacleRotation = Quaternion.Euler(-17.718f, 109.998f, 0);
         GameObject obstacle = Instantiate(upObstacle, cameraPosition, obstacleRotation);
         obstacle.transform.localScale = new Vector3(1.5f,0.7f,1.5f);
@@ -184,7 +195,7 @@ public class GenerateCube : MonoBehaviour
     public void ObstacleDown()
     {
         Vector3 cameraPosition = Camera.main.transform.position;
-        cameraPosition += new Vector3(1.5f,-0.8f,5f);
+        cameraPosition += new Vector3(1.5f,-2f,10f);
         Quaternion obstacleRotation = Quaternion.Euler(0f, 0f, 90f);
         GameObject obstacle = Instantiate(downObstacle, cameraPosition, obstacleRotation);
         obstacle.transform.localScale = new Vector3(1.3f,1.3f,1.3f);
@@ -194,7 +205,7 @@ public class GenerateCube : MonoBehaviour
     public void ObstacleLeft()
     {
         Vector3 cameraPosition = Camera.main.transform.position;
-        cameraPosition += new Vector3(-0.8f,-2.3f,5f);
+        cameraPosition += new Vector3(-0.8f,-1.8f,10f);
         Quaternion obstacleRotation = Quaternion.Euler(0f, 180f, 0f);
         GameObject obstacle = Instantiate(leftObstacle, cameraPosition, obstacleRotation);
         obstacle.transform.localScale = new Vector3(1f, 1f, 1f);
@@ -204,7 +215,7 @@ public class GenerateCube : MonoBehaviour
     public void ObstacleRight()
     {
         Vector3 cameraPosition = Camera.main.transform.position;
-        cameraPosition += new Vector3(1.1f,-2.3f,5f);
+        cameraPosition += new Vector3(1.1f,-1.8f,10f);
         Quaternion obstacleRotation = Quaternion.Euler(0f, 90f,0f);
         GameObject obstacle = Instantiate(rightObstacle, cameraPosition, obstacleRotation);
         obstacle.transform.localScale = new Vector3(1f, 1f, 1f);
