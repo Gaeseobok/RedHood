@@ -10,16 +10,10 @@ TagManager:
   - TrueCube
   - FalseCube
   - IterationStart
-  - HighStrikerGaugeBars
-  - CodingZone
-  - IterationEnd
-  - SuccessWindow
-  - FailureWindow
-  - ClearWindow
-  - DescriptionWindow
+  - Down
+  - Up
+  - RIght
   - Left
-  - Right
-  - ScoreCylinder
   layers:
   - Default
   - TransparentFX
@@ -27,7 +21,7 @@ TagManager:
   - 
   - Water
   - UI
-  - Grab
+  - 
   - 
   - 
   - 
