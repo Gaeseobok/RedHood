@@ -8,7 +8,10 @@ public class FinalMission : MonoBehaviour
     [SerializeField] private float cubeDelay = 5.0f;
 
     [Tooltip("첫 번째 장애물이 등장할 때까지의 지연 시간")]
-    [SerializeField] private float obstacleActiveDelay = 15.0f;
+    [SerializeField] private float obstacleActiveDelay = 20.0f;
+
+    [Tooltip("늑대 오브젝트")]
+    [SerializeField] private Transform wolfObject;
 
     private Animator cameraAnimator;
     private BoxCollider[] attachTransforms;
@@ -75,18 +78,25 @@ public class FinalMission : MonoBehaviour
             {
                 failureAlert.SetActive(true);
                 failureAlert.GetComponent<AudioSource>().Play();
+                wolfObject.position += new Vector3(2f, 0f, 0f);
             }
             else if (!CompareName(attachTransform.name, cubes[i].name))
             {
                 TriggerCameraAnim(cubes[i].name);
                 failureAlert.SetActive(true);
                 failureAlert.GetComponent<AudioSource>().Play();
+                wolfObject.position += new Vector3(2f, 0f, 0f);
             }
             else
             {
                 TriggerCameraAnim(cubes[i].name);
                 successAlert.SetActive(true);
                 successAlert.GetComponent<AudioSource>().Play();
+            }
+
+            if (wolfObject.position.x >= 0.0f)
+            {
+                // TODO: 게임 오버
             }
 
             yield return new WaitForSeconds(cubeDelay);
