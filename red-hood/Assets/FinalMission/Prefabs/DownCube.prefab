@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 1469472425944959128}
   m_Layer: 0
   m_Name: DownCube
-  m_TagString: Up
+  m_TagString: QuestModel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

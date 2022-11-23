@@ -67,6 +67,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cubeDelay: 5
   obstacleActiveDelay: 20
+  descWindow: {fileID: 0}
+  timer: {fileID: 0}
+  mapObject: {fileID: 0}
+  wolfObject: {fileID: 0}
+  buttonObject: {fileID: 0}
+  gameoverSound: {fileID: 0}
 --- !u!1001 &516264723187772666
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -74,10 +80,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7140447452220292249}
     m_Modifications:
-    - target: {fileID: 1749489946895438789, guid: 0181c5c89d98c4bcfb2569f27e7132ac, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2533516963366992720, guid: 0181c5c89d98c4bcfb2569f27e7132ac, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -140,10 +142,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7140447452220292249}
     m_Modifications:
-    - target: {fileID: 1081852526136763441, guid: f685b79c59ec5435ea42a06cc1fccf87, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3419562350874817153, guid: f685b79c59ec5435ea42a06cc1fccf87, type: 3}
       propertyPath: m_Name
       value: Right_CubeBox
@@ -206,10 +204,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7140447452220292249}
     m_Modifications:
-    - target: {fileID: 1749489946895438789, guid: 0181c5c89d98c4bcfb2569f27e7132ac, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2533516963366992720, guid: 0181c5c89d98c4bcfb2569f27e7132ac, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -320,10 +314,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2564373944137999728, guid: c32fc7e4254214a77b1e9ca40431e6ba, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c32fc7e4254214a77b1e9ca40431e6ba, type: 3}
 --- !u!4 &4107254725161400291 stripped
@@ -385,10 +375,6 @@ PrefabInstance:
     - target: {fileID: 5788946514207379489, guid: 42e0a06ab17894db59721445d0eaed68, type: 3}
       propertyPath: m_Name
       value: Left_CubeBox
-      objectReference: {fileID: 0}
-    - target: {fileID: 8079812711348553361, guid: 42e0a06ab17894db59721445d0eaed68, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42e0a06ab17894db59721445d0eaed68, type: 3}
@@ -452,10 +438,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2564373944137999728, guid: c32fc7e4254214a77b1e9ca40431e6ba, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c32fc7e4254214a77b1e9ca40431e6ba, type: 3}
 --- !u!4 &3942203197384286143 stripped
@@ -470,10 +452,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7140447452220292249}
     m_Modifications:
-    - target: {fileID: 1081852526136763441, guid: f685b79c59ec5435ea42a06cc1fccf87, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3419562350874817153, guid: f685b79c59ec5435ea42a06cc1fccf87, type: 3}
       propertyPath: m_Name
       value: Right_CubeBox (1)
@@ -583,10 +561,6 @@ PrefabInstance:
     - target: {fileID: 5788946514207379489, guid: 42e0a06ab17894db59721445d0eaed68, type: 3}
       propertyPath: m_Name
       value: Left_CubeBox (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8079812711348553361, guid: 42e0a06ab17894db59721445d0eaed68, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42e0a06ab17894db59721445d0eaed68, type: 3}
