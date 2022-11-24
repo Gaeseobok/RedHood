@@ -5,9 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class FinalMission : MonoBehaviour
 {
-    private Coroutine CurrentRoutine { set; get; } = null;
-
-
     [Tooltip("큐브 하나가 실행되는 시간")]
     [SerializeField] private float cubeDelay = 5.0f;
 
@@ -25,7 +22,6 @@ public class FinalMission : MonoBehaviour
 
     [Tooltip("맵 오브젝트")]
     [SerializeField] private Animator mapAnimator;
-    private Animator treeAnimator;
 
     [Tooltip("늑대 오브젝트")]
     [SerializeField] private Transform wolfObject;
@@ -37,7 +33,6 @@ public class FinalMission : MonoBehaviour
     [SerializeField] private GameObject failureWindow;
 
     private BoxCollider[] attachTransforms;
-    private PopUpMessage popUpMessage;
     private FadeCanvas fadeCanvas;
 
     // 유저가 입력한 방향 큐브 리스트
@@ -48,6 +43,7 @@ public class FinalMission : MonoBehaviour
     private const string SUCCESS_ALERT = "SuccessAlert";
     private const string FAILURE_ALERT = "FailureAlert";
 
+    private const string NONE = "None";
     private const string LEFT = "Left";
     private const string RIGHT = "Right";
     private const string UP = "Up";
@@ -56,7 +52,6 @@ public class FinalMission : MonoBehaviour
     private void Start()
     {
         attachTransforms = GetComponentsInChildren<BoxCollider>();
-        popUpMessage = GetComponent<PopUpMessage>();
         fadeCanvas = FindObjectOfType<FadeCanvas>();
 
         ResetMission();
@@ -64,15 +59,8 @@ public class FinalMission : MonoBehaviour
 
     private void ResetMission()
     {
-        GameObject[] questModels = GameObject.FindGameObjectsWithTag(QUEST_MODEL);
-        foreach (GameObject questModel in questModels)
-        {
-            Destroy(questModel);
-        }
         cubes.Clear();
-
         timer.Stop();
-        //descWindow.SetActive(true);
         buttonObject.SetActive(false);
         wolfObject.gameObject.SetActive(false);
         wolfObject.localPosition = new Vector3(-0.5f, 0f, -12f);
@@ -121,35 +109,38 @@ public class FinalMission : MonoBehaviour
 
     private IEnumerator CheckAnswers()
     {
-        for (int i = 0; i < attachTransforms.Length; i++)
+        int i = 0;
+        for (; i < attachTransforms.Length; i++)
         {
             Transform attachTransform = attachTransforms[i].transform;
             GameObject successAlert = attachTransform.Find(SUCCESS_ALERT).gameObject;
             GameObject failureAlert = attachTransform.Find(FAILURE_ALERT).gameObject;
 
-            if (cubes.Count <= i)
-            {
-                failureAlert.SetActive(true);
-                failureAlert.GetComponent<AudioSource>().Play();
-                wolfObject.localPosition += new Vector3(0f, 0f, 3.0f);
-            }
-            else if (!CompareName(attachTransform.name, cubes[i].name))
-            {
-                TriggerMapAnim(cubes[i].name);
-                failureAlert.SetActive(true);
-                failureAlert.GetComponent<AudioSource>().Play();
-                wolfObject.localPosition += new Vector3(0f, 0f, 3.0f);
-            }
-            else
+            if (cubes.Count > i && CompareName(attachTransform.name, cubes[i].name))
             {
                 TriggerMapAnim(cubes[i].name);
                 successAlert.SetActive(true);
                 successAlert.GetComponent<AudioSource>().Play();
             }
+            else
+            {
+                if (cubes.Count > i)
+                {
+                    TriggerMapAnim(cubes[i].name);
+                }
+                failureAlert.SetActive(true);
+                failureAlert.GetComponent<AudioSource>().Play();
+                wolfObject.localPosition += new Vector3(0f, 0f, 3.0f);
+
+                fadeCanvas.StartFadeIn();
+                yield return fadeCanvas.CurrentRoutine;
+                fadeCanvas.StartFadeOut();
+            }
 
             if (wolfObject.localPosition.z > -3.0f)
             {
-                GetComponent<AudioSource>().Play();
+                XRAnimator.GetComponent<AudioSource>().Play();
+                mapAnimator.Play(NONE);
 
                 fadeCanvas.StartFadeIn();
                 yield return fadeCanvas.CurrentRoutine;
@@ -159,9 +150,13 @@ public class FinalMission : MonoBehaviour
                 Invoke(nameof(ReloadScene), 5.0f);
 
                 fadeCanvas.StartFadeOut();
-                yield return fadeCanvas.CurrentRoutine;
-
                 break;
+            }
+
+            if (i == attachTransforms.Length - 1)
+            {
+                wolfObject.localPosition = new Vector3(-0.5f, 0f, -10f);
+                timer.Stop();
             }
 
             yield return new WaitForSeconds(cubeDelay);
@@ -177,7 +172,7 @@ public class FinalMission : MonoBehaviour
     private void ExecuteBlocks()
     {
         StopAllCoroutines();
-        CurrentRoutine = StartCoroutine(CheckAnswers());
+        _ = StartCoroutine(CheckAnswers());
     }
 
     internal void AddCube(GameObject cube)
