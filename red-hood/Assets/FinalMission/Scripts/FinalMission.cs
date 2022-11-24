@@ -21,7 +21,7 @@ public class FinalMission : MonoBehaviour
     [SerializeField] private AudioSource timer;
 
     [Tooltip("카메라 오프셋 오브젝트")]
-    [SerializeField] private Animator cameraOffsetAnimator;
+    [SerializeField] private Animator xrAnimator;
 
     [Tooltip("맵 오브젝트")]
     [SerializeField] private Animator mapAnimator;
@@ -76,7 +76,7 @@ public class FinalMission : MonoBehaviour
         buttonObject.SetActive(false);
         wolfObject.gameObject.SetActive(false);
         wolfObject.position = new Vector3(-9.0f, 0f, 0f);
-        cameraOffsetAnimator.enabled = false;
+        xrAnimator.enabled = false;
         gameObject.SetActive(false);
     }
 
@@ -87,7 +87,7 @@ public class FinalMission : MonoBehaviour
         gameObject.SetActive(true);
         buttonObject.SetActive(true);
         wolfObject.gameObject.SetActive(true);
-        cameraOffsetAnimator.enabled = true;
+        xrAnimator.enabled = true;
 
         Invoke(nameof(ExecuteBlocks), obstacleActiveDelay);
         //Invoke(nameof(TriggerTreeAnim), treeAnimTriggerTime);
