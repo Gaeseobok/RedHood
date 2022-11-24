@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:red-hood/Assets/RedHood/Sprite/Icons/Opaque/Play.png.meta
 guid: 8243749799d84164daf0428b8d1baf23
+=======
+guid: 1d17a5d9790ee40fa900a1c12375ce94
+>>>>>>> main:red-hood/Assets/Home/Sprite/VendingMachine.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
