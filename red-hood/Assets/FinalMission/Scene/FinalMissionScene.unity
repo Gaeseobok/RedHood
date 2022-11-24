@@ -27724,6 +27724,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 924170349}
     m_Modifications:
+    - target: {fileID: -6826553170177089849, guid: bb501c86e92e85c4592a7ad2e34e3d8b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 170978392, guid: bb501c86e92e85c4592a7ad2e34e3d8b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4763502892550481344, guid: bb501c86e92e85c4592a7ad2e34e3d8b, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -41362,6 +41370,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1426906876}
     - target: {fileID: 1207178505121109966, guid: bec561938a8266d43a8758e782bb0b0e, type: 3}
+      propertyPath: XRAnimator
+      value: 
+      objectReference: {fileID: 1923854865}
+    - target: {fileID: 1207178505121109966, guid: bec561938a8266d43a8758e782bb0b0e, type: 3}
       propertyPath: descWindow
       value: 
       objectReference: {fileID: 2595250952995477375}
@@ -41385,6 +41397,10 @@ PrefabInstance:
       propertyPath: cameraObject
       value: 
       objectReference: {fileID: 832851399}
+    - target: {fileID: 1207178505121109966, guid: bec561938a8266d43a8758e782bb0b0e, type: 3}
+      propertyPath: failureWindow
+      value: 
+      objectReference: {fileID: 2142810403}
     - target: {fileID: 1207178505121109966, guid: bec561938a8266d43a8758e782bb0b0e, type: 3}
       propertyPath: gameoverSound
       value: 
@@ -42223,7 +42239,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 36d333cb40f03c94c8fcc8bffc4ba33f, type: 3}
+  m_audioClip: {fileID: 8300000, guid: d3efcdbff3e674f8d99a919dd8447e67, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -42269,7 +42285,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -67060,6 +67076,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1285961444}
     m_Modifications:
+    - target: {fileID: 1934047877989482592, guid: 82c905fcf2cb949439ff199fe123f154, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1934047877989482592, guid: 82c905fcf2cb949439ff199fe123f154, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1934047877989482592, guid: 82c905fcf2cb949439ff199fe123f154, type: 3}
+      propertyPath: m_Color.r
+      value: 0.4811321
+      objectReference: {fileID: 0}
     - target: {fileID: 8666140353602747552, guid: 82c905fcf2cb949439ff199fe123f154, type: 3}
       propertyPath: m_TagString
       value: MainCamera
@@ -67106,7 +67134,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8666140354029824136, guid: 82c905fcf2cb949439ff199fe123f154, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8666140354029824136, guid: 82c905fcf2cb949439ff199fe123f154, type: 3}
       propertyPath: m_LocalRotation.y
@@ -67114,7 +67142,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8666140354029824136, guid: 82c905fcf2cb949439ff199fe123f154, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8666140354029824136, guid: 82c905fcf2cb949439ff199fe123f154, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -81680,6 +81708,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 612812996124309258, guid: f2727472b344747408ea8dfb42ce1873, type: 3}
   m_PrefabInstance: {fileID: 2140201907}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2142810403 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4763502894553867243, guid: bb501c86e92e85c4592a7ad2e34e3d8b, type: 3}
+  m_PrefabInstance: {fileID: 738761870}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &273316013347346269
 Transform:

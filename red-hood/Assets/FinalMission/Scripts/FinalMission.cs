@@ -21,7 +21,7 @@ public class FinalMission : MonoBehaviour
     [SerializeField] private AudioSource timer;
 
     [Tooltip("카메라 오프셋 오브젝트")]
-    [SerializeField] private Animator xrAnimator;
+    [SerializeField] private Animator XRAnimator;
 
     [Tooltip("맵 오브젝트")]
     [SerializeField] private Animator mapAnimator;
@@ -33,15 +33,15 @@ public class FinalMission : MonoBehaviour
     [Tooltip("버튼 오브젝트")]
     [SerializeField] private GameObject buttonObject;
 
+    [Tooltip("게임오버 팝업창 오브젝트")]
+    [SerializeField] private GameObject failureWindow;
+
     private BoxCollider[] attachTransforms;
     private PopUpMessage popUpMessage;
     private FadeCanvas fadeCanvas;
 
     // 유저가 입력한 방향 큐브 리스트
     private static readonly List<GameObject> cubes = new();
-
-    private readonly float treeAnimTriggerTime = 65.8f;
-    private readonly float deadWolfAnimTriggerTime = 73.3f;
 
     private const string QUEST_MODEL = "QuestModel";
 
@@ -72,58 +72,44 @@ public class FinalMission : MonoBehaviour
         cubes.Clear();
 
         timer.Stop();
-        descWindow.SetActive(true);
+        //descWindow.SetActive(true);
         buttonObject.SetActive(false);
         wolfObject.gameObject.SetActive(false);
-        wolfObject.position = new Vector3(-9.0f, 0f, 0f);
-        xrAnimator.enabled = false;
+        wolfObject.localPosition = new Vector3(-0.5f, 0f, -12f);
+        XRAnimator.enabled = false;
+        XRAnimator.transform.localPosition = Vector3.zero;
+        XRAnimator.transform.localRotation = Quaternion.Euler(0f, 90f, 0f);
         gameObject.SetActive(false);
     }
 
     public void StartMission()
     {
+        gameObject.SetActive(true);
         timer.Play();
         descWindow.SetActive(false);
-        gameObject.SetActive(true);
         buttonObject.SetActive(true);
         wolfObject.gameObject.SetActive(true);
-        xrAnimator.enabled = true;
+        XRAnimator.enabled = true;
 
         Invoke(nameof(ExecuteBlocks), obstacleActiveDelay);
-        //Invoke(nameof(TriggerTreeAnim), treeAnimTriggerTime);
-        Invoke(nameof(TriggerDeadWolfAnim), deadWolfAnimTriggerTime);
-    }
-
-    private void TriggerTreeAnim()
-    {
-        treeAnimator.enabled = true;
-    }
-
-    private void TriggerDeadWolfAnim()
-    {
-        wolfObject.GetComponent<Animator>().Play("Dead");
     }
 
     private void TriggerMapAnim(string name)
     {
         if (name.StartsWith(LEFT))
         {
-            Debug.Log("레프트 실행");
             mapAnimator.Play(LEFT);
         }
         else if (name.StartsWith(RIGHT))
         {
-            Debug.Log("라이트 실행");
             mapAnimator.Play(RIGHT);
         }
         else if (name.StartsWith(UP))
         {
-            Debug.Log("업 실행");
             mapAnimator.Play(UP);
         }
         else
         {
-            Debug.Log("다운 실행");
             mapAnimator.Play(DOWN);
         }
     }
@@ -137,7 +123,6 @@ public class FinalMission : MonoBehaviour
     {
         for (int i = 0; i < attachTransforms.Length; i++)
         {
-            Debug.Log($"{i}번째 큐브 실행");
             Transform attachTransform = attachTransforms[i].transform;
             GameObject successAlert = attachTransform.Find(SUCCESS_ALERT).gameObject;
             GameObject failureAlert = attachTransform.Find(FAILURE_ALERT).gameObject;
@@ -162,33 +147,31 @@ public class FinalMission : MonoBehaviour
                 successAlert.GetComponent<AudioSource>().Play();
             }
 
-            //if (wolfObject.position.x >= 0.0f)
-            //{
-            //    Debug.Log("게임오버");
+            if (wolfObject.localPosition.z > -3.0f)
+            {
+                GetComponent<AudioSource>().Play();
 
-            //    GetComponent<AudioSource>().Play();
-            //    //wolfObject.position = new Vector3(-8.0f, 0f, 0f);
-            //    //buttonObject.SetActive(false);
-            //    //mapAnimator.SetBool(MAP_ANIM_PARAM, false);
-            //    //timer.Stop();
+                fadeCanvas.StartFadeIn();
+                yield return fadeCanvas.CurrentRoutine;
 
-            //    //PopUpMessage popUpMessage = gameObject.AddComponent<PopUpMessage>();
-            //    //popUpMessage.ActivateFailureWindow();
-            //    //Destroy(popUpMessage);
+                ResetMission();
+                failureWindow.SetActive(true);
+                Invoke(nameof(ReloadScene), 5.0f);
 
-            //    fadeCanvas.StartFadeIn();
-            //    yield return fadeCanvas.CurrentRoutine;
+                fadeCanvas.StartFadeOut();
+                yield return fadeCanvas.CurrentRoutine;
 
-            //    ResetMission();
-
-            //    fadeCanvas.StartFadeOut();
-            //    yield return fadeCanvas.CurrentRoutine;
-
-            //    break;
-            //}
+                break;
+            }
 
             yield return new WaitForSeconds(cubeDelay);
         }
+    }
+
+    private void ReloadScene()
+    {
+        StopAllCoroutines();
+        SceneManager.LoadScene(gameObject.scene.name);
     }
 
     private void ExecuteBlocks()
@@ -200,11 +183,5 @@ public class FinalMission : MonoBehaviour
     internal void AddCube(GameObject cube)
     {
         cubes.Add(cube);
-    }
-
-    private void ReloadScene()
-    {
-        StopCoroutine(CurrentRoutine);
-        SceneManager.LoadScene(gameObject.scene.name);
     }
 }
