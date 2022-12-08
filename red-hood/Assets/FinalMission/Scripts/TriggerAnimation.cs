@@ -1,8 +1,10 @@
 using UnityEngine;
+using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class TriggerAnimation : MonoBehaviour
 {
-    [Tooltip("¾²·¯Áú ³ª¹« ¶Ç´Â ´Á´ë ¿ÀºêÁ§Æ®ÀÇ ¾Ö´Ï¸ÞÀÌÅÍ")]
+    [Tooltip("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½ï¿½ï¿½ï¿½")]
     [SerializeField] private Animator animator;
 
     public void TriggerTreeAnimation()
@@ -14,5 +16,13 @@ public class TriggerAnimation : MonoBehaviour
     public void TriggerWolfDeadAnimation()
     {
         animator.Play("Dead");
+        StopAllCoroutines();
+        _ = StartCoroutine(LoadEnding());
+    }
+
+    private IEnumerator LoadEnding()
+    {
+        yield return new WaitForSeconds(10);
+        SceneManager.LoadScene(4);
     }
 }
